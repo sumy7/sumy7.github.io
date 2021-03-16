@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<body>
+    <header class="index-header" style="position:fixed; top:0; bottom:0; left:0; right:0; z-index:-1;">
+        <canvas id="background-canvas" style="height:100%">
+            当前浏览器不支持Canvas，请更换浏览器后再试
+        </canvas>
+    </header>
+
+    <script src="canvas._js"></script>
+    <script>
+        var generator = new SpiritGenerator();
+        var animator = new CanvasAnimation(document.getElementById('background-canvas'), {
+            width: window.innerWidth,
+            height: window.innerHeight
+        }, generator);
+        animator.start();
+        window.addEventListener("resize", function () {
+            animator.withSize(window.innerWidth, window.innerHeight);
+        }, false);
+    </script>
+</body>
+
+</html>

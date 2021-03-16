@@ -1,0 +1,166 @@
+<!DOCTYPE html><html lang="#{config.language}"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>新手向的问题描述及提问实践SSCCE | SumyBlog</title><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/5.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.3"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><meta name="generator" content="Hexo 5.4.0"></head><body><div class="body_container"><canvas id="background-canvas"></canvas><script>$(document).ready(function() {
+  var manager = new Manager(window.innerWidth, window.innerHeight);
+  var animator = new CanvasAnimation(document.getElementById('background-canvas'), {
+      width: window.innerWidth,
+      height: window.innerHeight
+  });
+  animator.addSpirit(manager);
+  animator.start();
+  window.addEventListener("resize", function () {
+      animator.withSize(window.innerWidth, window.innerHeight);
+  }, false);
+});</script><div id="header"><div class="site-name"><h1 class="hidden">新手向的问题描述及提问实践SSCCE</h1><a id="logo" href="/.">SumyBlog</a><p class="description">SumyGG的博客</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/tagcloud/"><i class="fa fa-tag"> 标签</i></a><a href="/watches/"><i class="fa fa-television"> 看一看</i></a><a href="/banners/"><i class="fa fa-sun-o"> 秀一秀</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4 left-post"><div class="content_container"><div class="post"><h1 class="post-title">新手向的问题描述及提问实践SSCCE</h1><div class="post-meta">2015-11-12<span> | </span><span class="category"><a href="/categories/%E9%AB%98%E6%95%88%E7%94%9F%E6%B4%BB/">高效生活</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span></div><a class="disqus-comment-count" data-disqus-identifier="2015/11/12/problem-with-short-selfcontained-correct-example/" href="/2015/11/12/problem-with-short-selfcontained-correct-example/#disqus_thread"></a><div class="post-content"><div class="description"><i class="fa fa-info-circle"></i>&nbsp;这篇文章主要讲解新手向的问题提问及描述实践，从一篇英文翻译而来。</div><h1 id="什么是-sscce"><a class="markdownIt-Anchor" href="#什么是-sscce"></a> 什么是 SSCCE</h1>
+<p><code>SSCCE</code>是 <strong>S</strong>hort, <strong>S</strong>elf <strong>C</strong>ontained, <strong>C</strong>orrect (Compilable), <strong>E</strong>xample 的缩写。</p>
+<p>如果对代码有问题并且想要寻求帮助，准备一个简短、自成一体、准确的示例（SSCCE）是很有必要的。但是什么是SSCCE？</p>
+<p>实际上，从名字上就能看出。让我们看一下每一部分。准备给他人看的内容应该是：</p>
+<ul>
+<li>简短的 - 例子尽量短小，不要让审阅者无聊</li>
+<li>自成一体的 - 确保一切想要的东西都包括进去了</li>
+<li>准确的 - 复制，粘贴，（编译，）就能看到所指的内容</li>
+<li>示例 - 展现我们正要解决的问题</li>
+</ul>
+<h1 id="简短的"><a class="markdownIt-Anchor" href="#简短的"></a> 简短的</h1>
+<p>这取决于讨论组或论坛上。就一个公共的论坛来说，大多数的阅览者大约只会阅读100行左右的代码，而有200-300行的代码就会产生抱怨情绪。</p>
+<h2 id="精简的技巧"><a class="markdownIt-Anchor" href="#精简的技巧"></a> 精简的技巧</h2>
+<p>如果一个GUI界面有40个按钮，但是与问题毛关系也没有，还留着它们干啥。如果这些按钮<strong>全都</strong>与问题相关（移除按钮问题也就消失了），依次放回一两个按钮，如果问题出现了，<strong>只</strong>保留这一两个按钮即可。</p>
+<p>导致数组或表格出问题的可能有一百多条数据，但是同样的，如果能从两三条条目中看出问题，那么精简一下只保留这些条目。</p>
+<p>如果问题出现在GUI界面层，精简所有后端的逻辑（JavaScript或Java等）。另一方面，如果一个应用有一个界面，但是问题出现在逻辑上，可以把GUI界面精简到最小版本。</p>
+<p>如果在别人看来精简了大量的代码，那么你可能精简了你认为与问题不相干的代码，但在解决问题上却是有用的。</p>
+<h2 id="问题解决了吗"><a class="markdownIt-Anchor" href="#问题解决了吗"></a> 问题解决了吗？</h2>
+<p>通过明确的指出问题出在哪里，你就向解决问题上迈出了重要的一步。这个过程突出显示一个问题的起源，而这个过程恰恰可以帮助解决问题。你可以更仔细的摘出这一部分，并在此过程中发现问题。</p>
+<p>即使你不能明确问题为什么发生，你仍然迈出了重要的一步：确定问题所涉及的代码（至少一部分）。</p>
+<p>如果代码已经精简成问题的简要例子，那么它就可以呈现给别人；如果还没有，将问题的代码放回来，继续精简其它部分，直到代码精简完毕。</p>
+<h1 id="自成一体的"><a class="markdownIt-Anchor" href="#自成一体的"></a> 自成一体的</h1>
+<p>最重要的是确保给他人的代码可以“复制，粘贴，编译，然后运行”，就帮助了解问题来说这是行之有效的方法。</p>
+<p>这意味着当这些代码被复制、粘贴然后编译，他们自己就能运行并看到结果。这可以认为是问题的一个示例。</p>
+<p>如果你能做到这一点，那么极有可能得到帮助。</p>
+<h2 id="怎样弄一个自成一体的例子"><a class="markdownIt-Anchor" href="#怎样弄一个自成一体的例子"></a> 怎样弄一个自成一体的例子</h2>
+<p>如果代码进行了文件I/O操作，把问题中与输入/输出无关的文件I/O操作用虚拟数据结构来代替。</p>
+<p>如果问题出在输入上，文本输入_就会_被用到，那么准备一个简短的例子，这个例子可以复制到实际的数据文件中。</p>
+<p>如果问题只发生在加载阶段，那么插入代码来模拟加载过程。如果一个布局问题只发生在特定情形下，找到切实可行的方法来_迫使_这些问题复现。</p>
+<p>显然，就发布到论坛上来说，有些东西是不能包含到例子里的，诸如“数据库”。但是更多时候你需要一点横向思维，想出一个方法来取代在展示问题上你认为“重要”的东西。</p>
+<p>横向思维的一个例子是“图像”。与代码问题相关的图像看起来可能很难被替换。但是有一个小技巧就是链接到网络上的图像，这个图像展示了相同的问题。如果可能的话，尽量使任何基于图像的Web网络在字节大小上“少”一点。</p>
+<h1 id="正确性"><a class="markdownIt-Anchor" href="#正确性"></a> 正确性</h1>
+<p>如果我的例子是正确的，<em>那我还需要在这里做什么？</em></p>
+<p>（笑）不，在这一方面不是什么“正确”的意思。在这篇文章中，正确性（或可编译性，尤其涉及到计算机源代码而言）意味着确保例子适合公认的标准或协议。</p>
+<p>为了实现这一目标，有必要来：</p>
+<ul>
+<li>行宽。示例中一行的宽度保持在62个字符以内。（但是<strong>不要</strong>删除所有的行缩进！）新闻阅读器通常在72个字符左右强制另起一行（为了确保稳定性字符可能会更少）。有时候，换行符不会导致任何问题，但是更多时候会有问题，这意味着行与行要重新整合，来确保可以出现预期的结果。大多数代码编辑器都会在编辑区顶端显示行宽。</li>
+<li>如果有的话请使用命名习惯。大多数人愿意帮助那些在提示中使用大小写字母，或用来描述命名的代码，这样可以略读代码以快速的确定问题。如果按照读者的习惯，就可以帮助他们更好的了解代码。</li>
+<li>确保示例是_正确的_。无论是示例可以编译清楚，或者能出现需要解决的确切错误信息。</li>
+</ul>
+<p>更多的提示：</p>
+<ul>
+<li>将所有的资源（CSS/JS/Java源代码、图像等）放到同一个文件夹，这样可以更容易管理，并且也很容易找到。</li>
+<li>从Java源代码中删除package语句。</li>
+<li>将Java的public类降级到默认级别。如果语言指定在每个源代码文件中只能有一个public类，那么就要降级所有其他的类到默认级别。这样可以让示例在不用分成单独的文件就可以编译。</li>
+<li>验证器如果可行，可以来验证示例。</li>
+<li>HTML<a target="_blank" rel="noopener" href="http://validator.w3.org/">验证器</a></li>
+<li>CSS<a target="_blank" rel="noopener" href="http://jigsaw.w3.org/css-validator/">验证器</a></li>
+</ul>
+<h1 id="示例"><a class="markdownIt-Anchor" href="#示例"></a> 示例</h1>
+<p><em>一定要确定发表的代码真的表现出了问题！</em></p>
+<p>已经在这个例子上纠结了一小时，或者有一天了吧。可能看起来像是永远。那么现在，就是一个很好的时间用来休息一会儿，后退一步，海阔天空。</p>
+<p><em>重整电脑也是如此。</em> 别忘了在必要的时候重启电脑。</p>
+<p>现在打开出现问题的网页或程序。当初的问题还在那儿吗？</p>
+<p>也许99%会是这样解决的（或者少使用较不可靠的操作系统）。</p>
+<p>现在，如果问题依然存在，那就发表你的示例吧。</p>
+<h2 id="示例-加分点"><a class="markdownIt-Anchor" href="#示例-加分点"></a> 示例 - 加分点</h2>
+<p>我们希望给这些人一美元，那些询问一个网页或样式表、一些JavaScript代码或者一个Java Applet小程序但没有给出链接的人。我们并不需要提供和维护这个文档，做这些还不如去沙滩享受阳光浴、体验异域风情、喝着异国风味的鸡尾酒。</p>
+<p>为什么人们会错过这样的机会？很少有东西能像链接那样诱人。对于一个经验丰富的论坛版主，有一个链接会像一个写有“喝掉我”这样模糊的讯息的瓶子那样诱人，也可以比作异国风味的鸡尾酒。</p>
+<p>三个臭皮匠，顶个诸葛亮。一群人有助于发现并解决手头的问题，也会解决_兼容性问题_（这可能就是问题的原因）。</p>
+<h2 id="网络上标准"><a class="markdownIt-Anchor" href="#网络上标准"></a> 网络上标准</h2>
+<p>当处理与互联网相关的事情时，这里存在另一个“疑难杂症”。互联网或与其相关的一些事情上，都会有些放荡不羁。每个标准后面都会有候补标准。对于每个规则往往有至少三个例外。</p>
+<p>首先，浏览器的工作方式不同。这里不是指IE和Netscape的不同，也不是指旧浏览器和新浏览器的不同。而是，举个例子来说，是Macintosh下的“Internet Explorer 5”和Windows下的“Internet Explorer 5”（显著）的区别。</p>
+<p>在网页设计讨论组寻求帮助的人们往往很惊讶的听到，他们经历的网页问题却没有在使用不同浏览器的那些人哪里表现出来。</p>
+<h2 id="java-applets"><a class="markdownIt-Anchor" href="#java-applets"></a> Java Applets</h2>
+<p>更复杂一点的，有更多问题的，还要数网页中有个Applet的时候了。上述提到的浏览器往往会形成不同（通常不好的）HTML和样式表，如何将Applets与浏览器结合的很好，这将是另一个问题。这里只是举个例子。</p>
+<p>很长一段时间，微软在Internet Explorer上运行Java的_早期版本_（JVM 1.1版本）。之后发生了一些事情，微软将_最新的Java_引擎嵌入到它的浏览器中。不就之后，他们又开始提供_没有JVM_的IE版本了。</p>
+<p>含有Applets可能会出现并发症，但庆幸的是当在互联网环境下，这很容易检查出来。点击几下，在星球另一边的人就能从他们自己浏览器的Java控制台上看到输出，有些时候也能看到Applet正常的工作。</p>
+<p>如果一个Applet在你这里能正常工作，在其他人那里却出问题了，这可以帮助你快速所别问题的范围，一般是HTML、Applet标签、或者（完全没有安装）浏览器的JVM插件。</p>
+<h1 id="何必如此"><a class="markdownIt-Anchor" href="#何必如此"></a> 何必如此？</h1>
+<p>这是一个很好的问题。为什么要做这些事情？</p>
+<p>也许会有人能从你给的描述中明白你所描述的问题。也许这只是数以千计的人无意当中发现的一件事情。</p>
+<p>如果你已经检查了FAQ、google过论坛、阅读了XXX指导手册，那么你会发现答案不会那么容易浮现出来。你_必须_深入做这些事情，难道不是吗？</p>
+<p>如果浪费了公共论坛其他会员的时间和带宽，就可能会被群起而攻之。</p>
+<p>在讨论组有过贡献的人给予很宽泛的建议。这些建议有时候会奏效，有时候不会，但无论哪种方式，意见都是免费的。</p>
+<p>贡献者这样做有多种多样的原因，其中一条是，当他们可以将自己所知道的与自己领域相关的一部分知识传递给正在学习的人，这样所带来的成就感。</p>
+<p>不幸的是，如果一些人问一些包含在基础教程却还需要别人喂养的问题，这个迹象表明，提问者并没有强烈的欲望想去学习那些他自己应该去学习的内容。</p>
+<p>如果这里有一段你想写的代码，你可以有很多途径来完成或者让其他人帮你修改一下。对于金额不多的时候，你可以找一些基于互联网的外包公司来完成（做完）大多数的IT工作。这些本来就是这些外包公司正在研究的。</p>
+<p>自由论坛就是用来学习的。</p>
+<p>话说回来：</p>
+<p>让我们假设你的确在学习，你有一个庞大的、复杂的系统，系统中有一个偶然的、不可预知的错误，然后你搜索了FAQ和论坛、研究了说明书或文档，但是却没有找到一个答案。</p>
+<p>向讨论组描述问题的时候放松宽泛一点，也许这样可以消除一些基本问题上的误解。</p>
+<p><strong>我们并不打算为了解决每一个单独的问题都用上SSCCE。也并不是说某些例子需要这样做或者必须那样做。</strong></p>
+<p>然而，它将使人们获得帮助，最终会增加找到解决方法的机会。</p>
+<h1>参考文献</h1><ul><li><a href="http://sscce.org/" target="_blank">Short, Self Contained, Correct Example</a></li></ul></div><script type="text/javascript" src="/js/share.js?v=0.0.3" async></script><a class="article-share-link" data-url="#{page.permalink}" data-id="#{page._id}">分享到</a><div class="tags"><a href="/tags/%E6%8A%80%E5%B7%A7/">技巧</a><a href="/tags/%E7%BC%96%E7%A8%8B/">编程</a></div><div class="post-nav"><a class="pre" href="/2015/11/24/use-http-parser-to-parse-url/">使用http_parser解析URL</a><a class="next" href="/2015/11/11/eat-cells-smaller-than-you-and-dont-get-eaten-by-the-bigger-ones/">一个你吃我我吃你的小游戏Agar</a></div><div id="disqus_thread"><script>var disqus_shortname = 'sumyblog';
+var disqus_identifier = '2015/11/12/problem-with-short-selfcontained-correct-example/';
+var disqus_title = '新手向的问题描述及提问实践SSCCE';
+var disqus_url = 'https://sumygg.com/2015/11/12/problem-with-short-selfcontained-correct-example/';
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><script id="dsq-count-scr" src="//#{theme.disqus}.disqus.com/count.js" async></script></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down right-widgets"><div id="sidebar"><div class="widget"><input class="st-default-search-input" placeholder="Search" type="text"/></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JustForFun/">JustForFun</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BD%93%E9%AA%8CElectron/">体验Electron</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8A%A8%E6%BC%AB/">动漫</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%A7%BF%E5%8A%BF/">姿势</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%9E%E8%B7%B5/">实践</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%9E%E9%AA%8C%E5%AE%A4/">实验室</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%90%9E%E6%9C%BA%E6%97%A5%E5%B8%B8/">搞机日常</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E7%B3%BB%E7%BB%9F/">服务器与系统</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9E%9C%E7%84%B6%E8%BF%98%E6%98%AF%E5%89%8D%E7%AB%AF/">果然还是前端</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F%E4%BA%BA%E7%94%9F/">游戏人生</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF%E4%BA%BA%E7%94%9F/">艺术人生</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%97%AE%E9%A2%98%E9%BA%BB%E7%83%A6/">问题麻烦</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AB%98%E6%95%88%E7%94%9F%E6%B4%BB/">高效生活</a><span class="category-list-count">11</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/c-c/" style="font-size: 14.44px;">c/c++</a> <a href="/tags/%E5%A7%BF%E5%8A%BF/" style="font-size: 27.78px;">姿势</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a> <a href="/tags/Java/" style="font-size: 18.89px;">Java</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 16.67px;">随笔</a> <a href="/tags/linux/" style="font-size: 23.33px;">linux</a> <a href="/tags/shell/" style="font-size: 23.33px;">shell</a> <a href="/tags/C-C/" style="font-size: 10px;">C/C++</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 30px;">算法</a> <a href="/tags/STL/" style="font-size: 10px;">STL</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 16.67px;">数学</a> <a href="/tags/%E6%A6%82%E7%8E%87/" style="font-size: 10px;">概率</a> <a href="/tags/%E6%95%B0%E8%AE%BA/" style="font-size: 25.56px;">数论</a> <a href="/tags/acm/" style="font-size: 12.22px;">acm</a> <a href="/tags/%E7%9F%A9%E9%98%B5/" style="font-size: 10px;">矩阵</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" style="font-size: 12.22px;">线性代数</a> <a href="/tags/%E9%80%92%E6%8E%A8/" style="font-size: 10px;">递推</a> <a href="/tags/%E6%AC%A7%E6%8B%89/" style="font-size: 10px;">欧拉</a> <a href="/tags/%E5%85%B6%E5%AE%83/" style="font-size: 10px;">其它</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 14.44px;">面试</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95/" style="font-size: 21.11px;">计算几何</a> <a href="/tags/%E8%A7%A3%E9%A2%98%E6%8A%A5%E5%91%8A/" style="font-size: 10px;">解题报告</a> <a href="/tags/codeforces/" style="font-size: 10px;">codeforces</a> <a href="/tags/%E4%B8%89%E8%A7%92%E5%BD%A2%E9%9D%A2%E7%A7%AF/" style="font-size: 10px;">三角形面积</a> <a href="/tags/bae/" style="font-size: 10px;">bae</a> <a href="/tags/baidu/" style="font-size: 10px;">baidu</a> <a href="/tags/jekyll/" style="font-size: 12.22px;">jekyll</a> <a href="/tags/github/" style="font-size: 16.67px;">github</a> <a href="/tags/ubuntu/" style="font-size: 16.67px;">ubuntu</a> <a href="/tags/%E8%A3%85%E6%9C%BA/" style="font-size: 10px;">装机</a></div><a href="/tagcloud" title="tags" target="_blank" style="display:block;text-align:right;">>>More<<</a></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/10/28/simplify-commit-history-with-git-rebase/">使用git中的rebase简化commit提交历史</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/31/p5js-version-for-taiko-drum-master-song-void-setup/">魔法の筆 呪文で絵描くよ 君も描こう！</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/26/domain-resolves-to-an-unknown-website/">记一次简单的域名解析找回操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/31/optimize-sql-queries-to-improving-the-performance/">优化SQL查询时候的性能</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/28/custom-domains-on-github-pages-support-for-https/">自定义域名在Github Pages中支持通过HTTPS访问</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/21/a-plus-one-day-problem-in-javascript/">一个处理JavaScript日期的时候出现的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/23/make-left4dead2-spray-paint-from-new-game-op/">制作《求生之路2》喷漆</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/11/breadth-first-search-and-depth-first-search-one-two-three/">深搜&广搜一二三</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/08/upper-bound-and-lower-bound-in-java/">用Java实现C++::std中的upper_bound和lower_bound</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/03/ball-battle-on-my-blog-background/">背景《球球大作战》实现要点</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div id="disqus-recent-comments-content"></div><script type="text/javascript" src="/js/handlebars.min.js"></script><script type="text/javascript" src="/js/recent-comments.js" async="async"></script></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="#{theme.links[i].url}" title="#{theme.links[i].title}" target="_blank">笔良文昌 - noclyt</a><ul></ul><a href="#{theme.links[i].url}" title="#{theme.links[i].title}" target="_blank">无火的余灰 - AShen One</a><ul></ul><a href="#{theme.links[i].url}" title="#{theme.links[i].title}" target="_blank">槽 - 雨rain</a></div></div></div></div><div class="pure-u-1 pure-u-md-1"><div id="footer"><div class="pure-u-1 pure-u-md-1-3" id="site"><div class="pure-menu"><span class="pure-menu-heading">Site</span><ul class="pure-menu-list"><li class="pure-menu-item"><a href="/atom.xml" target="_blank">RSS Feed</a></li><li class="pure-menu-item"><a href="/sitemap.xml" target="_blank">Site Map</a></li><li class="pure-menu-item"><a href="/baidusitemap.xml" target="_blank">Baidu Site Map</a></li><li class="pure-menu-item"><a href="/changelog" target="_blank">Change Log</a></li></ul></div></div><div class="pure-u-1 pure-u-md-1-3" id="social"><div class="pure-menu"><span class="pure-menu-heading">Follow</span><ul class="pure-menu-list"><li class="pure-menu-item"><a rel="nofollow" href="https://github.com/sumy7" target="_blank"><i class="fa #{item.icon}"></i>&nbsp;sumy7</a></li><li class="pure-menu-item"><a rel="nofollow" href="https://weibo.com/sumy7" target="_blank"><i class="fa #{item.icon}"></i>&nbsp;想要从咕咕变成熊熊的贱贱_Sumy</a></li><li class="pure-menu-item"><a rel="nofollow" href="https://twitter.com/sumygg" target="_blank"><i class="fa #{item.icon}"></i>&nbsp;sumygg</a></li><li class="pure-menu-item"><a rel="nofollow" href="https://profiles.exophase.com/sumy/" target="_blank">&nbsp;<img class='nofancybox' style='width:100%;' src='https://card.exophase.com/2/0/11434.png'></a></li></ul></div></div><div id="copyright">© 2015-2021 <a href="/." rel="nofollow">SumyBlog.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><div class="post-toc"><div class="post-toc-wrap"><div class="post-toc" id="toc"><div class="toc-title">文章目录</div><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-sscce"><span class="toc-number">1.</span> <span class="toc-text"> 什么是 SSCCE</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E7%9F%AD%E7%9A%84"><span class="toc-number">2.</span> <span class="toc-text"> 简短的</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B2%BE%E7%AE%80%E7%9A%84%E6%8A%80%E5%B7%A7"><span class="toc-number">2.1.</span> <span class="toc-text"> 精简的技巧</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E4%BA%86%E5%90%97"><span class="toc-number">2.2.</span> <span class="toc-text"> 问题解决了吗？</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%87%AA%E6%88%90%E4%B8%80%E4%BD%93%E7%9A%84"><span class="toc-number">3.</span> <span class="toc-text"> 自成一体的</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%8E%E6%A0%B7%E5%BC%84%E4%B8%80%E4%B8%AA%E8%87%AA%E6%88%90%E4%B8%80%E4%BD%93%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="toc-number">3.1.</span> <span class="toc-text"> 怎样弄一个自成一体的例子</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%AD%A3%E7%A1%AE%E6%80%A7"><span class="toc-number">4.</span> <span class="toc-text"> 正确性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B"><span class="toc-number">5.</span> <span class="toc-text"> 示例</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B-%E5%8A%A0%E5%88%86%E7%82%B9"><span class="toc-number">5.1.</span> <span class="toc-text"> 示例 - 加分点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E4%B8%8A%E6%A0%87%E5%87%86"><span class="toc-number">5.2.</span> <span class="toc-text"> 网络上标准</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#java-applets"><span class="toc-number">5.3.</span> <span class="toc-text"> Java Applets</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%95%E5%BF%85%E5%A6%82%E6%AD%A4"><span class="toc-number">6.</span> <span class="toc-text"> 何必如此？</span></a></li></ol></div></div><div class="post-toc-toggle-wrap" id="right-toggle"><div class="post-toc-toggle-first post-toc-toggle"></div><div class="post-toc-toggle-second post-toc-toggle"></div><div class="post-toc-toggle-thrid post-toc-toggle"></div></div><script>$(document).ready(function() {
+    var mediamatch = window.matchMedia('(max-width: 48em)');
+    mediamatch.onchange = function() {
+        if(mediamatch.matches) {
+          hideSidebar();
+        }
+    }
+    if(!mediamatch.matches) {
+        showSidebar();
+    }
+    $('#right-toggle').click(function(){
+        if($('#right-toggle').hasClass('open')){
+            showSidebar();
+        } else {
+            hideSidebar();
+        }
+    });
+});
+function showSidebar() {
+    $('.post-toc-wrap').show();
+    $('.post-toc-wrap').animate({"width": "320px"});
+    $('body').animate({"margin-right": "320px"}, function() {
+        $(window).resize();
+    });
+    $('.left-post').removeClass('pure-u-md-3-4');
+    $('.body_container').animate({"padding-right": 0});
+    $('.right-widgets').hide();
+    $('#right-toggle').removeClass('open');
+    $('#right-toggle').addClass('close');
+}
+function hideSidebar(){
+    $('.post-toc-wrap').animate({"width": 0}, function(){
+        $('.post-toc-wrap').hide();
+    });
+    $('body').animate({"margin-right": 0});
+    $('.left-post').addClass('pure-u-md-3-4');
+    $('.body_container').animate({"padding-right": "60px"}, function() {
+        $('.body_container').css('padding-right', '');
+        $(window).resize();
+    });
+    $('.right-widgets').show();
+    $('#right-toggle').removeClass('close');
+    $('#right-toggle').addClass('open');
+}</script></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.3" async></script><script>(function (root) {
+  "use strict";
+  var h = root ? root.location.hostname : "",
+  p = root ? root.location.protocol : "";
+  if ("http:" === p && !(/^(localhost|127.0.0.1)/).test(h)) {
+    root.location.protocol = "https:";
+  }
+})("undefined" !== typeof window ? window : this);
+</script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.3" async></script><link rel="stylesheet" type="text/css" href="/css/jquery.fancybox.css?v=0.0.3"><script>(function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+(w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+})(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+_st('install','azHCJByAUgF5kSeDJB_Q','2.0.0');
+</script><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create','UA-69760423-1','auto');ga('send','pageview');
+</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.3"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.3"></script><script type="text/javascript" src="/js/app.js?v=0.0.3"></script><script type="text/javascript" src="/js/background-canvas.js?v=0.0.3"></script></div></body></html>
