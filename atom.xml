@@ -40,6 +40,31 @@
   </entry>
   
   <entry>
+    <title>再次从零开始捣鼓一个Electron应用——菜单和再次发布</title>
+    <link href="https://sumygg.com/2021/05/09/restart-from-the-very-beginning-for-electron-with-menu-and-release-2/"/>
+    <id>https://sumygg.com/2021/05/09/restart-from-the-very-beginning-for-electron-with-menu-and-release-2/</id>
+    <published>2021-05-09T10:35:17.000Z</published>
+    <updated>2021-05-11T12:16:27.685Z</updated>
+    
+    <content type="html"><![CDATA[<p>时隔一段时间，其实每天还是在断断续续的“水”Electron的功能，本次在菜单和构建问题上又进了一步。i18n功能需要一个切换语言的位置，由于没有设置专门的设置窗口，就把切换语言放置在菜单栏中。Electron默认已经有一部分菜单了，这次就需要在菜单上加上语言列表。另一项任务是发布，每次手动发布也好麻烦（其实也就手动发布了一次而已），这次看看能不能利用Github Actions功能将构建和发布自动化。</p><span id="more"></span><h1 id="菜单"><a class="markdownIt-Anchor" href="#菜单"></a> 菜单</h1><p>Electron的菜单通过一个<code>(MenuItemConstructorOptions | MenuItem)[]</code>类型数组进行声明，然后在窗口的ready事件后才能执行修改菜单的命令。</p><p>修改菜单先是要将菜单模板构建成菜单对象，然后再应用到ApplcationMenu上。</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> menu = Menu.buildFromTemplate([<span class="comment">/* 菜单在这里 */</span>])</span><br><span class="line">Menu.setApplicationMenu(menu)</span><br></pre></td></tr></table></figure><p>以一个简单菜单来说，一个独立的菜单包含label、accelerator、role这三项。label是菜单展示；accelerator是菜单快捷键；role是菜单角色，有些内置的菜单角色可以触发系统的默认行为，比如undo就会触发撤销行为等。将type设置为separator会绘制一个菜单分隔条。如果默认角色没有符合要求的也可以使用click属性向菜单绑定点击事件。</p><p>下面是菜单的一个简单用法：</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">label</span>: <span class="string">&#x27;Edit&#x27;</span>,</span><br><span class="line">  <span class="attr">submenu</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">label</span>: <span class="string">&#x27;Undo&#x27;</span>,</span><br><span class="line">      <span class="attr">accelerator</span>: <span class="string">&#x27;CmdOrCtrl+Z&#x27;</span>,</span><br><span class="line">      <span class="attr">role</span>: <span class="string">&#x27;undo&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">type</span>: <span class="string">&#x27;separator&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">label</span>: <span class="string">&#x27;Reload&#x27;</span>,</span><br><span class="line">      <span class="attr">accelerator</span>: <span class="string">&#x27;CmdOrCtrl+R&#x27;</span>,</span><br><span class="line">      <span class="attr">click</span>: <span class="function"><span class="keyword">function</span> (<span class="params">item, focusedWindow</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (focusedWindow) &#123;</span><br><span class="line">          focusedWindow.reload()</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>使用了自定义菜单之后，会丢失默认菜单的配置，如果还想保留默认菜单，建议将默认菜单项重新拷贝一遍，与新菜单合并放置在一起。可以使用<a href="https://github.com/carter-thaxton/electron-default-menu/blob/master/index.js">https://github.com/carter-thaxton/electron-default-menu/blob/master/index.js</a>提供的模板稍加修改。</p><h1 id="发布"><a class="markdownIt-Anchor" href="#发布"></a> 发布</h1><p>上篇文章之后，就一直在捣鼓怎么进行更有效的发布操作，初步想法是用Github Actions在push tags操作后，触发构建然后推送将成品推送到release中，以此来替代手动构建上传的操作。</p><p>后来发现，原来<a href="https://www.electron.build/">electron-builder</a>存在构建后自动上传github的方式，而使用的<a href="https://github.com/nklayman/vue-cli-plugin-electron-builder">vue-cli-plugin-electron-builder</a>引用了electron-builder，自然也存在这项功能。</p><p>要想在本地使用，首先需要申请Github Token。打开<a href="https://github.com/settings/tokens">Personal Access Tokens</a>，选择“Generate new token”，然后将repo下的所有权限选中，生成一个新的token。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export GH_TOKEN=xxx_xxxxxxxxxxxxxxxxx</span><br><span class="line">vue-cli-service electron:build --mac --win --linux deb tar.xz -p always</span><br></pre></td></tr></table></figure><p>这样就会在本地构建mac、windows、linux的成品，并上传Github对应仓库的releases里。</p><p>除了在本地操作，还可以将这个步骤整理成一个Github Actions，在push的时候自动进行。新建.github/workflows/build.yml文件，并输入以下内容。</p><figure class="highlight yaml"><figcaption><span>.github/workflows/build.yml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">Build/release</span></span><br><span class="line"></span><br><span class="line"><span class="attr">on:</span> <span class="string">push</span></span><br><span class="line"></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">release:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">$</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">strategy:</span></span><br><span class="line">      <span class="attr">matrix:</span></span><br><span class="line">        <span class="attr">os:</span> [<span class="string">macos-latest</span>, <span class="string">ubuntu-latest</span>, <span class="string">windows-latest</span>]</span><br><span class="line"></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Check</span> <span class="string">out</span> <span class="string">Git</span> <span class="string">repository</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/checkout@v2.3.4</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Install</span> <span class="string">Node.js,</span> <span class="string">NPM</span> <span class="string">and</span> <span class="string">Yarn</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/setup-node@v2.1.5</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">node-version:</span> <span class="number">14</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Yarn</span> <span class="string">install</span> <span class="string">and</span> <span class="string">release</span></span><br><span class="line">        <span class="attr">env:</span></span><br><span class="line">          <span class="attr">GH_TOKEN:</span> <span class="string">$</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          yarn install</span></span><br><span class="line"><span class="string">          yarn run electron:release-$</span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure><p>步骤就是用macos、ubuntu和windows这三个操作系统，分别去构建成品。如果存在GH_TOKEN环境变量，会自动触发上传操作。当然这个GH_TOKEN也不需要配置和填写，执行的时候Github会自动生成token并进行替换。</p><p>这个Actions构建依赖几个命令，可以提前放在package.json里：</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    <span class="attr">&quot;electron:release-all&quot;</span>: <span class="string">&quot;vue-cli-service electron:build --mac --win --linux deb tar.xz -p always&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;electron:release-macos-latest&quot;</span>: <span class="string">&quot;vue-cli-service electron:build --mac -p always&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;electron:release-ubuntu-latest&quot;</span>: <span class="string">&quot;vue-cli-service electron:build --linux deb tar.xz -p always&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;electron:release-windows-latest&quot;</span>: <span class="string">&quot;vue-cli-service electron:build --win -p always&quot;</span>,</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>然后将文件push到仓库里，就自动创建Github Actions了。以后有push操作的时候，都会自动构建。还会根据当前最新的tag创建版本号，但是这样自动创建的releases是一个草稿状态，还需要手动编辑然后进行发布操作。</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;时隔一段时间，其实每天还是在断断续续的“水”Electron的功能，本次在菜单和构建问题上又进了一步。i18n功能需要一个切换语言的位置，由于没有设置专门的设置窗口，就把切换语言放置在菜单栏中。Electron默认已经有一部分菜单了，这次就需要在菜单上加上语言列表。另一项任务是发布，每次手动发布也好麻烦（其实也就手动发布了一次而已），这次看看能不能利用Github Actions功能将构建和发布自动化。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="体验Electron" scheme="https://sumygg.com/categories/%E4%BD%93%E9%AA%8CElectron/"/>
+    
+    
+    <category term="electron" scheme="https://sumygg.com/tags/electron/"/>
+    
+    <category term="release" scheme="https://sumygg.com/tags/release/"/>
+    
+    <category term="github-actions" scheme="https://sumygg.com/tags/github-actions/"/>
+    
+  </entry>
+  
+  <entry>
     <title>美化你的Github个人信息页</title>
     <link href="https://sumygg.com/2021/04/25/beautify-your-github-profile-readme/"/>
     <id>https://sumygg.com/2021/04/25/beautify-your-github-profile-readme/</id>
@@ -510,9 +535,9 @@
     
     <category term="github" scheme="https://sumygg.com/tags/github/"/>
     
-    <category term="https" scheme="https://sumygg.com/tags/https/"/>
-    
     <category term="域名" scheme="https://sumygg.com/tags/%E5%9F%9F%E5%90%8D/"/>
+    
+    <category term="https" scheme="https://sumygg.com/tags/https/"/>
     
   </entry>
   
@@ -540,38 +565,6 @@
     <category term="javascript" scheme="https://sumygg.com/tags/javascript/"/>
     
     <category term="日期时间" scheme="https://sumygg.com/tags/%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>制作《求生之路2》喷漆</title>
-    <link href="https://sumygg.com/2017/09/23/make-left4dead2-spray-paint-from-new-game-op/"/>
-    <id>https://sumygg.com/2017/09/23/make-left4dead2-spray-paint-from-new-game-op/</id>
-    <published>2017-09-23T07:37:59.000Z</published>
-    <updated>2021-04-20T13:24:04.252Z</updated>
-    
-    <content type="html"><![CDATA[<p>最近比较迷《求生之路2》，不过现在的水平也只能打打普通难度。网上有许多个人的服务器，可以支持多于4人的游戏。游戏人多了就感觉比较有意思了。过程中看到好多人都会往墙上或地上画一些个性的图画（或者不可描述的图片），感觉比较有意思。查了查发现制作喷漆也很简单，于是打算动手制作一个。<img class="emoji" draggable="false" alt="😋" src="https://twemoji.maxcdn.com/2/72x72/1f60b.png"/></p><h1 id="工具"><a class="markdownIt-Anchor" href="#工具"></a> 工具</h1><p>已知喷漆的类型有几种：普通贴图喷漆、距离变换喷漆、动图喷漆。喷漆的原理其实只是一帧一帧的图片轮番显示而已。想做一个动图的喷漆。</p><p>需要的工具：</p><ol><li>vtfedit-主要用来编辑和生成喷漆文件</li><li>ScreenToGif-集屏幕录制和gif编辑于一身的工具</li></ol><h1 id="制作"><a class="markdownIt-Anchor" href="#制作"></a> 制作</h1><h2 id="来源图片"><a class="markdownIt-Anchor" href="#来源图片"></a> 来源图片</h2><p>喷漆选用的图片当然是最最可爱的日富美了<img class="emoji" draggable="false" alt="😍" src="https://twemoji.maxcdn.com/2/72x72/1f60d.png"/>，选用了《NEW GAME！！》op中的一段，“轻柔如羽毛”。。。</p><img src="/2017/09/23/make-left4dead2-spray-paint-from-new-game-op/rifumei.gif" class="" title="轻柔如羽毛"><p>这个gif使用ScreenToGif录制。为了缩小体积，修改了图片的大小，只截取了中间正方形的部分。还有删去了几帧，这样的感觉似乎有点鬼畜，不过在游戏中似乎无所谓。</p><img src="/2017/09/23/make-left4dead2-spray-paint-from-new-game-op/3.gif" class="" title="轻柔如羽毛"><p>接下来继续使用ScreenToGif将gif的每一帧导成一张图片。这样整个gif就变成了相册集了。</p><p>看着有点晃眼<img class="emoji" draggable="false" alt="😖" src="https://twemoji.maxcdn.com/2/72x72/1f616.png"/>，快点继续。。。</p><h2 id="制作喷漆"><a class="markdownIt-Anchor" href="#制作喷漆"></a> 制作喷漆</h2><p>按帧导出图片之后，要用vtfedit工具制作喷漆。</p><img src="/2017/09/23/make-left4dead2-spray-paint-from-new-game-op/2.png" class="" title="按帧导出图片"><p>打开VTFEdit软件，选择File-&gt;Import…，按住Shitf或Ctrl选择导出图片的所有帧。选择后出现VTF Options对话框。</p><img src="/2017/09/23/make-left4dead2-spray-paint-from-new-game-op/3.png" class="" title="图片导入选项"><p>导入选项其余的没有要修改的，需要注意调整Clamp大小，为了减少文件体积，这里选择64x64大小的。可以多制作几个选择不同大小测试一下，文件体积尽量保持在100kb左右吧。</p><img src="/2017/09/23/make-left4dead2-spray-paint-from-new-game-op/4.png" class="" title="导入后"><p>导入后点击Play就能播放，播放感觉速度会很快，但是游戏中的速度没有这么快。还有大小也没有看到的这么小，游戏中就感觉很大的样子了。</p><p>最后通过File-&gt;Save…保存成vtf喷漆文件。</p><h2 id="导入喷漆"><a class="markdownIt-Anchor" href="#导入喷漆"></a> 导入喷漆</h2><p>打开游戏，在主界面选择“选项”-&gt;“多人联机”，下面有个“导入喷漆图案…”的菜单。由于游戏对中文支持不够好，喷漆需要放在全英文路径下，文件名也是英文字符即可。</p><p>导入喷漆后就可以在游戏中使用了。喷漆的快捷键默认是T。</p><p>游戏中的效果大概是这样子，感觉还不错。</p><img src="/2017/09/23/make-left4dead2-spray-paint-from-new-game-op/5.png" class="" title="效果图">]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;最近比较迷《求生之路2》，不过现在的水平也只能打打普通难度。网上有许多个人的服务器，可以支持多于4人的游戏。游戏人多了就感觉比较有意思了。过程中看到好多人都会往墙上或地上画一些个性的图画（或者不可描述的图片），感觉比较有意思。查了查发现制作喷漆也很简单，于是打算动手制作一个</summary>
-      
-    
-    
-    
-    <category term="游戏人生" scheme="https://sumygg.com/categories/%E6%B8%B8%E6%88%8F%E4%BA%BA%E7%94%9F/"/>
-    
-    
-    <category term="游戏" scheme="https://sumygg.com/tags/%E6%B8%B8%E6%88%8F/"/>
-    
-    <category term="求生之路2" scheme="https://sumygg.com/tags/%E6%B1%82%E7%94%9F%E4%B9%8B%E8%B7%AF2/"/>
-    
-    <category term="喷漆" scheme="https://sumygg.com/tags/%E5%96%B7%E6%BC%86/"/>
-    
-    <category term="newgame" scheme="https://sumygg.com/tags/newgame/"/>
-    
-    <category term="日富美" scheme="https://sumygg.com/tags/%E6%97%A5%E5%AF%8C%E7%BE%8E/"/>
     
   </entry>
   

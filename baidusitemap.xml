@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://sumygg.com/2021/05/09/restart-from-the-very-beginning-for-electron-with-menu-and-release-2/</loc>
+    <lastmod>2021-05-11</lastmod>
+  </url>
+  <url>
     <loc>https://sumygg.com/2021/05/11/vue-router-4-path-ranking/</loc>
     <lastmod>2021-05-11</lastmod>
   </url>
@@ -93,6 +97,10 @@
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
+    <loc>https://sumygg.com/2018/10/28/simplify-commit-history-with-git-rebase/</loc>
+    <lastmod>2021-04-20</lastmod>
+  </url>
+  <url>
     <loc>https://sumygg.com/2021/03/15/leave-from-company-a-resign-or-quit/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
@@ -101,7 +109,7 @@
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
-    <loc>https://sumygg.com/2018/10/28/simplify-commit-history-with-git-rebase/</loc>
+    <loc>https://sumygg.com/2018/07/31/p5js-version-for-taiko-drum-master-song-void-setup/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
@@ -109,19 +117,11 @@
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
-    <loc>https://sumygg.com/2018/07/31/p5js-version-for-taiko-drum-master-song-void-setup/</loc>
-    <lastmod>2021-04-20</lastmod>
-  </url>
-  <url>
-    <loc>https://sumygg.com/2018/05/28/custom-domains-on-github-pages-support-for-https/</loc>
-    <lastmod>2021-04-20</lastmod>
-  </url>
-  <url>
     <loc>https://sumygg.com/2018/05/31/optimize-sql-queries-to-improving-the-performance/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
-    <loc>https://sumygg.com/2017/09/11/breadth-first-search-and-depth-first-search-one-two-three/</loc>
+    <loc>https://sumygg.com/2018/05/28/custom-domains-on-github-pages-support-for-https/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
@@ -133,6 +133,10 @@
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
+    <loc>https://sumygg.com/2017/09/11/breadth-first-search-and-depth-first-search-one-two-three/</loc>
+    <lastmod>2021-04-20</lastmod>
+  </url>
+  <url>
     <loc>https://sumygg.com/2017/08/03/ball-battle-on-my-blog-background/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
@@ -141,19 +145,19 @@
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
-    <loc>https://sumygg.com/2017/06/20/start-from-the-very-beginning-for-electron-with-reading-file-state/</loc>
-    <lastmod>2021-04-20</lastmod>
-  </url>
-  <url>
     <loc>https://sumygg.com/2017/06/19/start-from-the-very-beginning-for-electron-with-element-ui-and-icon/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
-    <loc>https://sumygg.com/2017/05/29/make-a-animation-of-grid-particle-in-canvas/</loc>
+    <loc>https://sumygg.com/2017/06/20/start-from-the-very-beginning-for-electron-with-reading-file-state/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
     <loc>https://sumygg.com/2017/06/07/java8-stream-forker-consumer-framework/</loc>
+    <lastmod>2021-04-20</lastmod>
+  </url>
+  <url>
+    <loc>https://sumygg.com/2017/05/29/make-a-animation-of-grid-particle-in-canvas/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
@@ -165,19 +169,19 @@
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
-    <loc>https://sumygg.com/2017/05/05/digital-circuits-and-redstone-circuits-in-minecraft/</loc>
-    <lastmod>2021-04-20</lastmod>
-  </url>
-  <url>
     <loc>https://sumygg.com/2017/04/28/how-to-properly-stop-a-thread-in-java/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
-    <loc>https://sumygg.com/2017/04/20/un-fixing-fixed-elements-with-css-transforms/</loc>
+    <loc>https://sumygg.com/2017/05/05/digital-circuits-and-redstone-circuits-in-minecraft/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
     <loc>https://sumygg.com/2017/04/27/single-number-ii-solved-using-circult-design-and-digital-logic/</loc>
+    <lastmod>2021-04-20</lastmod>
+  </url>
+  <url>
+    <loc>https://sumygg.com/2017/04/20/un-fixing-fixed-elements-with-css-transforms/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
@@ -193,7 +197,7 @@
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
-    <loc>https://sumygg.com/2016/11/22/maven-pratice-in-my-project/</loc>
+    <loc>https://sumygg.com/2017/01/21/note-for-2017-blog-theme-change/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
@@ -201,11 +205,7 @@
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
-    <loc>https://sumygg.com/2017/01/21/note-for-2017-blog-theme-change/</loc>
-    <lastmod>2021-04-20</lastmod>
-  </url>
-  <url>
-    <loc>https://sumygg.com/2016/11/15/move-parition-data-to-another-parition/</loc>
+    <loc>https://sumygg.com/2016/11/22/maven-pratice-in-my-project/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
@@ -213,7 +213,7 @@
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
-    <loc>https://sumygg.com/2016/03/13/change-the-maintenance-for-mi3/</loc>
+    <loc>https://sumygg.com/2016/11/15/move-parition-data-to-another-parition/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
@@ -225,6 +225,10 @@
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
+    <loc>https://sumygg.com/2016/03/13/change-the-maintenance-for-mi3/</loc>
+    <lastmod>2021-04-20</lastmod>
+  </url>
+  <url>
     <loc>https://sumygg.com/2016/02/29/hexo-support-emoji/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
@@ -233,7 +237,7 @@
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
-    <loc>https://sumygg.com/2016/02/18/electron-get-started/</loc>
+    <loc>https://sumygg.com/2016/02/19/electron-hello-world/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
@@ -241,7 +245,7 @@
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
-    <loc>https://sumygg.com/2016/02/19/electron-hello-world/</loc>
+    <loc>https://sumygg.com/2016/02/18/electron-get-started/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
@@ -265,11 +269,11 @@
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
-    <loc>https://sumygg.com/2016/01/24/install-and-configure-dont-starve-together-server-on-centos/</loc>
+    <loc>https://sumygg.com/2016/01/21/note-for-2016-theme-improvement/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
-    <loc>https://sumygg.com/2016/01/21/note-for-2016-theme-improvement/</loc>
+    <loc>https://sumygg.com/2016/01/24/install-and-configure-dont-starve-together-server-on-centos/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
@@ -281,11 +285,11 @@
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
-    <loc>https://sumygg.com/2016/01/02/use-emoji-in-github-and-emoji-cheat-sheet/</loc>
+    <loc>https://sumygg.com/2016/01/04/amazing-cinemagraph/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
-    <loc>https://sumygg.com/2016/01/04/amazing-cinemagraph/</loc>
+    <loc>https://sumygg.com/2016/01/02/use-emoji-in-github-and-emoji-cheat-sheet/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
@@ -297,15 +301,11 @@
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
-    <loc>https://sumygg.com/2015/12/25/got-heartstone-samsung-card-back-and-card-pack-with-something-wrong/</loc>
-    <lastmod>2021-04-20</lastmod>
-  </url>
-  <url>
     <loc>https://sumygg.com/2015/12/26/markdown-language-tutor/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
-    <loc>https://sumygg.com/2015/12/23/some-screenshots-of-owarimonogatari/</loc>
+    <loc>https://sumygg.com/2015/12/25/got-heartstone-samsung-card-back-and-card-pack-with-something-wrong/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
@@ -313,11 +313,11 @@
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
-    <loc>https://sumygg.com/2015/12/15/java-generic-type-one-two-and-three/</loc>
+    <loc>https://sumygg.com/2015/12/23/some-screenshots-of-owarimonogatari/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
-    <loc>https://sumygg.com/2015/12/11/getting-start-for-android-emulator-preview/</loc>
+    <loc>https://sumygg.com/2015/12/15/java-generic-type-one-two-and-three/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
@@ -325,11 +325,11 @@
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
-    <loc>https://sumygg.com/2015/12/10/install-jquery-terminal-emulator-plugin-in-my-blog/</loc>
+    <loc>https://sumygg.com/2015/12/11/getting-start-for-android-emulator-preview/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
-    <loc>https://sumygg.com/2015/12/07/guide-for-nexus-6p-unlock-root-flash-and-xposed/</loc>
+    <loc>https://sumygg.com/2015/12/10/install-jquery-terminal-emulator-plugin-in-my-blog/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
@@ -337,11 +337,15 @@
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
-    <loc>https://sumygg.com/2015/11/28/executing-command-from-php-and-capturing-output/</loc>
+    <loc>https://sumygg.com/2015/12/07/guide-for-nexus-6p-unlock-root-flash-and-xposed/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
     <loc>https://sumygg.com/2015/12/01/ACTIVATE-POWER-MODE-ON/</loc>
+    <lastmod>2021-04-20</lastmod>
+  </url>
+  <url>
+    <loc>https://sumygg.com/2015/11/28/executing-command-from-php-and-capturing-output/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
@@ -353,11 +357,11 @@
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
-    <loc>https://sumygg.com/2015/11/24/use-http-parser-to-parse-url/</loc>
+    <loc>https://sumygg.com/2015/11/12/problem-with-short-selfcontained-correct-example/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
-    <loc>https://sumygg.com/2015/11/12/problem-with-short-selfcontained-correct-example/</loc>
+    <loc>https://sumygg.com/2015/11/24/use-http-parser-to-parse-url/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
@@ -397,19 +401,19 @@
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
-    <loc>https://sumygg.com/2015/10/17/hexo-mathjax-plugin/</loc>
-    <lastmod>2021-04-20</lastmod>
-  </url>
-  <url>
     <loc>https://sumygg.com/2015/10/19/atom-shortcut/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
-    <loc>https://sumygg.com/2015/05/18/android-smali-inject/</loc>
+    <loc>https://sumygg.com/2015/10/17/hexo-mathjax-plugin/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
     <loc>https://sumygg.com/2015/04/22/hello-gallery/</loc>
+    <lastmod>2021-04-20</lastmod>
+  </url>
+  <url>
+    <loc>https://sumygg.com/2015/05/18/android-smali-inject/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
@@ -441,15 +445,11 @@
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
-    <loc>https://sumygg.com/2013/11/16/first-step-simple-java-serializable/</loc>
-    <lastmod>2021-04-20</lastmod>
-  </url>
-  <url>
     <loc>https://sumygg.com/2013/11/09/writting-in-jekyll/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
-    <loc>https://sumygg.com/2013/11/08/set-up-jekyll-local-service/</loc>
+    <loc>https://sumygg.com/2013/11/16/first-step-simple-java-serializable/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
@@ -457,11 +457,11 @@
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
-    <loc>https://sumygg.com/2013/11/04/baidu-BAE-first-try/</loc>
+    <loc>https://sumygg.com/2013/11/08/set-up-jekyll-local-service/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
-    <loc>https://sumygg.com/2013/10/13/prime-factorization-for-n-factorial-and-combinatorial-number/</loc>
+    <loc>https://sumygg.com/2013/11/04/baidu-BAE-first-try/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
@@ -469,11 +469,15 @@
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
-    <loc>https://sumygg.com/2013/08/07/triangle-area/</loc>
+    <loc>https://sumygg.com/2013/10/13/prime-factorization-for-n-factorial-and-combinatorial-number/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
     <loc>https://sumygg.com/2013/08/06/Radius-Circle-Cover/</loc>
+    <lastmod>2021-04-20</lastmod>
+  </url>
+  <url>
+    <loc>https://sumygg.com/2013/08/07/triangle-area/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
@@ -485,11 +489,11 @@
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
-    <loc>https://sumygg.com/2013/07/30/Sorting-Points-by-Polar-Angle/</loc>
+    <loc>https://sumygg.com/2013/07/31/Polygon-Area/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
-    <loc>https://sumygg.com/2013/07/31/Polygon-Area/</loc>
+    <loc>https://sumygg.com/2013/07/30/Sorting-Points-by-Polar-Angle/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
@@ -525,11 +529,11 @@
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
-    <loc>https://sumygg.com/2013/05/10/matrix/</loc>
+    <loc>https://sumygg.com/2013/05/12/gauss/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
-    <loc>https://sumygg.com/2013/05/12/gauss/</loc>
+    <loc>https://sumygg.com/2013/05/10/matrix/</loc>
     <lastmod>2021-04-20</lastmod>
   </url>
   <url>
