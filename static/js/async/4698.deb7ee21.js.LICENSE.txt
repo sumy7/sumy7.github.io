@@ -1,0 +1,7 @@
+/*! ./case-2-4-2.png */
+
+/*! ./case-2-4-1.png */
+
+/*! @mdx-js/react */
+
+/*! react/jsx-runtime */

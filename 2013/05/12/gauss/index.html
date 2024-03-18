@@ -1,0 +1,304 @@
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Rspress v1.15.0"><title data-rh="true">高斯消元 - SumyBlog</title><meta data-rh="true" name="description" content="SumyGG&#x27;s Blog"/><meta data-rh="true" name="referrer" content="no-referrer-when-downgrade"/><link data-rh="true" rel="alternate" type="application/rss+xml" href="https://sumygg.com/rss/feed.rss"/>
+<script id="check-dark-light">
+;(() => {
+  const saved = localStorage.getItem('rspress-theme-appearance')
+  const prefereDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+  if (!saved || saved === 'auto' ? prefereDark : saved === 'dark') {
+    document.documentElement.classList.add('dark')
+  }
+})()
+</script>
+<title>SumyBlog</title><link rel="icon" href="/favicon.ico"><script defer="defer" src="/static/js/styles.df47b71a.js"></script><script defer="defer" src="/static/js/lib-lodash.b329996d.js"></script><script defer="defer" src="/static/js/lib-polyfill.6c0e3b15.js"></script><script defer="defer" src="/static/js/lib-react.1a4d633b.js"></script><script defer="defer" src="/static/js/lib-router.345150bc.js"></script><script defer="defer" src="/static/js/4051.e82f0025.js"></script><script defer="defer" src="/static/js/index.e31e71f4.js"></script><link href="/static/css/styles.fb4df59b.css" rel="stylesheet"><script async src="https://www.googletagmanager.com/gtag/js?id=G-2NDCXW15G4"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-2NDCXW15G4")</script><link href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" rel="stylesheet" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script></head><body ><div id="root"><div><div><div class="navContainer_f6cde sticky rspress-nav px-6 "><div class="container_f6cde flex justify-between items-center h-full"><div class="navBarTitle_f6cde"><a href="/" class="flex items-center w-full h-full text-base font-semibold transition-opacity duration-300 hover:opacity-60"><span>SumyBlog</span></a></div><div class="undefined flex flex-1 justify-end items-center"><div class="rightNav_f6cde"><div class="flex sm:flex-1 items-center sm:pl-4 sm:pr-2"><div class="rspress-nav-search-button navSearchButton_6e282"><button><svg width="18" height="18" viewBox="0 0 32 32"><path fill="var(--rp-c-gray)" d="m29 27.586-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L27.586 29ZM4 13a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9Z"></path></svg><p class="searchWord_6e282">搜索...</p><div style="opacity:0"><span></span><span>K</span></div></button></div><div class="mobileNavSearchButton_6e282"><svg width="24" height="24" viewBox="0 0 32 32"><path fill="var(--rp-c-gray)" d="m29 27.586-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L27.586 29ZM4 13a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9Z"></path></svg></div></div><div class="rspress-nav-menu menu h-14"><a class="link_03735  cursor-pointer" target="" href="/blog/flinks/index.html"><div class="rspress-nav-menu-item singleItem_f6cde  text-sm font-medium mx-1.5 px-3 py-2 flex items-center">友情链接</div></a><a class="link_03735  cursor-pointer" target="" href="/blog/archives/index.html"><div class="rspress-nav-menu-item singleItem_f6cde  text-sm font-medium mx-1.5 px-3 py-2 flex items-center">归档</div></a><a class="link_03735  cursor-pointer" target="" href="/blog/categories/index.html"><div class="rspress-nav-menu-item singleItem_f6cde  text-sm font-medium mx-1.5 px-3 py-2 flex items-center">分类</div></a><a class="link_03735  cursor-pointer" target="" href="/blog/tags/index.html"><div class="rspress-nav-menu-item singleItem_f6cde  text-sm font-medium mx-1.5 px-3 py-2 flex items-center">标签</div></a><a class="link_03735  cursor-pointer" target="" href="/about/index.html"><div class="rspress-nav-menu-item singleItem_f6cde  text-sm font-medium mx-1.5 px-3 py-2 flex items-center">关于我</div></a></div><div class="flex-center flex-row"><div class="mx-2"><div class="md:mr-2 rspress-nav-appearance"><div class="p-1 border border-solid border-gray-300 text-gray-400  cursor-pointer rounded-md hover:border-gray-600 hover:text-gray-600 dark:hover:border-gray-200 dark:hover:text-gray-200 transition-all duration-300"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 18c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6zm0-10c-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4zM12 4c-.6 0-1-.4-1-1V1c0-.6.4-1 1-1s1 .4 1 1v2c0 .6-.4 1-1 1zM12 24c-.6 0-1-.4-1-1v-2c0-.6.4-1 1-1s1 .4 1 1v2c0 .6-.4 1-1 1zM5.6 6.6c-.3 0-.5-.1-.7-.3L3.5 4.9c-.4-.4-.4-1 0-1.4s1-.4 1.4 0l1.4 1.4c.4.4.4 1 0 1.4-.1.2-.4.3-.7.3zM19.8 20.8c-.3 0-.5-.1-.7-.3l-1.4-1.4c-.4-.4-.4-1 0-1.4s1-.4 1.4 0l1.4 1.4c.4.4.4 1 0 1.4-.2.2-.5.3-.7.3zM3 13H1c-.6 0-1-.4-1-1s.4-1 1-1h2c.6 0 1 .4 1 1s-.4 1-1 1zM23 13h-2c-.6 0-1-.4-1-1s.4-1 1-1h2c.6 0 1 .4 1 1s-.4 1-1 1zM4.2 20.8c-.3 0-.5-.1-.7-.3-.4-.4-.4-1 0-1.4l1.4-1.4c.4-.4 1-.4 1.4 0s.4 1 0 1.4l-1.4 1.4c-.2.2-.4.3-.7.3zM18.4 6.6c-.3 0-.5-.1-.7-.3-.4-.4-.4-1 0-1.4l1.4-1.4c.4-.4 1-.4 1.4 0s.4 1 0 1.4l-1.4 1.4c-.2.2-.5.3-.7.3z"></path></svg></div></div></div><div class="social-links menu-item_93d67 flex-center relative"><div class="flex-center h-full gap-x-4 transition-colors duration-300 md:mr-2"><a href="https://github.com/sumy7/" target="_blank" rel="noopener noreferrer" class="social-links"><div class="social-links-icon_93d67"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg></div></a><a href="https://weibo.com/sumy7" target="_blank" rel="noopener noreferrer" class="social-links"><div class="social-links-icon_93d67"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" class="iconify iconify--ri" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M17.525 11.378c1.263.392 2.669 1.336 2.669 3.004c0 2.763-3.98 6.239-9.964 6.239c-4.565 0-9.23-2.213-9.23-5.852c0-1.902 1.204-4.102 3.277-6.177c2.773-2.77 6.004-4.033 7.219-2.816c.537.537.588 1.464.244 2.572c-.178.557.525.25.525.25c2.24-.938 4.196-.994 4.909.027c.38.543.343 1.306-.008 2.19c-.163.407.048.471.36.563zm-7.282 7.939c3.641-.362 6.401-2.592 6.167-4.983c-.237-2.391-3.382-4.038-7.023-3.677c-3.64.36-6.403 2.59-6.167 4.98c.237 2.394 3.382 4.039 7.023 3.68zM6.16 14.438c.754-1.527 2.712-2.39 4.446-1.94c1.793.463 2.707 2.154 1.976 3.8c-.744 1.682-2.882 2.578-4.695 1.993c-1.752-.566-2.493-2.294-1.727-3.853zm1.446 2.587c.568.257 1.325.013 1.676-.55c.346-.568.163-1.217-.407-1.459c-.563-.237-1.291.008-1.64.553c-.354.547-.189 1.202.371 1.456zm2.206-1.808c.219.092.501-.012.628-.231c.123-.22.044-.466-.178-.548c-.216-.084-.486.018-.613.232c-.123.214-.054.458.163.547zM19.873 9.5a.725.725 0 1 1-1.378-.451a1.38 1.38 0 0 0-.288-1.357a1.395 1.395 0 0 0-1.321-.425a.723.723 0 1 1-.303-1.416a2.836 2.836 0 0 1 3.29 3.649zm-3.916-6.575A5.831 5.831 0 0 1 21.5 4.72a5.836 5.836 0 0 1 1.22 5.704a.838.838 0 0 1-1.06.54a.844.844 0 0 1-.542-1.062a4.143 4.143 0 0 0-4.807-5.327a.845.845 0 0 1-.354-1.65z"></path></svg></div></a><a href="https://twitter.com/sumygg" target="_blank" rel="noopener noreferrer" class="social-links"><div class="social-links-icon_93d67"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>X</title><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"></path></svg></div></a></div><div class="md:ml-1 p-2"><svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M16 22 6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg></div></div></div></div><div class="mobileNavMenu_f6cde"><div class="navScreen_457e8 " id="navScreen"><div class="container_457e8"><div class="navMenu_457e8"><div class="navMenuItem_457e8 w-full"><a class="link_03735  cursor-pointer" target="" href="/blog/flinks/index.html"><div class="rspress-nav-menu-item singleItem_f6cde  text-sm font-medium mx-1.5 px-3 py-2 flex items-center">友情链接</div></a></div><div class="navMenuItem_457e8 w-full"><a class="link_03735  cursor-pointer" target="" href="/blog/archives/index.html"><div class="rspress-nav-menu-item singleItem_f6cde  text-sm font-medium mx-1.5 px-3 py-2 flex items-center">归档</div></a></div><div class="navMenuItem_457e8 w-full"><a class="link_03735  cursor-pointer" target="" href="/blog/categories/index.html"><div class="rspress-nav-menu-item singleItem_f6cde  text-sm font-medium mx-1.5 px-3 py-2 flex items-center">分类</div></a></div><div class="navMenuItem_457e8 w-full"><a class="link_03735  cursor-pointer" target="" href="/blog/tags/index.html"><div class="rspress-nav-menu-item singleItem_f6cde  text-sm font-medium mx-1.5 px-3 py-2 flex items-center">标签</div></a></div><div class="navMenuItem_457e8 w-full"><a class="link_03735  cursor-pointer" target="" href="/about/index.html"><div class="rspress-nav-menu-item singleItem_f6cde  text-sm font-medium mx-1.5 px-3 py-2 flex items-center">关于我</div></a></div></div><div class="flex-center flex-col gap-2"><div class="mt-2 navAppearance_457e8 flex justify-center"></div><div class="social-links menu-item_93d67 flex-center relative"><div class="flex-center h-full gap-x-4 transition-colors duration-300 md:mr-2"><a href="https://github.com/sumy7/" target="_blank" rel="noopener noreferrer" class="social-links"><div class="social-links-icon_93d67"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg></div></a><a href="https://weibo.com/sumy7" target="_blank" rel="noopener noreferrer" class="social-links"><div class="social-links-icon_93d67"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" class="iconify iconify--ri" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M17.525 11.378c1.263.392 2.669 1.336 2.669 3.004c0 2.763-3.98 6.239-9.964 6.239c-4.565 0-9.23-2.213-9.23-5.852c0-1.902 1.204-4.102 3.277-6.177c2.773-2.77 6.004-4.033 7.219-2.816c.537.537.588 1.464.244 2.572c-.178.557.525.25.525.25c2.24-.938 4.196-.994 4.909.027c.38.543.343 1.306-.008 2.19c-.163.407.048.471.36.563zm-7.282 7.939c3.641-.362 6.401-2.592 6.167-4.983c-.237-2.391-3.382-4.038-7.023-3.677c-3.64.36-6.403 2.59-6.167 4.98c.237 2.394 3.382 4.039 7.023 3.68zM6.16 14.438c.754-1.527 2.712-2.39 4.446-1.94c1.793.463 2.707 2.154 1.976 3.8c-.744 1.682-2.882 2.578-4.695 1.993c-1.752-.566-2.493-2.294-1.727-3.853zm1.446 2.587c.568.257 1.325.013 1.676-.55c.346-.568.163-1.217-.407-1.459c-.563-.237-1.291.008-1.64.553c-.354.547-.189 1.202.371 1.456zm2.206-1.808c.219.092.501-.012.628-.231c.123-.22.044-.466-.178-.548c-.216-.084-.486.018-.613.232c-.123.214-.054.458.163.547zM19.873 9.5a.725.725 0 1 1-1.378-.451a1.38 1.38 0 0 0-.288-1.357a1.395 1.395 0 0 0-1.321-.425a.723.723 0 1 1-.303-1.416a2.836 2.836 0 0 1 3.29 3.649zm-3.916-6.575A5.831 5.831 0 0 1 21.5 4.72a5.836 5.836 0 0 1 1.22 5.704a.838.838 0 0 1-1.06.54a.844.844 0 0 1-.542-1.062a4.143 4.143 0 0 0-4.807-5.327a.845.845 0 0 1-.354-1.65z"></path></svg></div></a><a href="https://twitter.com/sumygg" target="_blank" rel="noopener noreferrer" class="social-links"><div class="social-links-icon_93d67"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>X</title><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"></path></svg></div></a></div><div class="md:ml-1 p-2"><svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M16 22 6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg></div></div></div></div></div><button aria-label="mobile hamburger" class=" navHamburger_e7b06 text-gray-500"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="currentColor"><circle cx="8" cy="16" r="2" fill="currentColor"></circle><circle cx="16" cy="16" r="2" fill="currentColor"></circle><circle cx="24" cy="16" r="2" fill="currentColor"></circle></svg></button></div></div></div></div><section><div class="docLayout_edeb4 pt-0"><div class="content_edeb4 rspress-doc-container flex flex-shrink-0 mx-auto"><div class="w-full flex-1"><div><div class="rspress-doc"><!--$--><h1 id="高斯消元" class="text-3xl mb-10 leading-10 tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#高斯消元">#</a>高斯消元</h1><div class="postInfoContainer_07bfd -mt-5 mb-8"><span class="postInfoMetaItem_07bfd"><iconify-icon icon="{&quot;body&quot;:&quot;&lt;path fill=\&quot;currentColor\&quot; d=\&quot;M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5h16V4H0V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5z\&quot;/&gt;&quot;}" inline="true"></iconify-icon> <!-- -->2013-05-12</span><span class="postInfoMetaItem_07bfd"><iconify-icon icon="{&quot;body&quot;:&quot;&lt;path fill=\&quot;currentColor\&quot; d=\&quot;M9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 7A2 2 0 0 1 13.174 14H2.825a2 2 0 0 1-1.991-1.819l-.637-7a1.99 1.99 0 0 1 .342-1.31L.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3zm-8.322.12C1.72 3.042 1.95 3 2.19 3h5.396l-.707-.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139z\&quot;/&gt;&quot;}" inline="true"></iconify-icon> <a class="link_03735  cursor-pointer" target="" href="/blog/categories/index.html?category=姿势">姿势</a></span><span class="postInfoMetaItem_07bfd"><iconify-icon icon="{&quot;body&quot;:&quot;&lt;path fill=\&quot;currentColor\&quot; d=\&quot;M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1H2zm4 3.5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0z\&quot;/&gt;&quot;}" inline="true"></iconify-icon> <a class="link_03735  cursor-pointer" target="" href="/blog/tags/index.html?tag=数论">数论</a></span><span class="postInfoMetaItem_07bfd"><iconify-icon icon="{&quot;body&quot;:&quot;&lt;path fill=\&quot;currentColor\&quot; d=\&quot;M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1H2zm4 3.5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0z\&quot;/&gt;&quot;}" inline="true"></iconify-icon> <a class="link_03735  cursor-pointer" target="" href="/blog/tags/index.html?tag=数学">数学</a></span><span class="postInfoMetaItem_07bfd"><iconify-icon icon="{&quot;body&quot;:&quot;&lt;path fill=\&quot;currentColor\&quot; d=\&quot;M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1H2zm4 3.5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0z\&quot;/&gt;&quot;}" inline="true"></iconify-icon> <a class="link_03735  cursor-pointer" target="" href="/blog/tags/index.html?tag=线性代数">线性代数</a></span><span class="postInfoMetaItem_07bfd"><iconify-icon icon="{&quot;body&quot;:&quot;&lt;path fill=\&quot;currentColor\&quot; d=\&quot;M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM5.485 6.879l1.036 4.144l.997-3.655a.5.5 0 0 1 .964 0l.997 3.655l1.036-4.144a.5.5 0 0 1 .97.242l-1.5 6a.5.5 0 0 1-.967.01L8 9.402l-1.018 3.73a.5.5 0 0 1-.967-.01l-1.5-6a.5.5 0 1 1 .97-.242z\&quot;/&gt;&quot;}" inline="true"></iconify-icon> <!-- -->1.2k<!-- --> 字</span><span class="postInfoMetaItem_07bfd"><iconify-icon icon="{&quot;body&quot;:&quot;&lt;path fill=\&quot;currentColor\&quot; d=\&quot;M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z\&quot;/&gt;&quot;}" inline="true"></iconify-icon> <!-- -->3<!-- --> 分钟</span><span class="postInfoMetaItem_07bfd"><iconify-icon icon="{&quot;body&quot;:&quot;&lt;g fill=\&quot;currentColor\&quot;&gt;&lt;path d=\&quot;M10.5 8a2.5 2.5 0 1 1-5 0a2.5 2.5 0 0 1 5 0z\&quot;/&gt;&lt;path d=\&quot;M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7a3.5 3.5 0 0 0 0 7z\&quot;/&gt;&lt;/g&gt;&quot;}" inline="true"></iconify-icon> </span></div>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">高斯消元提供了一种简单的方法解决方程组联立的问题。</p>
+</blockquote>
+<h2 id="基础知识" class="mt-14 mb-6 text-2xl tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#基础知识">#</a>基础知识</h2>
+<p class="my-4 leading-7">高斯消元是线性代数中的一类方法，也是一种算法，用来求解线性方程组，并可以求出矩阵的秩，以及求解出可逆方阵的逆矩阵。</p>
+<p class="my-4 leading-7">根据初等变换原理，将增广矩阵转换为行阶梯矩阵，然后回代求出方程的解。</p>
+<p class="my-4 leading-7">在程序设计中，常用的算法是：
+(我们设方程组中方程的个数为equ，变元的个数为var)</p>
+<ol class="list-decimal pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">把方程组转换成增广矩阵。</li>
+<li class="[&amp;:not(:first-child)]:mt-2">利用初等行变换来把增广矩阵转换成行阶梯阵。 枚举k从0到equ – 1，当前处理的列为col(初始为0) ，每次找第k行以下(包括第k行)，col列中元素绝对值最大的列与第k行交换。如果col列中的元素全为0，那么则处理col + 1列，k不变。</li>
+<li class="[&amp;:not(:first-child)]:mt-2">转换为行阶梯阵，判断解的情况。</li>
+</ol>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">① <strong class="font-semibold">无解</strong>
+当方程中出现(0, 0, …, 0, a)的形式，且a != 0时，说明是无解的。
+② <strong class="font-semibold">唯一解</strong>
+条件是k = equ，即行阶梯阵形成了严格的上三角阵。利用回代逐一求出解集。
+③ <strong class="font-semibold">无穷解</strong>
+条件是k &lt; equ，即不能形成严格的上三角形，自由变元的个数即为equ – k，但有些题目要求判断哪些变元是不缺定的。</p>
+</blockquote>
+<p class="my-4 leading-7">这里单独介绍下这种解法：</p>
+<p class="my-4 leading-7">首先，自由变元有var - k个，即不确定的变元至少有var - k个。我们先把所有的变元视为不确定的。在每个方程中判断不确定变元的个数，如果大于1个，则该方程无法求解。如果只有1个变元，那么该变元即可求出，即为确定变元。</p>
+<p class="my-4 leading-7">以上介绍的是求解整数线性方程组的求法，复杂度是O(n^3)。浮点数线性方程组的求法类似，但是要在判断是否为0时，加入EPS，以消除精度问题。</p>
+<h2 id="贴代码" class="mt-14 mb-6 text-2xl tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#贴代码">#</a>贴代码</h2>
+<p class="my-4 leading-7">代码（雍哥修改的不知道谁的）——整型参数型</p>
+<div class="language-cpp"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-cpp" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>#define maxn 405
+</span></span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">int equ,var;
+</span><span style="display:block;padding:0 1.25rem">//有equ个方程,val个变元 equ行(0~equ-1) val+1列(增广矩阵)(0~val)
+</span><span style="display:block;padding:0 1.25rem">int mat[maxn][maxn];//行列式矩阵
+</span><span style="display:block;padding:0 1.25rem">int x[maxn];//解
+</span><span style="display:block;padding:0 1.25rem">bool free_x[maxn];//是否是不确定变元
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">void Debug()
+</span><span style="display:block;padding:0 1.25rem">{
+</span><span style="display:block;padding:0 1.25rem">    for(int i=0;i&lt;equ;++i)
+</span><span style="display:block;padding:0 1.25rem">    {
+</span><span style="display:block;padding:0 1.25rem">        for(int j=0;j&lt;=var;++j)
+</span><span style="display:block;padding:0 1.25rem">            printf(&quot;%01d &quot;,mat[i][j]);
+</span><span style="display:block;padding:0 1.25rem">        puts(&quot;&quot;);
+</span><span style="display:block;padding:0 1.25rem">    }puts(&quot;&quot;);
+</span><span style="display:block;padding:0 1.25rem">}
+</span><span style="display:block;padding:0 1.25rem">inline int gcd(int a,int b){return b==0?a:gcd(b,a%b);}
+</span><span style="display:block;padding:0 1.25rem">inline int lcm(int a,int b){return a*b/gcd(a,b);}
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">//-2 有浮点数解 -1 无解 0有一个解 &gt;0无穷解,返回自由变元个数
+</span><span style="display:block;padding:0 1.25rem">int gauss()
+</span><span style="display:block;padding:0 1.25rem">{
+</span><span style="display:block;padding:0 1.25rem">    int k,max_r,col;//当前行,当前列绝对值最大的行;当前列
+</span><span style="display:block;padding:0 1.25rem">    //初始化
+</span><span style="display:block;padding:0 1.25rem">    memset(x,0,sizeof(x));
+</span><span style="display:block;padding:0 1.25rem">    memset(free_x,true,sizeof(free_x));
+</span><span style="display:block;padding:0 1.25rem">    //转换为阶梯矩阵
+</span><span style="display:block;padding:0 1.25rem">    for(k=0,col=0;k&lt;equ&amp;&amp;col&lt;var;++k,++col)
+</span><span style="display:block;padding:0 1.25rem">    {
+</span><span style="display:block;padding:0 1.25rem">        max_r=k;
+</span><span style="display:block;padding:0 1.25rem">        for(int i=k+1;i&lt;equ;++i)
+</span><span style="display:block;padding:0 1.25rem">            if(abs(mat[i][col])&gt;abs(mat[max_r][col]))max_r=i;
+</span><span style="display:block;padding:0 1.25rem">        if(max_r!=k)
+</span><span style="display:block;padding:0 1.25rem">            for(int i=k;i&lt;=var;++i)swap(mat[k][i],mat[max_r][i]);
+</span><span style="display:block;padding:0 1.25rem">        if(!mat[k][col]){--k;continue;}
+</span><span style="display:block;padding:0 1.25rem">        for(int i=k+1;i&lt;equ;++i)if(mat[i][col])
+</span><span style="display:block;padding:0 1.25rem">        {
+</span><span style="display:block;padding:0 1.25rem">            int l=lcm(abs(mat[i][col]),abs(mat[k][col]));
+</span><span style="display:block;padding:0 1.25rem">            int ta=l/abs(mat[i][col]),tb=l/abs(mat[k][col]);
+</span><span style="display:block;padding:0 1.25rem">            if(mat[i][col]*mat[k][col]&lt;0)tb=-tb;
+</span><span style="display:block;padding:0 1.25rem">            for(int j=col;j&lt;=var;++j)
+</span><span style="display:block;padding:0 1.25rem">                mat[i][j]=mat[i][j]*ta-mat[k][j]*tb;
+</span><span style="display:block;padding:0 1.25rem">        }
+</span><span style="display:block;padding:0 1.25rem">    }//Debug();
+</span><span style="display:block;padding:0 1.25rem">    //1.无解的情况 存在行(0,0,...,a) a!=0
+</span><span style="display:block;padding:0 1.25rem">    for(int i=k;i&lt;equ;++i)
+</span><span style="display:block;padding:0 1.25rem">        if(mat[i][col])return -1;
+</span><span style="display:block;padding:0 1.25rem">    //2.无穷解的情况 秩不是equ
+</span><span style="display:block;padding:0 1.25rem">    if(k&lt;var)
+</span><span style="display:block;padding:0 1.25rem">    {
+</span><span style="display:block;padding:0 1.25rem">        for(int i=k-1;i&gt;=0;--i)
+</span><span style="display:block;padding:0 1.25rem">        {
+</span><span style="display:block;padding:0 1.25rem">            int free_x_num=0,free_index;
+</span><span style="display:block;padding:0 1.25rem">            for(int j=0;j&lt;var;++j)
+</span><span style="display:block;padding:0 1.25rem">                if(mat[i][j]&amp;&amp;free_x[j])++free_x_num,free_index=j;
+</span><span style="display:block;padding:0 1.25rem">            if(free_x_num&gt;1)continue;
+</span><span style="display:block;padding:0 1.25rem">            int tmp=mat[i][var];
+</span><span style="display:block;padding:0 1.25rem">            for(int j=0;j&lt;var;++j)
+</span><span style="display:block;padding:0 1.25rem">                if(mat[i][j]&amp;&amp;j!=free_index)tmp-=mat[i][j]*x[j];
+</span><span style="display:block;padding:0 1.25rem">            x[free_index]=tmp/mat[i][free_index];
+</span><span style="display:block;padding:0 1.25rem">            free_x[free_index]=false;
+</span><span style="display:block;padding:0 1.25rem">        }
+</span><span style="display:block;padding:0 1.25rem">        return var-k;
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">    //3.唯一解 严格三角阵 满秩
+</span><span style="display:block;padding:0 1.25rem">    for(int i=var-1;i&gt;=0;--i)
+</span><span style="display:block;padding:0 1.25rem">    {
+</span><span style="display:block;padding:0 1.25rem">        int tmp=mat[i][var];
+</span><span style="display:block;padding:0 1.25rem">        for(int j=i+1;j&lt;var;++j)
+</span><span style="display:block;padding:0 1.25rem">            if(mat[i][j])tmp-=mat[i][j]*x[j];
+</span><span style="display:block;padding:0 1.25rem">        if(tmp%mat[i][i])return -2;//有浮点数
+</span><span style="display:block;padding:0 1.25rem">        x[i]=tmp/mat[i][i];
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">    return 0;
+</span><span style="display:block;padding:0 1.25rem">}</span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<p class="my-4 leading-7">对于浮点参数型，基本实现形式差不多，只不过求解的时候注意点浮点数的运算就行了。</p>
+<p class="my-4 leading-7">代码（来自<a target="_blank" rel="noopener noreferrer" href="http://blog.csdn.net/zhjchengfeng5/article/details/8046202" class="link-_707cf  link_3b154 inline-link_3b154">这里</a>）：</p>
+<div class="language-cpp"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-cpp" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>#define MAXN 405
+</span></span><span style="display:block;padding:0 1.25rem">const double EPS=1e-9;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">double A[MAXN][MAXN];
+</span><span style="display:block;padding:0 1.25rem">double X[MAXN];
+</span><span style="display:block;padding:0 1.25rem">bool Free[MAXN];
+</span><span style="display:block;padding:0 1.25rem">int equation, variable;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">void debug()
+</span><span style="display:block;padding:0 1.25rem">{
+</span><span style="display:block;padding:0 1.25rem">    printf(&quot;The Matrix is :\n&quot;);
+</span><span style="display:block;padding:0 1.25rem">    for(int i=0; i&lt;=variable+1; i++)
+</span><span style="display:block;padding:0 1.25rem">    {
+</span><span style="display:block;padding:0 1.25rem">        printf(&quot;%8d&quot;,i);
+</span><span style="display:block;padding:0 1.25rem">        if(i==0) printf(&quot;|&quot;);
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">    printf(&quot;\n&quot;);
+</span><span style="display:block;padding:0 1.25rem">    for(int i=0; i&lt;=variable+1; i++)
+</span><span style="display:block;padding:0 1.25rem">    {
+</span><span style="display:block;padding:0 1.25rem">        printf(&quot;-------&quot;);
+</span><span style="display:block;padding:0 1.25rem">        if(i==0) printf(&quot;-+&quot;);
+</span><span style="display:block;padding:0 1.25rem">        else printf(&quot;-&quot;);
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">    printf(&quot;\n&quot;);
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    for(int i=1; i&lt;=equation; i++)
+</span><span style="display:block;padding:0 1.25rem">    {
+</span><span style="display:block;padding:0 1.25rem">        printf(&quot;%8d|&quot;,i);
+</span><span style="display:block;padding:0 1.25rem">        for(int j=1; j&lt;=variable+1; j++)
+</span><span style="display:block;padding:0 1.25rem">        {
+</span><span style="display:block;padding:0 1.25rem">            printf(&quot;%8.2lf&quot;,A[i][j]);
+</span><span style="display:block;padding:0 1.25rem">        }
+</span><span style="display:block;padding:0 1.25rem">        printf(&quot;\n&quot;);
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">    printf(&quot;\n&quot;);
+</span><span style="display:block;padding:0 1.25rem">}
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">/***************************************************************************/
+</span><span style="display:block;padding:0 1.25rem">///   功能说明：
+</span><span style="display:block;padding:0 1.25rem">///   1、不需带入参数，参数已经在 build() 函数中设置好了
+</span><span style="display:block;padding:0 1.25rem">///   2、函数返回 -1 ：无解
+</span><span style="display:block;padding:0 1.25rem">///   3、函数返回 0  ：有且仅有一组解
+</span><span style="display:block;padding:0 1.25rem">///   4、函数返回 其他正数 ：有多解，返回的值是不确定变元的个数
+</span><span style="display:block;padding:0 1.25rem">/**************************************************************************/
+</span><span style="display:block;padding:0 1.25rem">int gauss()
+</span><span style="display:block;padding:0 1.25rem">{
+</span><span style="display:block;padding:0 1.25rem">    int col=1, row=1;
+</span><span style="display:block;padding:0 1.25rem">    for(; row&lt;=equation &amp;&amp; col&lt;=variable; row++, col++)
+</span><span style="display:block;padding:0 1.25rem">    {
+</span><span style="display:block;padding:0 1.25rem">        int max_row=row;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">        //找到 col 那列元素绝对值最大的那行与当前行交换，减小精度误差
+</span><span style="display:block;padding:0 1.25rem">        for(int i=row+1; i&lt;=equation; i++)
+</span><span style="display:block;padding:0 1.25rem">            if(abs(A[i][col])&gt;abs(A[max_row][col]))
+</span><span style="display:block;padding:0 1.25rem">                max_row=i;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">        //如果 col 那列元素最大是 0，表明这一列全部是 0，处理下一列
+</span><span style="display:block;padding:0 1.25rem">        if(abs(A[max_row][col])&lt;=EPS)
+</span><span style="display:block;padding:0 1.25rem">        {
+</span><span style="display:block;padding:0 1.25rem">            row--;
+</span><span style="display:block;padding:0 1.25rem">            continue;
+</span><span style="display:block;padding:0 1.25rem">        }
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">        //如果不是同一行，交换元素
+</span><span style="display:block;padding:0 1.25rem">        if(max_row!=row)
+</span><span style="display:block;padding:0 1.25rem">        {
+</span><span style="display:block;padding:0 1.25rem">            for(int i=col; i&lt;=variable+1; i++)
+</span><span style="display:block;padding:0 1.25rem">                swap(A[max_row][i], A[row][i]);
+</span><span style="display:block;padding:0 1.25rem">        }
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">        //枚举要删去的行
+</span><span style="display:block;padding:0 1.25rem">        //for(int i=row+1; i&lt;=equation; i++)
+</span><span style="display:block;padding:0 1.25rem">        for(int i=1; i&lt;=equation; i++)
+</span><span style="display:block;padding:0 1.25rem">        {
+</span><span style="display:block;padding:0 1.25rem">            if(i==row) continue;
+</span><span style="display:block;padding:0 1.25rem">            if(abs(A[i][col])&lt;=EPS) continue;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">            double ta=A[row][col];
+</span><span style="display:block;padding:0 1.25rem">            double tb=A[i][col];
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">            for(int j=1; j&lt;=variable+1; j++)
+</span><span style="display:block;padding:0 1.25rem">                A[i][j]=A[i][j]*ta-A[row][j]*tb;
+</span><span style="display:block;padding:0 1.25rem">        }
+</span><span style="display:block;padding:0 1.25rem">//        printf(&quot;row=%d col=%d\n&quot;, row, col);
+</span><span style="display:block;padding:0 1.25rem">//        debug();
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">//    debug();
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    // 1、没有解的情况：
+</span><span style="display:block;padding:0 1.25rem">    for(int i=row; i&lt;=equation; i++)
+</span><span style="display:block;padding:0 1.25rem">        if(A[i][variable+1]!=0) return -1; //表明无解
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    // 2、无穷解的情况：
+</span><span style="display:block;padding:0 1.25rem">    if(row&lt;variable+1)
+</span><span style="display:block;padding:0 1.25rem">    {
+</span><span style="display:block;padding:0 1.25rem">        for(int i=row-1; i&gt;=1; i--)
+</span><span style="display:block;padding:0 1.25rem">        {
+</span><span style="display:block;padding:0 1.25rem">            int free_x_num=0, free_index=-1;
+</span><span style="display:block;padding:0 1.25rem">            for(int j=1; j&lt;=variable; j++)
+</span><span style="display:block;padding:0 1.25rem">                if(Free[j] &amp;&amp; A[i][j]!=0)
+</span><span style="display:block;padding:0 1.25rem">                {
+</span><span style="display:block;padding:0 1.25rem">                    free_x_num++;
+</span><span style="display:block;padding:0 1.25rem">                    free_index=j;
+</span><span style="display:block;padding:0 1.25rem">                }
+</span><span style="display:block;padding:0 1.25rem">            if(free_x_num&gt;1) continue;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">            Free[free_index]=false;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">            double temp=A[i][variable+1];
+</span><span style="display:block;padding:0 1.25rem">            for(int j=1; j&lt;=variable; j++)
+</span><span style="display:block;padding:0 1.25rem">                if(!(abs(A[i][j])&lt;=EPS) &amp;&amp; j!=free_index)
+</span><span style="display:block;padding:0 1.25rem">                    temp-=A[i][j]*X[j];
+</span><span style="display:block;padding:0 1.25rem">            X[free_index]=temp/A[i][free_index];
+</span><span style="display:block;padding:0 1.25rem">        }
+</span><span style="display:block;padding:0 1.25rem">        return variable-row+1;
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    // 3、唯一解的情况：
+</span><span style="display:block;padding:0 1.25rem">    for(int i=variable; i&gt;=1; i--)
+</span><span style="display:block;padding:0 1.25rem">    {
+</span><span style="display:block;padding:0 1.25rem">        double temp=A[i][variable+1];
+</span><span style="display:block;padding:0 1.25rem">        for(int j=i+1; j&lt;=variable; j++)
+</span><span style="display:block;padding:0 1.25rem">            if(!(abs(A[i][j])&lt;=EPS))
+</span><span style="display:block;padding:0 1.25rem">                temp-=A[i][j]*X[j];
+</span><span style="display:block;padding:0 1.25rem">        X[i]=temp/A[i][i];
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">    return 0;
+</span><span style="display:block;padding:0 1.25rem">}
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">void build(int n, int m)
+</span><span style="display:block;padding:0 1.25rem">{
+</span><span style="display:block;padding:0 1.25rem">    memset(Free, true, sizeof(Free));
+</span><span style="display:block;padding:0 1.25rem">    memset(X, 0, sizeof(X));
+</span><span style="display:block;padding:0 1.25rem">    variable=n, equation=m;
+</span><span style="display:block;padding:0 1.25rem">    for(int i=1; i&lt;=equation; i++)
+</span><span style="display:block;padding:0 1.25rem">        for(int j=1; j&lt;=variable+1; j++)
+</span><span style="display:block;padding:0 1.25rem">            scanf(&quot;%lf&quot;,&amp;A[i][j]);
+</span><span style="display:block;padding:0 1.25rem">    debug();
+</span><span style="display:block;padding:0 1.25rem">}
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">void PRIMAXNT(int flag)
+</span><span style="display:block;padding:0 1.25rem">{
+</span><span style="display:block;padding:0 1.25rem">    if(flag==-1)
+</span><span style="display:block;padding:0 1.25rem">    {
+</span><span style="display:block;padding:0 1.25rem">        printf(&quot;MAXNO Solution !\n&quot;);
+</span><span style="display:block;padding:0 1.25rem">        return;
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">    if(flag==0)
+</span><span style="display:block;padding:0 1.25rem">    {
+</span><span style="display:block;padding:0 1.25rem">        for(int i=1; i&lt;=variable; i++)
+</span><span style="display:block;padding:0 1.25rem">            printf(&quot;x%d : %4.4lf\n&quot;, i, X[i]);
+</span><span style="display:block;padding:0 1.25rem">        return;
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">    printf(&quot;There are %d variables who are indeterminate !\n&quot;,flag);
+</span><span style="display:block;padding:0 1.25rem">    for(int i=1; i&lt;=variable; i++)
+</span><span style="display:block;padding:0 1.25rem">    {
+</span><span style="display:block;padding:0 1.25rem">        printf(&quot;x%d : &quot;, i);
+</span><span style="display:block;padding:0 1.25rem">        if(Free[i]) printf(&quot;indeterminate !\n&quot;);
+</span><span style="display:block;padding:0 1.25rem">        else printf(&quot;%4.4lf\n&quot;,X[i]);
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">}</span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<h2 id="主要解决的问题" class="mt-14 mb-6 text-2xl tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#主要解决的问题">#</a>主要解决的问题</h2>
+<p class="my-4 leading-7">高斯消元主要解决这几类问题：</p>
+<h3 id="普通的消元问题" class="mt-10 mb-2 leading-7 text-xl title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#普通的消元问题">#</a>普通的消元问题</h3>
+<p class="my-4 leading-7">给出几个方程组，求出每个解。一般套用模板就可以了。</p>
+<h3 id="染色问题" class="mt-10 mb-2 leading-7 text-xl title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#染色问题">#</a>染色问题</h3>
+<p class="my-4 leading-7">一个方格只有01两种状态，改变其中一个方格会影响其它周围方格的状态。</p>
+<p class="my-4 leading-7">对于这种问题，首先要建立方程组。关于方程组的建立，首先要把方格转换成一行，然后构造一个 n * n 的矩阵。那么对于矩阵中的( i,j )就表示j可以影响i的状态。</p>
+<p class="my-4 leading-7">那么如果 i 能影响 j 点，就应该把( j,i )设为1。</p>
+<p class="my-4 leading-7">用高斯消元的时候，注意把中间过程 mod 2，因为只有 01 两种状态。</p>
+<h3 id="mod-p问题" class="mt-10 mb-2 leading-7 text-xl title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#mod-p问题">#</a>mod p问题</h3>
+<p class="my-4 leading-7">方程组对p取余，相当于一个线性同余型的问题吧。</p>
+<p class="my-4 leading-7">对于这种问题，分为两种情况：</p>
+<ol class="list-decimal pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">如果p为 <strong class="font-semibold">质数</strong> ，这样就可以参考染色问题，根据性质，直接将中间过程 mod p，最后得出的解保证小于 p 即可。</li>
+<li class="[&amp;:not(:first-child)]:mt-2">如果p为 <strong class="font-semibold">非质数</strong> ，这样就不能对中间过程 mod p，因为这样会形成循环节而扩大解集。我也没有什么好的解决方法，暂时可以中间过程不要进行任何取余操作。求解集的时候可以枚举 0~p 的数字，满足同余关系就可以作为解的一部分。这个也要注意解不要超过 p 。</li>
+</ol>
+<h3 id="找出逆矩阵" class="mt-10 mb-2 leading-7 text-xl title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#找出逆矩阵">#</a>找出逆矩阵</h3>
+<p class="my-4 leading-7">高斯消元法可以用来找出一个可逆矩阵的逆矩阵。设 A 为一个 N * N 的矩阵，其逆矩阵可被两个分块矩阵表示出来。将一个 N * N 单位矩阵放在 A 的右手边，形成一个 N * 2N 的分块矩阵 B = [ A,I ] 。经过高斯消元法的计算程序后，矩阵 B 的左手边会变成一个单位矩阵 I ，而逆矩阵 A - 1 会出现在B 的右手边。</p>
+<p class="my-4 leading-7">假如高斯消元法不能将A 化为三角形的格式，那就代表A 是一个不可逆的矩阵。</p>
+<p class="my-4 leading-7">应用上，高斯消元法极少被用来求出逆矩阵。高斯消元法通常只为线性方程组求解。</p>
+<h2 id="参考内容" class="mt-14 mb-6 text-2xl tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#参考内容">#</a>参考内容</h2>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2"><a target="_blank" rel="noopener noreferrer" href="http://blog.sina.com.cn/s/blog_6a84c1d30100l8y4.html" class="link-_707cf  link_3b154 inline-link_3b154">高斯消元法(Gauss_Elimination)_分析_&amp;_题解_&amp;_模板_漂流萍</a></li>
+<li class="[&amp;:not(:first-child)]:mt-2"><a target="_blank" rel="noopener noreferrer" href="http://blog.csdn.net/zhjchengfeng5/article/details/8046202" class="link-_707cf  link_3b154 inline-link_3b154">高斯消元模板——浮点参数型 - zhj5chengfeng</a></li>
+<li class="[&amp;:not(:first-child)]:mt-2"><a target="_blank" rel="noopener noreferrer" href="http://blog.csdn.net/zhjchengfeng5/article/details/8046200" class="link-_707cf  link_3b154 inline-link_3b154">高斯消元模板——整数参数型 - zhj5chengfeng</a></li>
+<li class="[&amp;:not(:first-child)]:mt-2"><a target="_blank" rel="noopener noreferrer" href="http://baike.baidu.cn/view/33268.htm" class="link-_707cf  link_3b154 inline-link_3b154">高斯消元法_百度百科</a></li>
+</ul><!--/$--></div><div class="rspress-doc-footer"><div class="postFooter_2e2af flex flex-col"><div class="flex flex-col sm:flex-row sm:justify-around gap-4 pt-6"><div class="prev_edac1 flex flex-col"><a class="link_03735 pagerLink_edac1 cursor-pointer" target="" href="/2013/05/10/dichotomous-matrix-fast-power-and-its-application/index.html"><span class="desc_edac1">上一篇</span><span class="title_edac1">二分矩阵快速幂及其应用</span></a></div><div class="next_edac1 flex flex-col"><a class="link_03735 pagerLink_edac1 next_edac1 cursor-pointer" target="" href="/2013/05/13/joseph/index.html"><span class="desc_edac1">下一篇</span><span class="title_edac1">约瑟夫（joseph）问题</span></a></div></div></div><footer class="mt-8"><div class="xs:flex pb-5 px-2 justify-end items-center"><div class="flex text-sm text-text-2 leading-6 sm:leading-8 font-medium"><p>最后编辑时间<!-- -->: <span>2024/2/12 18:55:54</span></p></div></div><div class="flex flex-col"><a href="https://github.com/sumy7/SumyBlog-rspress/blob/main/source/../source/_posts/2013-05-12-gauss.md" target="_blank" class="editLink_2a169">📝 在 GitHub 上编辑此页</a></div><div class="flex flex-col sm:flex-row sm:justify-around gap-4 pt-6"><div class="prev_e7091 flex flex-col"></div><div class="next_e7091 flex flex-col"></div></div></footer></div></div></div><div class="aside-container_edeb4"><div><div></div><div class="flex flex-col"><div class="&lt;lg:hidden"><div id="aside-container" class="relative text-sm font-medium"><div class="leading-7 block text-sm font-semibold pl-3">目录</div><nav class="mt-1"><ul class="relative"><li><a href="#基础知识" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:0;font-weight:semibold"><span class="aside-link-text block">基础知识</span></a></li><li><a href="#贴代码" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:0;font-weight:semibold"><span class="aside-link-text block">贴代码</span></a></li><li><a href="#主要解决的问题" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:0;font-weight:semibold"><span class="aside-link-text block">主要解决的问题</span></a></li><li><a href="#普通的消元问题" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:12px;font-weight:semibold"><span class="aside-link-text block">普通的消元问题</span></a></li><li><a href="#染色问题" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:12px;font-weight:semibold"><span class="aside-link-text block">染色问题</span></a></li><li><a href="#mod-p问题" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:12px;font-weight:semibold"><span class="aside-link-text block">mod p问题</span></a></li><li><a href="#找出逆矩阵" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:12px;font-weight:semibold"><span class="aside-link-text block">找出逆矩阵</span></a></li><li><a href="#参考内容" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:0;font-weight:semibold"><span class="aside-link-text block">参考内容</span></a></li></ul></nav></div></div></div></div></div></div></div></section><footer class="mt-6 py-8 px-6 sm:p-8 w-full border-t border-solid border-divider-light"><div class="m-auto w-full text-center"><div class="font-meduim text-sm text-text-2">© 2015-<!-- -->2024<!-- --> SumyBlog. Powered by<!-- --> <a href="https://rspress.dev/" target="_blank" rel="noreferrer">Rspress</a>.</div></div></footer></div></div></div><div id="search-container"></div></body></html>

@@ -1,0 +1,642 @@
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Rspress v1.15.0"><title data-rh="true">判断一个点是否在凸包（多边形）内 - SumyBlog</title><meta data-rh="true" name="description" content="SumyGG&#x27;s Blog"/><meta data-rh="true" name="referrer" content="no-referrer-when-downgrade"/><link data-rh="true" rel="alternate" type="application/rss+xml" href="https://sumygg.com/rss/feed.rss"/>
+<script id="check-dark-light">
+;(() => {
+  const saved = localStorage.getItem('rspress-theme-appearance')
+  const prefereDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+  if (!saved || saved === 'auto' ? prefereDark : saved === 'dark') {
+    document.documentElement.classList.add('dark')
+  }
+})()
+</script>
+<title>SumyBlog</title><link rel="icon" href="/favicon.ico"><script defer="defer" src="/static/js/styles.df47b71a.js"></script><script defer="defer" src="/static/js/lib-lodash.b329996d.js"></script><script defer="defer" src="/static/js/lib-polyfill.6c0e3b15.js"></script><script defer="defer" src="/static/js/lib-react.1a4d633b.js"></script><script defer="defer" src="/static/js/lib-router.345150bc.js"></script><script defer="defer" src="/static/js/4051.e82f0025.js"></script><script defer="defer" src="/static/js/index.e31e71f4.js"></script><link href="/static/css/styles.fb4df59b.css" rel="stylesheet"><script async src="https://www.googletagmanager.com/gtag/js?id=G-2NDCXW15G4"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-2NDCXW15G4")</script><link href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" rel="stylesheet" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script></head><body ><div id="root"><div><div><div class="navContainer_f6cde sticky rspress-nav px-6 "><div class="container_f6cde flex justify-between items-center h-full"><div class="navBarTitle_f6cde"><a href="/" class="flex items-center w-full h-full text-base font-semibold transition-opacity duration-300 hover:opacity-60"><span>SumyBlog</span></a></div><div class="undefined flex flex-1 justify-end items-center"><div class="rightNav_f6cde"><div class="flex sm:flex-1 items-center sm:pl-4 sm:pr-2"><div class="rspress-nav-search-button navSearchButton_6e282"><button><svg width="18" height="18" viewBox="0 0 32 32"><path fill="var(--rp-c-gray)" d="m29 27.586-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L27.586 29ZM4 13a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9Z"></path></svg><p class="searchWord_6e282">搜索...</p><div style="opacity:0"><span></span><span>K</span></div></button></div><div class="mobileNavSearchButton_6e282"><svg width="24" height="24" viewBox="0 0 32 32"><path fill="var(--rp-c-gray)" d="m29 27.586-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L27.586 29ZM4 13a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9Z"></path></svg></div></div><div class="rspress-nav-menu menu h-14"><a class="link_03735  cursor-pointer" target="" href="/blog/flinks/index.html"><div class="rspress-nav-menu-item singleItem_f6cde  text-sm font-medium mx-1.5 px-3 py-2 flex items-center">友情链接</div></a><a class="link_03735  cursor-pointer" target="" href="/blog/archives/index.html"><div class="rspress-nav-menu-item singleItem_f6cde  text-sm font-medium mx-1.5 px-3 py-2 flex items-center">归档</div></a><a class="link_03735  cursor-pointer" target="" href="/blog/categories/index.html"><div class="rspress-nav-menu-item singleItem_f6cde  text-sm font-medium mx-1.5 px-3 py-2 flex items-center">分类</div></a><a class="link_03735  cursor-pointer" target="" href="/blog/tags/index.html"><div class="rspress-nav-menu-item singleItem_f6cde  text-sm font-medium mx-1.5 px-3 py-2 flex items-center">标签</div></a><a class="link_03735  cursor-pointer" target="" href="/about/index.html"><div class="rspress-nav-menu-item singleItem_f6cde  text-sm font-medium mx-1.5 px-3 py-2 flex items-center">关于我</div></a></div><div class="flex-center flex-row"><div class="mx-2"><div class="md:mr-2 rspress-nav-appearance"><div class="p-1 border border-solid border-gray-300 text-gray-400  cursor-pointer rounded-md hover:border-gray-600 hover:text-gray-600 dark:hover:border-gray-200 dark:hover:text-gray-200 transition-all duration-300"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 18c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6zm0-10c-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4zM12 4c-.6 0-1-.4-1-1V1c0-.6.4-1 1-1s1 .4 1 1v2c0 .6-.4 1-1 1zM12 24c-.6 0-1-.4-1-1v-2c0-.6.4-1 1-1s1 .4 1 1v2c0 .6-.4 1-1 1zM5.6 6.6c-.3 0-.5-.1-.7-.3L3.5 4.9c-.4-.4-.4-1 0-1.4s1-.4 1.4 0l1.4 1.4c.4.4.4 1 0 1.4-.1.2-.4.3-.7.3zM19.8 20.8c-.3 0-.5-.1-.7-.3l-1.4-1.4c-.4-.4-.4-1 0-1.4s1-.4 1.4 0l1.4 1.4c.4.4.4 1 0 1.4-.2.2-.5.3-.7.3zM3 13H1c-.6 0-1-.4-1-1s.4-1 1-1h2c.6 0 1 .4 1 1s-.4 1-1 1zM23 13h-2c-.6 0-1-.4-1-1s.4-1 1-1h2c.6 0 1 .4 1 1s-.4 1-1 1zM4.2 20.8c-.3 0-.5-.1-.7-.3-.4-.4-.4-1 0-1.4l1.4-1.4c.4-.4 1-.4 1.4 0s.4 1 0 1.4l-1.4 1.4c-.2.2-.4.3-.7.3zM18.4 6.6c-.3 0-.5-.1-.7-.3-.4-.4-.4-1 0-1.4l1.4-1.4c.4-.4 1-.4 1.4 0s.4 1 0 1.4l-1.4 1.4c-.2.2-.5.3-.7.3z"></path></svg></div></div></div><div class="social-links menu-item_93d67 flex-center relative"><div class="flex-center h-full gap-x-4 transition-colors duration-300 md:mr-2"><a href="https://github.com/sumy7/" target="_blank" rel="noopener noreferrer" class="social-links"><div class="social-links-icon_93d67"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg></div></a><a href="https://weibo.com/sumy7" target="_blank" rel="noopener noreferrer" class="social-links"><div class="social-links-icon_93d67"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" class="iconify iconify--ri" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M17.525 11.378c1.263.392 2.669 1.336 2.669 3.004c0 2.763-3.98 6.239-9.964 6.239c-4.565 0-9.23-2.213-9.23-5.852c0-1.902 1.204-4.102 3.277-6.177c2.773-2.77 6.004-4.033 7.219-2.816c.537.537.588 1.464.244 2.572c-.178.557.525.25.525.25c2.24-.938 4.196-.994 4.909.027c.38.543.343 1.306-.008 2.19c-.163.407.048.471.36.563zm-7.282 7.939c3.641-.362 6.401-2.592 6.167-4.983c-.237-2.391-3.382-4.038-7.023-3.677c-3.64.36-6.403 2.59-6.167 4.98c.237 2.394 3.382 4.039 7.023 3.68zM6.16 14.438c.754-1.527 2.712-2.39 4.446-1.94c1.793.463 2.707 2.154 1.976 3.8c-.744 1.682-2.882 2.578-4.695 1.993c-1.752-.566-2.493-2.294-1.727-3.853zm1.446 2.587c.568.257 1.325.013 1.676-.55c.346-.568.163-1.217-.407-1.459c-.563-.237-1.291.008-1.64.553c-.354.547-.189 1.202.371 1.456zm2.206-1.808c.219.092.501-.012.628-.231c.123-.22.044-.466-.178-.548c-.216-.084-.486.018-.613.232c-.123.214-.054.458.163.547zM19.873 9.5a.725.725 0 1 1-1.378-.451a1.38 1.38 0 0 0-.288-1.357a1.395 1.395 0 0 0-1.321-.425a.723.723 0 1 1-.303-1.416a2.836 2.836 0 0 1 3.29 3.649zm-3.916-6.575A5.831 5.831 0 0 1 21.5 4.72a5.836 5.836 0 0 1 1.22 5.704a.838.838 0 0 1-1.06.54a.844.844 0 0 1-.542-1.062a4.143 4.143 0 0 0-4.807-5.327a.845.845 0 0 1-.354-1.65z"></path></svg></div></a><a href="https://twitter.com/sumygg" target="_blank" rel="noopener noreferrer" class="social-links"><div class="social-links-icon_93d67"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>X</title><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"></path></svg></div></a></div><div class="md:ml-1 p-2"><svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M16 22 6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg></div></div></div></div><div class="mobileNavMenu_f6cde"><div class="navScreen_457e8 " id="navScreen"><div class="container_457e8"><div class="navMenu_457e8"><div class="navMenuItem_457e8 w-full"><a class="link_03735  cursor-pointer" target="" href="/blog/flinks/index.html"><div class="rspress-nav-menu-item singleItem_f6cde  text-sm font-medium mx-1.5 px-3 py-2 flex items-center">友情链接</div></a></div><div class="navMenuItem_457e8 w-full"><a class="link_03735  cursor-pointer" target="" href="/blog/archives/index.html"><div class="rspress-nav-menu-item singleItem_f6cde  text-sm font-medium mx-1.5 px-3 py-2 flex items-center">归档</div></a></div><div class="navMenuItem_457e8 w-full"><a class="link_03735  cursor-pointer" target="" href="/blog/categories/index.html"><div class="rspress-nav-menu-item singleItem_f6cde  text-sm font-medium mx-1.5 px-3 py-2 flex items-center">分类</div></a></div><div class="navMenuItem_457e8 w-full"><a class="link_03735  cursor-pointer" target="" href="/blog/tags/index.html"><div class="rspress-nav-menu-item singleItem_f6cde  text-sm font-medium mx-1.5 px-3 py-2 flex items-center">标签</div></a></div><div class="navMenuItem_457e8 w-full"><a class="link_03735  cursor-pointer" target="" href="/about/index.html"><div class="rspress-nav-menu-item singleItem_f6cde  text-sm font-medium mx-1.5 px-3 py-2 flex items-center">关于我</div></a></div></div><div class="flex-center flex-col gap-2"><div class="mt-2 navAppearance_457e8 flex justify-center"></div><div class="social-links menu-item_93d67 flex-center relative"><div class="flex-center h-full gap-x-4 transition-colors duration-300 md:mr-2"><a href="https://github.com/sumy7/" target="_blank" rel="noopener noreferrer" class="social-links"><div class="social-links-icon_93d67"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg></div></a><a href="https://weibo.com/sumy7" target="_blank" rel="noopener noreferrer" class="social-links"><div class="social-links-icon_93d67"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" class="iconify iconify--ri" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M17.525 11.378c1.263.392 2.669 1.336 2.669 3.004c0 2.763-3.98 6.239-9.964 6.239c-4.565 0-9.23-2.213-9.23-5.852c0-1.902 1.204-4.102 3.277-6.177c2.773-2.77 6.004-4.033 7.219-2.816c.537.537.588 1.464.244 2.572c-.178.557.525.25.525.25c2.24-.938 4.196-.994 4.909.027c.38.543.343 1.306-.008 2.19c-.163.407.048.471.36.563zm-7.282 7.939c3.641-.362 6.401-2.592 6.167-4.983c-.237-2.391-3.382-4.038-7.023-3.677c-3.64.36-6.403 2.59-6.167 4.98c.237 2.394 3.382 4.039 7.023 3.68zM6.16 14.438c.754-1.527 2.712-2.39 4.446-1.94c1.793.463 2.707 2.154 1.976 3.8c-.744 1.682-2.882 2.578-4.695 1.993c-1.752-.566-2.493-2.294-1.727-3.853zm1.446 2.587c.568.257 1.325.013 1.676-.55c.346-.568.163-1.217-.407-1.459c-.563-.237-1.291.008-1.64.553c-.354.547-.189 1.202.371 1.456zm2.206-1.808c.219.092.501-.012.628-.231c.123-.22.044-.466-.178-.548c-.216-.084-.486.018-.613.232c-.123.214-.054.458.163.547zM19.873 9.5a.725.725 0 1 1-1.378-.451a1.38 1.38 0 0 0-.288-1.357a1.395 1.395 0 0 0-1.321-.425a.723.723 0 1 1-.303-1.416a2.836 2.836 0 0 1 3.29 3.649zm-3.916-6.575A5.831 5.831 0 0 1 21.5 4.72a5.836 5.836 0 0 1 1.22 5.704a.838.838 0 0 1-1.06.54a.844.844 0 0 1-.542-1.062a4.143 4.143 0 0 0-4.807-5.327a.845.845 0 0 1-.354-1.65z"></path></svg></div></a><a href="https://twitter.com/sumygg" target="_blank" rel="noopener noreferrer" class="social-links"><div class="social-links-icon_93d67"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>X</title><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"></path></svg></div></a></div><div class="md:ml-1 p-2"><svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M16 22 6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg></div></div></div></div></div><button aria-label="mobile hamburger" class=" navHamburger_e7b06 text-gray-500"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="currentColor"><circle cx="8" cy="16" r="2" fill="currentColor"></circle><circle cx="16" cy="16" r="2" fill="currentColor"></circle><circle cx="24" cy="16" r="2" fill="currentColor"></circle></svg></button></div></div></div></div><section><div class="docLayout_edeb4 pt-0"><div class="content_edeb4 rspress-doc-container flex flex-shrink-0 mx-auto"><div class="w-full flex-1"><div><div class="rspress-doc"><!--$--><h1 id="判断一个点是否在凸包多边形内" class="text-3xl mb-10 leading-10 tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#判断一个点是否在凸包多边形内">#</a>判断一个点是否在凸包（多边形）内</h1><div class="postInfoContainer_07bfd -mt-5 mb-8"><span class="postInfoMetaItem_07bfd"><iconify-icon icon="{&quot;body&quot;:&quot;&lt;path fill=\&quot;currentColor\&quot; d=\&quot;M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5h16V4H0V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5z\&quot;/&gt;&quot;}" inline="true"></iconify-icon> <!-- -->2013-08-01</span><span class="postInfoMetaItem_07bfd"><iconify-icon icon="{&quot;body&quot;:&quot;&lt;path fill=\&quot;currentColor\&quot; d=\&quot;M9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 7A2 2 0 0 1 13.174 14H2.825a2 2 0 0 1-1.991-1.819l-.637-7a1.99 1.99 0 0 1 .342-1.31L.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3zm-8.322.12C1.72 3.042 1.95 3 2.19 3h5.396l-.707-.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139z\&quot;/&gt;&quot;}" inline="true"></iconify-icon> <a class="link_03735  cursor-pointer" target="" href="/blog/categories/index.html?category=算法">算法</a></span><span class="postInfoMetaItem_07bfd"><iconify-icon icon="{&quot;body&quot;:&quot;&lt;path fill=\&quot;currentColor\&quot; d=\&quot;M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1H2zm4 3.5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0z\&quot;/&gt;&quot;}" inline="true"></iconify-icon> <a class="link_03735  cursor-pointer" target="" href="/blog/tags/index.html?tag=算法">算法</a></span><span class="postInfoMetaItem_07bfd"><iconify-icon icon="{&quot;body&quot;:&quot;&lt;path fill=\&quot;currentColor\&quot; d=\&quot;M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1H2zm4 3.5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0z\&quot;/&gt;&quot;}" inline="true"></iconify-icon> <a class="link_03735  cursor-pointer" target="" href="/blog/tags/index.html?tag=计算几何">计算几何</a></span><span class="postInfoMetaItem_07bfd"><iconify-icon icon="{&quot;body&quot;:&quot;&lt;path fill=\&quot;currentColor\&quot; d=\&quot;M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM5.485 6.879l1.036 4.144l.997-3.655a.5.5 0 0 1 .964 0l.997 3.655l1.036-4.144a.5.5 0 0 1 .97.242l-1.5 6a.5.5 0 0 1-.967.01L8 9.402l-1.018 3.73a.5.5 0 0 1-.967-.01l-1.5-6a.5.5 0 1 1 .97-.242z\&quot;/&gt;&quot;}" inline="true"></iconify-icon> <!-- -->1.6k<!-- --> 字</span><span class="postInfoMetaItem_07bfd"><iconify-icon icon="{&quot;body&quot;:&quot;&lt;path fill=\&quot;currentColor\&quot; d=\&quot;M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z\&quot;/&gt;&quot;}" inline="true"></iconify-icon> <!-- -->4<!-- --> 分钟</span><span class="postInfoMetaItem_07bfd"><iconify-icon icon="{&quot;body&quot;:&quot;&lt;g fill=\&quot;currentColor\&quot;&gt;&lt;path d=\&quot;M10.5 8a2.5 2.5 0 1 1-5 0a2.5 2.5 0 0 1 5 0z\&quot;/&gt;&lt;path d=\&quot;M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7a3.5 3.5 0 0 0 0 7z\&quot;/&gt;&lt;/g&gt;&quot;}" inline="true"></iconify-icon> </span></div>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">判断一个点是否在凸包内是比较常用的一个算法。</p>
+</blockquote>
+<p class="my-4 leading-7">判断一个点是否在凸包（多边形）内是比较常用的一个算法，总结了一下出现的方法，主要找到了下面的几种。</p>
+<h2 id="方法一外积计算法只适用于凸多边形" class="mt-14 mb-6 text-2xl tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#方法一外积计算法只适用于凸多边形">#</a>方法一：外积计算法（只适用于凸多边形）</h2>
+<p class="my-4 leading-7">简单来说就是将点到凸多边形的顶点的各条向量，通过外积运算判断是否都往同一方向旋转，如果都是往同一方向旋转，则表示点在凸多边形的内部；如果中途出现反方向旋转，则说明点在凸多边形的外部；如果中途出现为零的情况，表示点在凸多边形上，而且就在对应的边上。</p>
+<p class="my-4 leading-7">时间复杂度为O(N)</p>
+<p class="my-4 leading-7"><img alt="点位置判断1" src="/static/image/1.f4b3e5e3.png"/></p>
+<h2 id="方法二区域判别法" class="mt-14 mb-6 text-2xl tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#方法二区域判别法">#</a>方法二：区域判别法</h2>
+<p class="my-4 leading-7">这种方法适用于快速判断多个点是否在一个凸多边形内。</p>
+<p class="my-4 leading-7"><img alt="点位置判断1-1" src="/static/image/2-1.552e6704.jpg"/></p>
+<p class="my-4 leading-7">首先，将一个凸多边形划分为 N 个三角形的区域。</p>
+<p class="my-4 leading-7"><img alt="点位置判断1-2" src="/static/image/2-2.0ac1eba2.jpg"/></p>
+<p class="my-4 leading-7">对于某一个点，如果不在这些三角形区域内，则必不在凸包内。否则就能通过二分的方法得到点所在的三角形区间。</p>
+<p class="my-4 leading-7">最后只需判断点与原凸包边的关系即可。</p>
+<p class="my-4 leading-7"><img alt="点位置判断1-3" src="/static/image/2-3.41306848.jpg"/></p>
+<p class="my-4 leading-7">假设我们查询绿色的点是否在凸包内，我们首先二分得到了它所在的区间，然后判断它和绿色的向量的关系，蓝色和紫色的点类似，蓝色的点在边界上，紫色的点在边界右边。</p>
+<p class="my-4 leading-7">由于应用了二分，时间复杂度为O(logN)。</p>
+<p class="my-4 leading-7">问题链接：<a target="_blank" rel="noopener noreferrer" href="http://blog.csdn.net/codeforces_sphinx/article/details/7200301" class="link-_707cf  link_3b154 inline-link_3b154">SGU253 Theodore Roosevelt</a></p>
+<p class="my-4 leading-7"><em>sgu253 这个问题需要使用极角序判断才能通过，而 cf116B 因为精度问题（把 eps 开到 1e-20 了都过不了）就需要使用叉乘判断，但是叉乘判断对于 sgu253 却不起作用。两题的方法不能通用，也不知道这是为什么？</em></p>
+<p class="my-4 leading-7">sgu253 代码：</p>
+<div class="language-cpp"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-cpp" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>#include &lt;iostream&gt;
+</span></span><span style="display:block;padding:0 1.25rem">#include &lt;cstring&gt;
+</span><span style="display:block;padding:0 1.25rem">#include &lt;algorithm&gt;
+</span><span style="display:block;padding:0 1.25rem">#include &lt;cmath&gt;
+</span><span style="display:block;padding:0 1.25rem">#include &lt;cstdio&gt;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">#define PI   3.14159265358979323846
+</span><span style="display:block;padding:0 1.25rem">#define PI_2 1.57079632679489661923
+</span><span style="display:block;padding:0 1.25rem">#define PI_4 0.78539816339744830962
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">#define eps 1e-6
+</span><span style="display:block;padding:0 1.25rem">#define DINF 1e200
+</span><span style="display:block;padding:0 1.25rem">using namespace std;
+</span><span style="display:block;padding:0 1.25rem">struct point
+</span><span style="display:block;padding:0 1.25rem">{
+</span><span style="display:block;padding:0 1.25rem">    double x,y;
+</span><span style="display:block;padding:0 1.25rem">    double ang;
+</span><span style="display:block;padding:0 1.25rem">    point(){}
+</span><span style="display:block;padding:0 1.25rem">    point(double _x,double _y){x=_x;y=_y;}
+</span><span style="display:block;padding:0 1.25rem">    void read()
+</span><span style="display:block;padding:0 1.25rem">    {
+</span><span style="display:block;padding:0 1.25rem">        scanf(&quot;%lf%lf&quot;,&amp;x,&amp;y);
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">    void write()
+</span><span style="display:block;padding:0 1.25rem">    {
+</span><span style="display:block;padding:0 1.25rem">        printf(&quot;%lf %lf\n&quot;,x,y);
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">};
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">bool dy(double x,double y)  {return x &gt; y + eps;}          // x &gt; y
+</span><span style="display:block;padding:0 1.25rem">bool xy(double x,double y)  {return x &lt; y - eps;}          // x &lt; y
+</span><span style="display:block;padding:0 1.25rem">bool dyd(double x,double y) {return x &gt; y - eps;}          // x &gt;= y
+</span><span style="display:block;padding:0 1.25rem">bool xyd(double x,double y) {return x &lt; y + eps;}          // x &lt;= y
+</span><span style="display:block;padding:0 1.25rem">bool dd(double x,double y)  {return fabs( x - y ) &lt; eps;}  // x == y
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">double cross(point a,point b,point c)//向量 ac 在 ab 的方向
+</span><span style="display:block;padding:0 1.25rem">{
+</span><span style="display:block;padding:0 1.25rem">    return (c.x - a.x)*(b.y - a.y) - (b.x - a.x)*(c.y - a.y);
+</span><span style="display:block;padding:0 1.25rem">}
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">double dis(point a,point b)
+</span><span style="display:block;padding:0 1.25rem">{
+</span><span style="display:block;padding:0 1.25rem">    return(sqrt((a.x-b.x)*(a.x-b.x)+(a.y-b.y)*(a.y-b.y)));
+</span><span style="display:block;padding:0 1.25rem">}
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">int n,m,k;
+</span><span style="display:block;padding:0 1.25rem">point pt[100005];
+</span><span style="display:block;padding:0 1.25rem">point p[100005];
+</span><span style="display:block;padding:0 1.25rem">int cnt;
+</span><span style="display:block;padding:0 1.25rem">int pk;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">int cmp(point a, point b)
+</span><span style="display:block;padding:0 1.25rem">{
+</span><span style="display:block;padding:0 1.25rem">    return(xy(a.ang,b.ang) || (dd(a.ang,b.ang) &amp;&amp; dis(a,pt[0])&lt;dis(b,pt[0])));
+</span><span style="display:block;padding:0 1.25rem">}
+</span><span style="display:block;padding:0 1.25rem">int panduan(point x)
+</span><span style="display:block;padding:0 1.25rem">{
+</span><span style="display:block;padding:0 1.25rem">    int l=1,r=n-1;
+</span><span style="display:block;padding:0 1.25rem">    int mid;
+</span><span style="display:block;padding:0 1.25rem">    int pos;
+</span><span style="display:block;padding:0 1.25rem">    if(xy(x.ang,pt[l].ang) || dy(x.ang,pt[r].ang)) return 0;
+</span><span style="display:block;padding:0 1.25rem">    while(l&lt;r)
+</span><span style="display:block;padding:0 1.25rem">    {
+</span><span style="display:block;padding:0 1.25rem">        mid=(l+r)/2;
+</span><span style="display:block;padding:0 1.25rem">        if(pt[mid].ang&lt;=x.ang)
+</span><span style="display:block;padding:0 1.25rem">        {
+</span><span style="display:block;padding:0 1.25rem">            l=mid+1;
+</span><span style="display:block;padding:0 1.25rem">            pos=l;
+</span><span style="display:block;padding:0 1.25rem">        }
+</span><span style="display:block;padding:0 1.25rem">        else
+</span><span style="display:block;padding:0 1.25rem">        {
+</span><span style="display:block;padding:0 1.25rem">            r=mid;
+</span><span style="display:block;padding:0 1.25rem">            pos=r;
+</span><span style="display:block;padding:0 1.25rem">        }
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">    if(pos==n) pos--;
+</span><span style="display:block;padding:0 1.25rem">    if(dyd(cross(pt[pos],pt[pos-1],x),0)) return 1;
+</span><span style="display:block;padding:0 1.25rem">    return 0;
+</span><span style="display:block;padding:0 1.25rem">}
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">int main()
+</span><span style="display:block;padding:0 1.25rem">{
+</span><span style="display:block;padding:0 1.25rem">    scanf(&quot;%d%d%d&quot;,&amp;n,&amp;m,&amp;k);
+</span><span style="display:block;padding:0 1.25rem">    cnt=0;
+</span><span style="display:block;padding:0 1.25rem">    pk=0;
+</span><span style="display:block;padding:0 1.25rem">    for(int i=0;i&lt;n;i++)
+</span><span style="display:block;padding:0 1.25rem">    {
+</span><span style="display:block;padding:0 1.25rem">        pt[i].read();
+</span><span style="display:block;padding:0 1.25rem">        if(pt[pk].y&gt;pt[i].y) pk=i;
+</span><span style="display:block;padding:0 1.25rem">        else if(pt[pk].y==pt[i].y &amp;&amp; pt[pk].x&gt;pt[i].x) pk=i;
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">    swap(pt[pk],pt[0]);
+</span><span style="display:block;padding:0 1.25rem">    for(int i=0;i&lt;n;i++)
+</span><span style="display:block;padding:0 1.25rem">    {
+</span><span style="display:block;padding:0 1.25rem">        pt[i].ang=atan2(pt[i].y-pt[0].y,pt[i].x-pt[0].x);
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">    sort(pt+1,pt+n,cmp);
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">//    for(int i=0;i&lt;n;i++) pt[i].write();
+</span><span style="display:block;padding:0 1.25rem">    pt[n]=pt[0];
+</span><span style="display:block;padding:0 1.25rem">    for(int i=0;i&lt;m;i++)
+</span><span style="display:block;padding:0 1.25rem">    {
+</span><span style="display:block;padding:0 1.25rem">        p[i].read();
+</span><span style="display:block;padding:0 1.25rem">        p[i].ang=atan2(p[i].y-pt[0].y,p[i].x-pt[0].x);
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">    for(int i=0;i&lt;m;i++)
+</span><span style="display:block;padding:0 1.25rem">        if(panduan(p[i]))
+</span><span style="display:block;padding:0 1.25rem">        {
+</span><span style="display:block;padding:0 1.25rem">            cnt++;
+</span><span style="display:block;padding:0 1.25rem">            //cout&lt;&lt;i&lt;&lt;&quot; ok&quot;&lt;&lt;endl;
+</span><span style="display:block;padding:0 1.25rem">        }
+</span><span style="display:block;padding:0 1.25rem">    if(cnt&gt;=k) puts(&quot;YES&quot;);
+</span><span style="display:block;padding:0 1.25rem">    else puts(&quot;NO&quot;);
+</span><span style="display:block;padding:0 1.25rem">    return 0;
+</span><span style="display:block;padding:0 1.25rem">}</span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<p class="my-4 leading-7">CF116B 代码：（方法四提供了其它解法）</p>
+<div class="language-cpp"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-cpp" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>#include &lt;iostream&gt;
+</span></span><span style="display:block;padding:0 1.25rem">#include &lt;cstring&gt;
+</span><span style="display:block;padding:0 1.25rem">#include &lt;algorithm&gt;
+</span><span style="display:block;padding:0 1.25rem">#include &lt;cmath&gt;
+</span><span style="display:block;padding:0 1.25rem">#include &lt;cstdio&gt;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">#define PI   3.14159265358979323846
+</span><span style="display:block;padding:0 1.25rem">#define PI_2 1.57079632679489661923
+</span><span style="display:block;padding:0 1.25rem">#define PI_4 0.78539816339744830962
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">#define eps 1e-10
+</span><span style="display:block;padding:0 1.25rem">#define DINF 1e200
+</span><span style="display:block;padding:0 1.25rem">using namespace std;
+</span><span style="display:block;padding:0 1.25rem">struct point
+</span><span style="display:block;padding:0 1.25rem">{
+</span><span style="display:block;padding:0 1.25rem">    double x,y;
+</span><span style="display:block;padding:0 1.25rem">    point(){}
+</span><span style="display:block;padding:0 1.25rem">    point(double _x,double _y){x=_x;y=_y;}
+</span><span style="display:block;padding:0 1.25rem">    void read()
+</span><span style="display:block;padding:0 1.25rem">    {
+</span><span style="display:block;padding:0 1.25rem">        scanf(&quot;%lf%lf&quot;,&amp;x,&amp;y);
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">    void write()
+</span><span style="display:block;padding:0 1.25rem">    {
+</span><span style="display:block;padding:0 1.25rem">        printf(&quot;%lf %lf\n&quot;,x,y);
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">};
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">bool dy(double x,double y)  {return x &gt; y + eps;}          // x &gt; y
+</span><span style="display:block;padding:0 1.25rem">bool xy(double x,double y)  {return x &lt; y - eps;}          // x &lt; y
+</span><span style="display:block;padding:0 1.25rem">bool dyd(double x,double y) {return x &gt; y - eps;}          // x &gt;= y
+</span><span style="display:block;padding:0 1.25rem">bool xyd(double x,double y) {return x &lt; y + eps;}          // x &lt;= y
+</span><span style="display:block;padding:0 1.25rem">bool dd(double x,double y)  {return fabs( x - y ) &lt; eps;}  // x == y
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">double cross(point a,point b,point c)//向量 ac 在 ab 的方向
+</span><span style="display:block;padding:0 1.25rem">{
+</span><span style="display:block;padding:0 1.25rem">    return (c.x - a.x)*(b.y - a.y) - (b.x - a.x)*(c.y - a.y);
+</span><span style="display:block;padding:0 1.25rem">}
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">double dis(point a,point b)
+</span><span style="display:block;padding:0 1.25rem">{
+</span><span style="display:block;padding:0 1.25rem">    return(sqrt((a.x-b.x)*(a.x-b.x)+(a.y-b.y)*(a.y-b.y)));
+</span><span style="display:block;padding:0 1.25rem">}
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">int n,m,k;
+</span><span style="display:block;padding:0 1.25rem">point pt[100005];
+</span><span style="display:block;padding:0 1.25rem">point p[100005];
+</span><span style="display:block;padding:0 1.25rem">int cnt;
+</span><span style="display:block;padding:0 1.25rem">int pk;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">int cmp(point a, point b)
+</span><span style="display:block;padding:0 1.25rem">{
+</span><span style="display:block;padding:0 1.25rem">    double ans = cross(pt[0], a, b);
+</span><span style="display:block;padding:0 1.25rem">    if(ans &lt; 0) return 1;
+</span><span style="display:block;padding:0 1.25rem">    if(ans == 0 &amp;&amp; (dis(a, pt[0]) &lt;= dis(b, pt[0]))) return 1;
+</span><span style="display:block;padding:0 1.25rem">    return 0;
+</span><span style="display:block;padding:0 1.25rem">}
+</span><span style="display:block;padding:0 1.25rem">int panduan(point x)
+</span><span style="display:block;padding:0 1.25rem">{
+</span><span style="display:block;padding:0 1.25rem">    int l=0,r=n-1;
+</span><span style="display:block;padding:0 1.25rem">    int mid;
+</span><span style="display:block;padding:0 1.25rem">    int pos;
+</span><span style="display:block;padding:0 1.25rem">    if(dd(cross(x,pt[0],pt[n-1]),0)) return 0;
+</span><span style="display:block;padding:0 1.25rem">    if(dd(cross(x,pt[1],pt[0]),0)) return 0;
+</span><span style="display:block;padding:0 1.25rem">    while(l&lt;=r)
+</span><span style="display:block;padding:0 1.25rem">    {
+</span><span style="display:block;padding:0 1.25rem">        mid=(l+r)/2;
+</span><span style="display:block;padding:0 1.25rem">        if(dyd(cross(x,pt[mid],pt[0]),0))
+</span><span style="display:block;padding:0 1.25rem">        {
+</span><span style="display:block;padding:0 1.25rem">            pos=mid;
+</span><span style="display:block;padding:0 1.25rem">            l=mid+1;
+</span><span style="display:block;padding:0 1.25rem">        }
+</span><span style="display:block;padding:0 1.25rem">        else r=mid-1;
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">    if(dyd(cross(x,pt[pos],pt[pos+1]),0)) return 0;
+</span><span style="display:block;padding:0 1.25rem">    return 1;
+</span><span style="display:block;padding:0 1.25rem">}
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">int main()
+</span><span style="display:block;padding:0 1.25rem">{
+</span><span style="display:block;padding:0 1.25rem">    scanf(&quot;%d&quot;,&amp;n);
+</span><span style="display:block;padding:0 1.25rem">    cnt=0;
+</span><span style="display:block;padding:0 1.25rem">    pk=0;
+</span><span style="display:block;padding:0 1.25rem">    for(int i=0;i&lt;n;i++)
+</span><span style="display:block;padding:0 1.25rem">    {
+</span><span style="display:block;padding:0 1.25rem">        pt[i].read();
+</span><span style="display:block;padding:0 1.25rem">        if(pt[pk].y&gt;pt[i].y) pk=i;
+</span><span style="display:block;padding:0 1.25rem">        else if(pt[pk].y==pt[i].y &amp;&amp; pt[pk].x&gt;pt[i].x) pk=i;
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">    swap(pt[pk],pt[0]);
+</span><span style="display:block;padding:0 1.25rem">    sort(pt+1,pt+n,cmp);
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">//    for(int i=0;i&lt;n;i++) pt[i].write();
+</span><span style="display:block;padding:0 1.25rem">    pt[n]=pt[0];
+</span><span style="display:block;padding:0 1.25rem">    scanf(&quot;%d&quot;,&amp;m);
+</span><span style="display:block;padding:0 1.25rem">    for(int i=0;i&lt;m;i++)
+</span><span style="display:block;padding:0 1.25rem">    {
+</span><span style="display:block;padding:0 1.25rem">        p[i].read();
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">    for(int i=0;i&lt;m;i++)
+</span><span style="display:block;padding:0 1.25rem">        if(!panduan(p[i]))
+</span><span style="display:block;padding:0 1.25rem">        {
+</span><span style="display:block;padding:0 1.25rem">            puts(&quot;NO&quot;);
+</span><span style="display:block;padding:0 1.25rem">            return 0;
+</span><span style="display:block;padding:0 1.25rem">        }
+</span><span style="display:block;padding:0 1.25rem">    puts(&quot;YES&quot;);
+</span><span style="display:block;padding:0 1.25rem">    return 0;
+</span><span style="display:block;padding:0 1.25rem">}</span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<h2 id="方法三射线相交法" class="mt-14 mb-6 text-2xl tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#方法三射线相交法">#</a>方法三：射线相交法</h2>
+<p class="my-4 leading-7">从给定的点开始，往随便一个方向（习惯水平向右）引一条无限长的射线，看看穿过多少条边。如果穿过偶数条边，说明点在多边形外；穿过奇数条边，说明点在多边形内。</p>
+<p class="my-4 leading-7">需要注意的是射线可能穿过定点或与边重合的情况。还有点也可能在多边形的边界上。</p>
+<p class="my-4 leading-7">时间复杂度为O(N)</p>
+<p class="my-4 leading-7"><img alt="点位置判断3" src="/static/image/3.483fdfb2.png"/></p>
+<div class="language-cpp"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-cpp" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>struct Point {float x, y;} p[10];
+</span></span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">// 无法正确判断点在多边形上的情况
+</span><span style="display:block;padding:0 1.25rem">bool point_in_polygon(Point&amp; t)
+</span><span style="display:block;padding:0 1.25rem">{
+</span><span style="display:block;padding:0 1.25rem">    bool c = false;
+</span><span style="display:block;padding:0 1.25rem">    for (int i = 0, j = 10-1; i &lt; 10; j = i++)
+</span><span style="display:block;padding:0 1.25rem">        if ((p[i].y &gt; t.y) != (p[j].y &gt; t.y) &amp;&amp;
+</span><span style="display:block;padding:0 1.25rem">            t.x &lt; (p[j].x-p[i].x)*(t.y-p[i].y)/(p[j].y-p[i].y)+p[i].x)
+</span><span style="display:block;padding:0 1.25rem">            c = !c;
+</span><span style="display:block;padding:0 1.25rem">    return c;
+</span><span style="display:block;padding:0 1.25rem">}</span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<p class="my-4 leading-7">补充两段代码：</p>
+<p class="my-4 leading-7">代码一：</p>
+<div class="language-cpp"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-cpp" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>inline int dblcmp(double x) //判断double的符号
+</span></span><span style="display:block;padding:0 1.25rem">{
+</span><span style="display:block;padding:0 1.25rem">    if(fabs(x) &lt; eps)
+</span><span style="display:block;padding:0 1.25rem">        return 0;
+</span><span style="display:block;padding:0 1.25rem">    return x &gt; 0 ? 1 : -1;
+</span><span style="display:block;padding:0 1.25rem">}
+</span><span style="display:block;padding:0 1.25rem">//判断点是否在多边形内
+</span><span style="display:block;padding:0 1.25rem">//思想：过点p做一条射线，判断交点数
+</span><span style="display:block;padding:0 1.25rem">bool point_inside(point p[],point&amp; aa)
+</span><span style="display:block;padding:0 1.25rem">{
+</span><span style="display:block;padding:0 1.25rem">    int i, cnt = 0;
+</span><span style="display:block;padding:0 1.25rem">    double t;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    //确保p[n] = p[0]
+</span><span style="display:block;padding:0 1.25rem">    for(i=0;i&lt;n;++i)
+</span><span style="display:block;padding:0 1.25rem">    {
+</span><span style="display:block;padding:0 1.25rem">        if((p[i].y&lt;=aa.y &amp;&amp; p[i+1].y&gt;aa.y) ||
+</span><span style="display:block;padding:0 1.25rem">            (p[i+1].y&lt;=aa.y &amp;&amp; p[i].y&gt;aa.y))
+</span><span style="display:block;padding:0 1.25rem">        {
+</span><span style="display:block;padding:0 1.25rem">            if(!dblcmp(p[i].y-p[i+1].y))
+</span><span style="display:block;padding:0 1.25rem">            {
+</span><span style="display:block;padding:0 1.25rem">                if(dblcmp(p[i].y-aa.y)==0)
+</span><span style="display:block;padding:0 1.25rem">                    cnt++;
+</span><span style="display:block;padding:0 1.25rem">                t=-DINF;
+</span><span style="display:block;padding:0 1.25rem">            }
+</span><span style="display:block;padding:0 1.25rem">            else
+</span><span style="display:block;padding:0 1.25rem">                t=p[i+1].x-(p[i+1].x-p[i].x)*(p[i+1].y-aa.y)/(p[i+1].y-p[i].y);
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">            if(dblcmp(t-aa.x)&gt;=0)
+</span><span style="display:block;padding:0 1.25rem">                cnt++;
+</span><span style="display:block;padding:0 1.25rem">        }
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">    return cnt%2;
+</span><span style="display:block;padding:0 1.25rem">}</span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<p class="my-4 leading-7">代码二：</p>
+<div class="language-cpp"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-cpp" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>bool isIntersected(point s1,point e1,point s2,point e2) //判断线段 s1-e1 与线段 s2-e2 是否相交
+</span></span><span style="display:block;padding:0 1.25rem">{
+</span><span style="display:block;padding:0 1.25rem">    return ( max(s1.x,e1.x)&gt;=min(s2.x,e2.x) &amp;&amp;
+</span><span style="display:block;padding:0 1.25rem">            max(s1.y,e1.y)&gt;=min(s2.y,e2.y) &amp;&amp;
+</span><span style="display:block;padding:0 1.25rem">            max(s2.x,e2.x)&gt;=min(s1.x,e1.x) &amp;&amp;
+</span><span style="display:block;padding:0 1.25rem">            max(s2.y,e2.y)&gt;=min(s1.y,e1.y) &amp;&amp;
+</span><span style="display:block;padding:0 1.25rem">            cross(s2,e1,s1)*cross(e1,e2,s1)&gt;=0 &amp;&amp;
+</span><span style="display:block;padding:0 1.25rem">            cross(s1,e2,s2)*cross(e2,e1,s2)&gt;=0 );
+</span><span style="display:block;padding:0 1.25rem">}
+</span><span style="display:block;padding:0 1.25rem">bool online(point p1,point p2,point p) //判断点 p 是否在线段 p1-p2 上
+</span><span style="display:block;padding:0 1.25rem">{
+</span><span style="display:block;padding:0 1.25rem">    if(fabs(cross(p1,p2,p))&lt;eps &amp;&amp; ((p.x-p1.x)*(p.x-p2.x)&lt;eps &amp;&amp; (p.y-p1.y)*(p.y-p2.y)&lt;eps))
+</span><span style="display:block;padding:0 1.25rem">        return true;
+</span><span style="display:block;padding:0 1.25rem">    return false;
+</span><span style="display:block;padding:0 1.25rem">}
+</span><span style="display:block;padding:0 1.25rem">//判断点是否在多边形内
+</span><span style="display:block;padding:0 1.25rem">//思路：取一条无限长的线段，判断线段与线段相交
+</span><span style="display:block;padding:0 1.25rem">bool In_Polygon(point p[],point cen)
+</span><span style="display:block;padding:0 1.25rem">{
+</span><span style="display:block;padding:0 1.25rem">    int cnt=0;
+</span><span style="display:block;padding:0 1.25rem">    point PINF=point(20000.0,cen.y);
+</span><span style="display:block;padding:0 1.25rem">    for(int i=0;i&lt;n;i++){
+</span><span style="display:block;padding:0 1.25rem">        if(online(p[i],p[i+1],cen)) return false;
+</span><span style="display:block;padding:0 1.25rem">        if(fabs(p[i].y-p[i+1].y)&lt;eps) continue;
+</span><span style="display:block;padding:0 1.25rem">        if(online(cen,PINF,p[i])){
+</span><span style="display:block;padding:0 1.25rem">            if(p[i].y&gt;p[i+1].y) cnt++;
+</span><span style="display:block;padding:0 1.25rem">        }
+</span><span style="display:block;padding:0 1.25rem">        else if(online(cen,PINF,p[i+1])){
+</span><span style="display:block;padding:0 1.25rem">            if(p[i+1].y&gt;p[i].y) cnt++;
+</span><span style="display:block;padding:0 1.25rem">        }
+</span><span style="display:block;padding:0 1.25rem">        else if(isIntersected(cen,PINF,p[i],p[i+1]))
+</span><span style="display:block;padding:0 1.25rem">            cnt++;
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">    return cnt&amp;1;
+</span><span style="display:block;padding:0 1.25rem">}</span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<h2 id="方法四面积比较法" class="mt-14 mb-6 text-2xl tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#方法四面积比较法">#</a>方法四：面积比较法</h2>
+<p class="my-4 leading-7">我们知道计算面积有两种方法（具体可以参考【计算多边形的面积】），而两种方法的区别是关于有没有使用基点。</p>
+<p class="my-4 leading-7">于是对于存在基点的方法，如果基点在多边形内，那么划分三角形得到的面积的符号都是相同的（逆时针计算的话都为正）。但是如果基点选在多边形外，就会出现相反符号的面积抵消的情况。这样来说，如果我们都按绝对值来计算每个划分三角形的面积，那么基点在多边形外的到的面积将会比真正的面积大。</p>
+<p class="my-4 leading-7">我们可以通过积分方法和基点方法分别计算面积，然后通过比较两种方法的面积判断基点的位置。如果面积相等，则说明基点在多边形内；如果不相等，则说明基点在多边形外。</p>
+<div class="language-cpp"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-cpp" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>struct node
+</span></span><span style="display:block;padding:0 1.25rem">{
+</span><span style="display:block;padding:0 1.25rem">    double x, y;
+</span><span style="display:block;padding:0 1.25rem">}p[105];
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">int n; //定点的数目
+</span><span style="display:block;padding:0 1.25rem">double getareap(node st)//多边形面积
+</span><span style="display:block;padding:0 1.25rem">{
+</span><span style="display:block;padding:0 1.25rem">    int i;
+</span><span style="display:block;padding:0 1.25rem">    double sum = 0;
+</span><span style="display:block;padding:0 1.25rem">    node p1, p2;
+</span><span style="display:block;padding:0 1.25rem">    p1 = p[n-1];
+</span><span style="display:block;padding:0 1.25rem">    for(i = 0; i &lt; n; i ++)
+</span><span style="display:block;padding:0 1.25rem">    {
+</span><span style="display:block;padding:0 1.25rem">        p2 = p[i];
+</span><span style="display:block;padding:0 1.25rem">        sum += (p1.y+p2.y) * (p1.x - p2.x);
+</span><span style="display:block;padding:0 1.25rem">        p1 = p2;
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">    return fabs(sum/2);
+</span><span style="display:block;padding:0 1.25rem">}
+</span><span style="display:block;padding:0 1.25rem">double areat(node p0, node p1, node p2)//三角形面积，面积取绝对值
+</span><span style="display:block;padding:0 1.25rem">{
+</span><span style="display:block;padding:0 1.25rem">    return fabs((p1.x-p0.x)*(p2.y-p0.y) - (p2.x-p0.x)*(p1.y-p0.y));
+</span><span style="display:block;padding:0 1.25rem">}
+</span><span style="display:block;padding:0 1.25rem">double getareat(node st)
+</span><span style="display:block;padding:0 1.25rem">{
+</span><span style="display:block;padding:0 1.25rem">    int i;
+</span><span style="display:block;padding:0 1.25rem">    double sum = 0;
+</span><span style="display:block;padding:0 1.25rem">    p[n] = p[0];
+</span><span style="display:block;padding:0 1.25rem">    for(i = 0; i &lt; n; i ++)
+</span><span style="display:block;padding:0 1.25rem">    {
+</span><span style="display:block;padding:0 1.25rem">        sum += areat(st, p[i], p[i+1]);
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">    return sum/2.0;
+</span><span style="display:block;padding:0 1.25rem">}
+</span><span style="display:block;padding:0 1.25rem">int inpolygon(node st)//点在多边形内判断，st 为基点
+</span><span style="display:block;padding:0 1.25rem">{
+</span><span style="display:block;padding:0 1.25rem">    double ans1, ans2;
+</span><span style="display:block;padding:0 1.25rem">    ans1 = getareap(st);
+</span><span style="display:block;padding:0 1.25rem">    ans2 = getareat(st);
+</span><span style="display:block;padding:0 1.25rem">    if(fabs(ans1-ans2) &lt; ep) return 1;
+</span><span style="display:block;padding:0 1.25rem">    return 0;
+</span><span style="display:block;padding:0 1.25rem">}</span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<h2 id="方法五共求凸包法" class="mt-14 mb-6 text-2xl tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#方法五共求凸包法">#</a>方法五：共求凸包法</h2>
+<p class="my-4 leading-7">在codeforces的一道题目里看到的这种方法，适用于点比较多的情况。</p>
+<p class="my-4 leading-7">大体思路是将凸包上的点与内部的点共同求凸包，如果最后求得的凸包中出现了原先没有出现的点，则证明有些点不严格在凸包内部。</p>
+<p class="my-4 leading-7">题目链结：<a target="_blank" rel="noopener noreferrer" href="http://codeforces.com/problemset/problem/166/B" class="link-_707cf  link_3b154 inline-link_3b154">Codeforces 166B Polygons</a></p>
+<p class="my-4 leading-7">这里大体讲解一下代码。题目要求的是严格在凸包内，那么就要求即使存在共线的点，也要出现在凸包上。</p>
+<p class="my-4 leading-7">这里提供两组cf上的测试数据</p>
+<div class="language-bash"><div class="rspress-code-content rspress-scrollbar"><code meta="">Test: #16
+4
+-10 -10
+-10 10
+10 10
+10 -10
+3
+-10 0
+1 5
+2 2
+
+Test: #42
+4
+-10 -10
+-10 10
+10 10
+10 -10
+3
+10 0
+2 2
+1 5
+</code></div></div>
+<p class="my-4 leading-7">可以看出，这两组测试数据形式上差不多，关键在于共线点存在的位置。这里为了使共线点出现在最后的凸包上，我们把最左上角的点和最右下角的点的连线作为参考线。在参考线右边的可以考虑按距离近的先排序，在参考线左边的可以考虑按距离远的先排序，这样的目的是为了保证真正的极角排序是按照逆时针（或顺时针） 形成的。这就有了下面代码的 cmp 函数。</p>
+<p class="my-4 leading-7"><img alt="点位置判断5" src="/static/image/5.7a70c1a0.jpg"/></p>
+<p class="my-4 leading-7">图片中点极角序是 S-&gt;C-&gt;J-&gt;D-&gt;E-&gt;T-&gt;I-&gt;F-&gt;G-&gt;H-&gt;K</p>
+<p class="my-4 leading-7">如果先K再H，k点一定会被弹出，但是先H再K就不会。</p>
+<p class="my-4 leading-7">我的渣代码：</p>
+<div class="language-cpp"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-cpp" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>#include &lt;iostream&gt;
+</span></span><span style="display:block;padding:0 1.25rem">#include &lt;cstring&gt;
+</span><span style="display:block;padding:0 1.25rem">#include &lt;algorithm&gt;
+</span><span style="display:block;padding:0 1.25rem">#include &lt;cstring&gt;
+</span><span style="display:block;padding:0 1.25rem">#include &lt;cstdio&gt;
+</span><span style="display:block;padding:0 1.25rem">#include &lt;vector&gt;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">using namespace std;
+</span><span style="display:block;padding:0 1.25rem">struct point
+</span><span style="display:block;padding:0 1.25rem">{
+</span><span style="display:block;padding:0 1.25rem">    long long x,y;
+</span><span style="display:block;padding:0 1.25rem">    int flag;
+</span><span style="display:block;padding:0 1.25rem">}tmp,pld,pru;
+</span><span style="display:block;padding:0 1.25rem">vector&lt;point&gt;VI;
+</span><span style="display:block;padding:0 1.25rem">vector&lt;point&gt;Q;
+</span><span style="display:block;padding:0 1.25rem">int n,m;
+</span><span style="display:block;padding:0 1.25rem">long long cross(point a,point b,point c) //求叉积
+</span><span style="display:block;padding:0 1.25rem">{
+</span><span style="display:block;padding:0 1.25rem">    return((a.x-c.x)*(b.y-c.y)-(a.y-c.y)*(b.x-c.x));
+</span><span style="display:block;padding:0 1.25rem">}
+</span><span style="display:block;padding:0 1.25rem">long long dis(point a,point b)
+</span><span style="display:block;padding:0 1.25rem">{
+</span><span style="display:block;padding:0 1.25rem">    return((a.x-b.x)*(a.x-b.x)+(a.y-b.y)*(a.y-b.y));
+</span><span style="display:block;padding:0 1.25rem">}
+</span><span style="display:block;padding:0 1.25rem">//int cmp(point a, point b)
+</span><span style="display:block;padding:0 1.25rem">//{
+</span><span style="display:block;padding:0 1.25rem">//    double ans = cross(a, b, tmp);
+</span><span style="display:block;padding:0 1.25rem">//    if(ans &gt; 0) return 1;
+</span><span style="display:block;padding:0 1.25rem">//    if(ans == 0 &amp;&amp; (dis(a, tmp) &lt;= dis(b, tmp))) return 1;
+</span><span style="display:block;padding:0 1.25rem">//    return 0;
+</span><span style="display:block;padding:0 1.25rem">//}
+</span><span style="display:block;padding:0 1.25rem">int cmp(point a,point b) //当两点共线的时候，则根据与标准线的位置决定距离问题
+</span><span style="display:block;padding:0 1.25rem">{
+</span><span style="display:block;padding:0 1.25rem">    if(cross(a,b,pld)!=0)
+</span><span style="display:block;padding:0 1.25rem">    {
+</span><span style="display:block;padding:0 1.25rem">        return cross(a,b,pld)&gt;0;
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">    else
+</span><span style="display:block;padding:0 1.25rem">    {
+</span><span style="display:block;padding:0 1.25rem">        if(cross(pld,a,pru)&gt;=0)
+</span><span style="display:block;padding:0 1.25rem">            return dis(a,pld)&lt;dis(b,pld);
+</span><span style="display:block;padding:0 1.25rem">        else
+</span><span style="display:block;padding:0 1.25rem">            return dis(a,pld)&gt;dis(b,pld);
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">}
+</span><span style="display:block;padding:0 1.25rem">int ld; //记录最左下角点的位置
+</span><span style="display:block;padding:0 1.25rem">int ru; //记录最右上角点的位置
+</span><span style="display:block;padding:0 1.25rem">int main()
+</span><span style="display:block;padding:0 1.25rem">{
+</span><span style="display:block;padding:0 1.25rem">    VI.clear();
+</span><span style="display:block;padding:0 1.25rem">    ld=ru=0;
+</span><span style="display:block;padding:0 1.25rem">    //将凸包点加入点集合中
+</span><span style="display:block;padding:0 1.25rem">    cin&gt;&gt;n;
+</span><span style="display:block;padding:0 1.25rem">    for(int i=0;i&lt;n;i++)
+</span><span style="display:block;padding:0 1.25rem">    {
+</span><span style="display:block;padding:0 1.25rem">        cin&gt;&gt;tmp.x&gt;&gt;tmp.y;
+</span><span style="display:block;padding:0 1.25rem">        tmp.flag=1;
+</span><span style="display:block;padding:0 1.25rem">        VI.push_back(tmp);
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">        if(VI[ld].x&lt;VI[VI.size()-1].x) ld=VI.size()-1;
+</span><span style="display:block;padding:0 1.25rem">        else if(VI[ld].x==VI[VI.size()-1].x &amp;&amp; VI[ld].y&lt;VI[VI.size()-1].y) ld=VI.size()-1;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">        if(VI[ru].x&gt;VI[VI.size()-1].x) ru=VI.size()-1;
+</span><span style="display:block;padding:0 1.25rem">        else if(VI[ru].x==VI[VI.size()-1].x &amp;&amp; VI[ru].y&gt;VI[VI.size()-1].y) ru=VI.size()-1;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    //将内部点加入点集合中
+</span><span style="display:block;padding:0 1.25rem">    cin&gt;&gt;m;
+</span><span style="display:block;padding:0 1.25rem">    for(int i=0;i&lt;m;i++)
+</span><span style="display:block;padding:0 1.25rem">    {
+</span><span style="display:block;padding:0 1.25rem">        cin&gt;&gt;tmp.x&gt;&gt;tmp.y;
+</span><span style="display:block;padding:0 1.25rem">        tmp.flag=2;
+</span><span style="display:block;padding:0 1.25rem">        VI.push_back(tmp);
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">        if(VI[ld].x&lt;VI[VI.size()-1].x) ld=VI.size()-1;
+</span><span style="display:block;padding:0 1.25rem">        else if(VI[ld].x==VI[VI.size()-1].x &amp;&amp; VI[ld].y&lt;VI[VI.size()-1].y) ld=VI.size()-1;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">        if(VI[ru].x&gt;VI[VI.size()-1].x) ru=VI.size()-1;
+</span><span style="display:block;padding:0 1.25rem">        else if(VI[ru].x==VI[VI.size()-1].x &amp;&amp; VI[ru].y&gt;VI[VI.size()-1].y) ru=VI.size()-1;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">    pld=VI[ld];
+</span><span style="display:block;padding:0 1.25rem">    pru=VI[ru];
+</span><span style="display:block;padding:0 1.25rem">    swap(VI[ld],VI[0]);
+</span><span style="display:block;padding:0 1.25rem">    sort(VI.begin()+1,VI.end(),cmp);
+</span><span style="display:block;padding:0 1.25rem">    VI.push_back(pld);
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    Q.clear();
+</span><span style="display:block;padding:0 1.25rem">    Q.push_back(VI[0]);
+</span><span style="display:block;padding:0 1.25rem">    Q.push_back(VI[1]);
+</span><span style="display:block;padding:0 1.25rem">    for(int i=2;i&lt;VI.size();i++)
+</span><span style="display:block;padding:0 1.25rem">    {
+</span><span style="display:block;padding:0 1.25rem">        while(cross(Q[Q.size()-2],VI[i],Q[Q.size()-1])&gt;0) Q.pop_back();
+</span><span style="display:block;padding:0 1.25rem">        Q.push_back(VI[i]);
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">    //cout&lt;&lt;Q.size()&lt;&lt;endl;
+</span><span style="display:block;padding:0 1.25rem">    int flag=1;
+</span><span style="display:block;padding:0 1.25rem">    for(int i=0;i&lt;Q.size();i++)
+</span><span style="display:block;padding:0 1.25rem">    {
+</span><span style="display:block;padding:0 1.25rem">        if(Q[i].flag==2)
+</span><span style="display:block;padding:0 1.25rem">        {
+</span><span style="display:block;padding:0 1.25rem">            flag=0;
+</span><span style="display:block;padding:0 1.25rem">            break;
+</span><span style="display:block;padding:0 1.25rem">        }
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">    if(flag) puts(&quot;YES&quot;);
+</span><span style="display:block;padding:0 1.25rem">    else puts(&quot;NO&quot;);
+</span><span style="display:block;padding:0 1.25rem">    return 0;
+</span><span style="display:block;padding:0 1.25rem">}</span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<p class="my-4 leading-7">我还发现还有其它的一些代码是相同的思路，但是使用了不同的实现方法。将点按坐标排序之后，然后求一个正向凸包，再求一次逆向凸包。最后就出结果了？？？还在考虑这是为什么。</p>
+<p class="my-4 leading-7">后来还是看了看，似乎明白了点。</p>
+<p class="my-4 leading-7">上面也提到了，前部分和后部分对于相同极角序的距离判断是不同的。极角序小的时候距离小的在前边，而极角序大的时候，正好想法。</p>
+<p class="my-4 leading-7">现在我们不考虑极角序对于距离的影响，统一进行相同的排序，那么在求凸包的时候正向凸包会把一些极角共线点包含进去，然后当反向求凸包的时候又会吧另一些极角共线点包含进去。由于正序和逆序对于严格的凸包上的点没有什么影响，不同的只是一些共线点的多少，通过两次求解凸包就会把所有的极角共线点包含进去，从而解决了分开排序的问题。</p>
+<div class="language-cpp"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-cpp" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>//by mystery_boy
+</span></span><span style="display:block;padding:0 1.25rem">/*
+</span><span style="display:block;padding:0 1.25rem">TASK: Polygons
+</span><span style="display:block;padding:0 1.25rem">LANG: C++
+</span><span style="display:block;padding:0 1.25rem">*/
+</span><span style="display:block;padding:0 1.25rem">#include&lt;stdio.h&gt;
+</span><span style="display:block;padding:0 1.25rem">#include&lt;stdlib.h&gt;
+</span><span style="display:block;padding:0 1.25rem">#include&lt;string.h&gt;
+</span><span style="display:block;padding:0 1.25rem">#include&lt;math.h&gt;
+</span><span style="display:block;padding:0 1.25rem">#include&lt;algorithm&gt;
+</span><span style="display:block;padding:0 1.25rem">#include&lt;map&gt;
+</span><span style="display:block;padding:0 1.25rem">#include&lt;set&gt;
+</span><span style="display:block;padding:0 1.25rem">#include&lt;list&gt;
+</span><span style="display:block;padding:0 1.25rem">#include&lt;queue&gt;
+</span><span style="display:block;padding:0 1.25rem">#include&lt;iostream&gt;
+</span><span style="display:block;padding:0 1.25rem">using namespace std;
+</span><span style="display:block;padding:0 1.25rem">#define X first
+</span><span style="display:block;padding:0 1.25rem">#define Y second
+</span><span style="display:block;padding:0 1.25rem">int N,M,T;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">typedef long long CoordType;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">struct Point {
+</span><span style="display:block;padding:0 1.25rem">    CoordType x, y, z;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    bool operator &lt;(const Point &amp;p) const {
+</span><span style="display:block;padding:0 1.25rem">        return x &lt; p.x || (x == p.x &amp;&amp; y &lt; p.y);
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">}temp;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">// 2D cross product.
+</span><span style="display:block;padding:0 1.25rem">// Return a positive value, if OAB makes a counter-clockwise turn,
+</span><span style="display:block;padding:0 1.25rem">// negative for clockwise turn, and zero if the points are collinear.
+</span><span style="display:block;padding:0 1.25rem">CoordType cross(const Point &amp;O, const Point &amp;A, const Point &amp;B)
+</span><span style="display:block;padding:0 1.25rem">{
+</span><span style="display:block;padding:0 1.25rem">    return (A.x - O.x) * (B.y - O.y) - (A.y - O.y) * (B.x - O.x);
+</span><span style="display:block;padding:0 1.25rem">}
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">// Returns a list of points on the convex hull in counter-clockwise order.
+</span><span style="display:block;padding:0 1.25rem">// Note: the last point in the returned list is the same as the first one.
+</span><span style="display:block;padding:0 1.25rem">vector&lt;Point&gt; convexHull(vector&lt;Point&gt; P)
+</span><span style="display:block;padding:0 1.25rem">{
+</span><span style="display:block;padding:0 1.25rem">    int n = P.size(), k = 0;
+</span><span style="display:block;padding:0 1.25rem">    vector&lt;Point&gt; H(2*n);
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    // Sort points lexicographically
+</span><span style="display:block;padding:0 1.25rem">    sort(P.begin(), P.end());
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    // Build lower hull
+</span><span style="display:block;padding:0 1.25rem">    for (int i = 0; i &lt; n; i++) {
+</span><span style="display:block;padding:0 1.25rem">        while (k &gt;= 2 &amp;&amp; cross(H[k-2], H[k-1], P[i]) &lt; 0) k--;
+</span><span style="display:block;padding:0 1.25rem">        H[k++] = P[i];
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    // Build upper hull
+</span><span style="display:block;padding:0 1.25rem">    for (int i = n-2, t = k+1; i &gt;= 0; i--) {
+</span><span style="display:block;padding:0 1.25rem">        while (k &gt;= t &amp;&amp; cross(H[k-2], H[k-1], P[i]) &lt; 0) k--;
+</span><span style="display:block;padding:0 1.25rem">        H[k++] = P[i];
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">    H.resize(k);
+</span><span style="display:block;padding:0 1.25rem">    return H;
+</span><span style="display:block;padding:0 1.25rem">}
+</span><span style="display:block;padding:0 1.25rem">vector&lt;Point&gt; v,ans;
+</span><span style="display:block;padding:0 1.25rem">int main()
+</span><span style="display:block;padding:0 1.25rem">{
+</span><span style="display:block;padding:0 1.25rem">    //freopen(&quot;xxx.in&quot;,&quot;r&quot;,stdin);
+</span><span style="display:block;padding:0 1.25rem">    //freopen(&quot;xxx.out&quot;,&quot;w&quot;,stdout);
+</span><span style="display:block;padding:0 1.25rem">    int i,j,k;
+</span><span style="display:block;padding:0 1.25rem">    scanf(&quot;%d&quot;,&amp;N);
+</span><span style="display:block;padding:0 1.25rem">    for(i=1;i&lt;=N;i++)
+</span><span style="display:block;padding:0 1.25rem">    {
+</span><span style="display:block;padding:0 1.25rem">        scanf(&quot;%I64d%I64d&quot;,&amp;temp.x,&amp;temp.y);
+</span><span style="display:block;padding:0 1.25rem">        temp.z=1;
+</span><span style="display:block;padding:0 1.25rem">        v.push_back(temp);
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">    scanf(&quot;%d&quot;,&amp;M);
+</span><span style="display:block;padding:0 1.25rem">    for(i=1;i&lt;=M;i++)
+</span><span style="display:block;padding:0 1.25rem">    {
+</span><span style="display:block;padding:0 1.25rem">        scanf(&quot;%I64d%I64d&quot;,&amp;temp.x,&amp;temp.y);
+</span><span style="display:block;padding:0 1.25rem">        temp.z=2;
+</span><span style="display:block;padding:0 1.25rem">        v.push_back(temp);
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">    ans=convexHull(v);
+</span><span style="display:block;padding:0 1.25rem">    bool ok=true;
+</span><span style="display:block;padding:0 1.25rem">    for(i=0;i&lt;ans.size();i++)
+</span><span style="display:block;padding:0 1.25rem">    {
+</span><span style="display:block;padding:0 1.25rem">        if(ans[i].z==2) ok=false;
+</span><span style="display:block;padding:0 1.25rem">//        printf(&quot;%I64d %I64d [%I64d]\n&quot;,ans[i].x,ans[i].y,ans[i].z);
+</span><span style="display:block;padding:0 1.25rem">    }
+</span><span style="display:block;padding:0 1.25rem">    if(ok)  printf(&quot;YES\n&quot;);
+</span><span style="display:block;padding:0 1.25rem">    else    printf(&quot;NO\n&quot;);
+</span><span style="display:block;padding:0 1.25rem">    scanf(&quot; &quot;);
+</span><span style="display:block;padding:0 1.25rem">}</span></code></pre></div><div class="code-button-group_15153"><button><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<h2 id="参考内容" class="mt-14 mb-6 text-2xl tracking-tight title_3b154"><a class="link_3b154 header-anchor" aria-hidden="true" href="#参考内容">#</a>参考内容</h2>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2"><a target="_blank" rel="noopener noreferrer" href="http://www.csie.ntnu.edu.tw/~u91029/Polygon.html#3" class="link-_707cf  link_3b154 inline-link_3b154">演算法筆記 - Polygon</a></li>
+<li class="[&amp;:not(:first-child)]:mt-2"><a target="_blank" rel="noopener noreferrer" href="http://www.nocow.cn/index.php/URAL/1215" class="link-_707cf  link_3b154 inline-link_3b154">URAL/1215 - NOCOW</a></li>
+<li class="[&amp;:not(:first-child)]:mt-2"><a target="_blank" rel="noopener noreferrer" href="http://hi.baidu.com/aekdycoin/item/2d54f9c0fef55457ad00efd6" class="link-_707cf  link_3b154 inline-link_3b154">【SGU 253】【Theodore Roosevelt】【快速判定点是否在凸包内】_AekdyCoin的空间</a></li>
+<li class="[&amp;:not(:first-child)]:mt-2"><a target="_blank" rel="noopener noreferrer" href="http://hi.baidu.com/lycanlancelot/item/dd2f8bb4ee5a6a9f18469753" class="link-_707cf  link_3b154 inline-link_3b154">CodeForces 166B Polygons_银白之翼</a></li>
+<li class="[&amp;:not(:first-child)]:mt-2"><a target="_blank" rel="noopener noreferrer" href="http://blog.csdn.net/wsniyufang/article/details/7494697" class="link-_707cf  link_3b154 inline-link_3b154">Codeforces 166B - Polygons - Join Hands</a></li>
+</ul><!--/$--></div><div class="rspress-doc-footer"><div class="postFooter_2e2af flex flex-col"><div class="flex flex-col sm:flex-row sm:justify-around gap-4 pt-6"><div class="prev_edac1 flex flex-col"><a class="link_03735 pagerLink_edac1 cursor-pointer" target="" href="/2013/07/31/Polygon-Area/index.html"><span class="desc_edac1">上一篇</span><span class="title_edac1">计算多边形的面积</span></a></div><div class="next_edac1 flex flex-col"><a class="link_03735 pagerLink_edac1 next_edac1 cursor-pointer" target="" href="/2013/08/02/sdau-practice-contest/index.html"><span class="desc_edac1">下一篇</span><span class="title_edac1">8-2-SDAU练习赛（泰山挑夫1）点题报告</span></a></div></div></div><footer class="mt-8"><div class="xs:flex pb-5 px-2 justify-end items-center"><div class="flex text-sm text-text-2 leading-6 sm:leading-8 font-medium"><p>最后编辑时间<!-- -->: <span>2024/2/12 18:55:54</span></p></div></div><div class="flex flex-col"><a href="https://github.com/sumy7/SumyBlog-rspress/blob/main/source/../source/_posts/2013-08-01-Point-in-Polygon/2013-08-01-Point-in-Polygon.md" target="_blank" class="editLink_2a169">📝 在 GitHub 上编辑此页</a></div><div class="flex flex-col sm:flex-row sm:justify-around gap-4 pt-6"><div class="prev_e7091 flex flex-col"></div><div class="next_e7091 flex flex-col"></div></div></footer></div></div></div><div class="aside-container_edeb4"><div><div></div><div class="flex flex-col"><div class="&lt;lg:hidden"><div id="aside-container" class="relative text-sm font-medium"><div class="leading-7 block text-sm font-semibold pl-3">目录</div><nav class="mt-1"><ul class="relative"><li><a href="#方法一外积计算法只适用于凸多边形" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:0;font-weight:semibold"><span class="aside-link-text block">方法一：外积计算法（只适用于凸多边形）</span></a></li><li><a href="#方法二区域判别法" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:0;font-weight:semibold"><span class="aside-link-text block">方法二：区域判别法</span></a></li><li><a href="#方法三射线相交法" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:0;font-weight:semibold"><span class="aside-link-text block">方法三：射线相交法</span></a></li><li><a href="#方法四面积比较法" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:0;font-weight:semibold"><span class="aside-link-text block">方法四：面积比较法</span></a></li><li><a href="#方法五共求凸包法" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:0;font-weight:semibold"><span class="aside-link-text block">方法五：共求凸包法</span></a></li><li><a href="#参考内容" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="padding-left:0;font-weight:semibold"><span class="aside-link-text block">参考内容</span></a></li></ul></nav></div></div></div></div></div></div></div></section><footer class="mt-6 py-8 px-6 sm:p-8 w-full border-t border-solid border-divider-light"><div class="m-auto w-full text-center"><div class="font-meduim text-sm text-text-2">© 2015-<!-- -->2024<!-- --> SumyBlog. Powered by<!-- --> <a href="https://rspress.dev/" target="_blank" rel="noreferrer">Rspress</a>.</div></div></footer></div></div></div><div id="search-container"></div></body></html>

@@ -1,0 +1,7 @@
+/*! ./1.png */
+
+/*! react/jsx-runtime */
+
+/*! ./2.png */
+
+/*! @mdx-js/react */

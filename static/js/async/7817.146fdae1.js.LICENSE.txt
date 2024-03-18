@@ -1,0 +1,19 @@
+/*! ./auto-ad-placement.png */
+
+/*! ./ad-unit-type.png */
+
+/*! react/jsx-runtime */
+
+/*! ./custom-infomation.png */
+
+/*! ./ad-unit-script.png */
+
+/*! ./validate-website.png */
+
+/*! @mdx-js/react */
+
+/*! ./adsense-startup.png */
+
+/*! ./config-ad-unit.png */
+
+/*! ./new-adsense-account.png */

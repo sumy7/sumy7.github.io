@@ -1,0 +1,1986 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>SumyBlog</title>
+        <link>https://sumygg.com</link>
+        <description>SumyGG's Blog</description>
+        <lastBuildDate>Mon, 18 Mar 2024 09:25:39 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <item>
+            <title><![CDATA[上传splatoon3对战记录到stat.ink]]></title>
+            <link>https://sumygg.com/2024/03/11/upload-splatoon3-battle-records-to-stat-ink/</link>
+            <guid>/2024/03/11/upload-splatoon3-battle-records-to-stat-ink/</guid>
+            <pubDate>Mon, 11 Mar 2024 20:00:00 GMT</pubDate>
+            <description><![CDATA[
+# 上传splatoon3对战记录到stat.ink
+
+[stat.ink](https://stat.ink/)是一个splatoon系列游戏的对战记录网站，可以上传对战记录，查看自己的对战记录，以及查看其他玩家的对战记录。
+
+虽然三代的NSO相比二代好用了不少，但是对战记录依然只能保留50条，对于一些喜欢查看自己对战记录的玩家来说，总归不是很方便。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[rspress博客插件折腾记录]]></title>
+            <link>https://sumygg.com/2024/03/08/sumy-blog-plugin-for-rspress/</link>
+            <guid>/2024/03/08/sumy-blog-plugin-for-rspress/</guid>
+            <pubDate>Fri, 08 Mar 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[
+# rspress博客插件折腾记录
+
+> 首先祝各位姐们儿节日快乐🎉。
+
+之前已经将博客引擎从hexo迁移到了rspress，具体可以参考文章[博客引擎迁移到 rspress](/2023/11/19/new-blog-with-rspress)。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[在博客中插入谷歌广告]]></title>
+            <link>https://sumygg.com/2024/02/17/insert-google-adsense-to-blog/</link>
+            <guid>/2024/02/17/insert-google-adsense-to-blog/</guid>
+            <pubDate>Sat, 17 Feb 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[
+# 在博客中插入谷歌广告
+
+最近看到博客每天也有点流量，就想着能不能广告薅点羊毛（事实证明并不是那么容易）。
+最近博客的引擎切换到了 rspress，本篇就基于此简单介绍一下如何在博客中插入谷歌广告。
+]]></description>
+        </item>
+        <item>
+            <title><![CDATA[我的 GitHub Sponsors 已经开通了]]></title>
+            <link>https://sumygg.com/2023/12/30/my-github-sponsors-is-active-now/</link>
+            <guid>/2023/12/30/my-github-sponsors-is-active-now/</guid>
+            <pubDate>Sat, 30 Dec 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[
+# 我的 GitHub Sponsors 已经开通了
+
+自从听到 GitHub Sponsors 的消息之后，就一直在关注这个，就是幻想能被别人赞助“包养”的感觉。于是早早就提交了 waitlist，然后就一直等待着。 
+因为提交的是大陆地区，所以一直没有开通的消息。
+]]></description>
+        </item>
+        <item>
+            <title><![CDATA[模块中默认导出和命名导出的区别]]></title>
+            <link>https://sumygg.com/2023/12/28/understanding-the-difference-between-export-default-and-export-with-named-exports-in-javascript/</link>
+            <guid>/2023/12/28/understanding-the-difference-between-export-default-and-export-with-named-exports-in-javascript/</guid>
+            <pubDate>Thu, 28 Dec 2023 12:00:00 GMT</pubDate>
+            <description><![CDATA[
+# 模块中默认导出和命名导出的区别
+
+最近碰到一个循环依赖的问题，看了下编译后的webpack模块，发现webpack对不同默认导出方式的处理是不同的，跟之前认为的有出入，于是记录一下。
+
+之前觉得在模块中，导出的内容是不可变的，比如导出了一个变量，那么这个变量就是导出时候的内容；如果导出的是一个函数，那么这个函数也是导出函数的引用。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[在Node中使用dotenv加载环境变量]]></title>
+            <link>https://sumygg.com/2023/12/01/ci-in-node-to-load-dotenv/</link>
+            <guid>/2023/12/01/ci-in-node-to-load-dotenv/</guid>
+            <pubDate>Fri, 01 Dec 2023 22:00:00 GMT</pubDate>
+            <description><![CDATA[
+# 在Node中使用dotenv加载环境变量
+
+一份代码往往需要部署到不同环境中（开发环境、预览环境、正式环境），它们的一些地方有细微差别。通过环境变量可以定义不同环境使用的值，
+比如开发环境的接口地址是 `http://localhost:8080`，而正式环境的接口地址是 `https://api.example.com`。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[鸿蒙应用前端开发导读]]></title>
+            <link>https://sumygg.com/2023/11/22/guide-to-harmony-apps-for-feer/</link>
+            <guid>/2023/11/22/guide-to-harmony-apps-for-feer/</guid>
+            <pubDate>Wed, 22 Nov 2023 17:50:00 GMT</pubDate>
+            <description><![CDATA[
+# 鸿蒙应用前端开发导读
+
+> 鸿蒙作为一个新兴的操作系统，也在发展其独特的生态。本文将从前端开发的角度，介绍鸿蒙应用的开发流程。
+
+## 鸿蒙与 OpenHarmony]]></description>
+        </item>
+        <item>
+            <title><![CDATA[博客引擎迁移到 rspress]]></title>
+            <link>https://sumygg.com/2023/11/19/new-blog-with-rspress/</link>
+            <guid>/2023/11/19/new-blog-with-rspress/</guid>
+            <pubDate>Sun, 19 Nov 2023 17:55:00 GMT</pubDate>
+            <description><![CDATA[
+# 博客引擎迁移到 rspress
+
+博客引擎经历了多次变迁，从最初的jekyll到hexo。本来这次想折腾一下hugo的，但是中间出来个rspress，
+考虑到目前前端技术比较火热的rust语言，因此决定迁移到rspress。
+]]></description>
+        </item>
+        <item>
+            <title><![CDATA[使用 Cloudflare 加速 Github Pages]]></title>
+            <link>https://sumygg.com/2023/11/13/use-cloudflare-speed-up-github-pages/</link>
+            <guid>/2023/11/13/use-cloudflare-speed-up-github-pages/</guid>
+            <pubDate>Mon, 13 Nov 2023 17:43:44 GMT</pubDate>
+            <description><![CDATA[
+# 使用 Cloudflare 加速 Github Pages
+
+之前很早注册过一个域名，一直闲置。后来看到 cloudflare 的免费域名托管服务，就用来做了邮箱。
+
+尝到甜头后，就把博客的域名也迁移到 cloudflare 上面去。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[小米2023年度编程挑战赛分享]]></title>
+            <link>https://sumygg.com/2023/10/31/solutions-to-xiaomi-programming-competition-2023/</link>
+            <guid>/2023/10/31/solutions-to-xiaomi-programming-competition-2023/</guid>
+            <pubDate>Tue, 31 Oct 2023 10:13:00 GMT</pubDate>
+            <description><![CDATA[
+# 小米2023年度编程挑战赛分享
+
+> 小米编程大赛是每年1024的固定活动，依托于力扣的周赛和双周赛，进行内部排名。  
+> 今年跟去年相比，因档期限制只有一场周赛可以参加。第二是存在些许冷门，这也是编程比赛的一个看点。
+> 本次将题目、解题思路和一些感悟分享给大家。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[鲁班平台Monorepo+rspack构建优化实践]]></title>
+            <link>https://sumygg.com/2023/09/07/luban-platform-in-actions-monorepo-and-rspack/</link>
+            <guid>/2023/09/07/luban-platform-in-actions-monorepo-and-rspack/</guid>
+            <pubDate>Thu, 07 Sep 2023 11:20:00 GMT</pubDate>
+            <description><![CDATA[
+# 鲁班平台Monorepo+rspack构建优化实践
+
+鲁班平台是我们内部的一个低代码搭建平台，承载着移动端、大屏端和RN的活动搭建。
+
+鲁班平台采用了一个仓库管理代码，整个代码仓库结构如下：]]></description>
+        </item>
+        <item>
+            <title><![CDATA[CTF Mobile 基础入门]]></title>
+            <link>https://sumygg.com/2023/06/02/ctf-mobile-startup/</link>
+            <guid>/2023/06/02/ctf-mobile-startup/</guid>
+            <pubDate>Fri, 02 Jun 2023 12:30:00 GMT</pubDate>
+            <description><![CDATA[
+# CTF Mobile 基础入门
+
+> 最近参加了公司组织的 CTF 比赛，混了一个还算不错的成绩，将当时分享的 Mobile 部分的提纲拿出来记录一下。
+
+mobile指移动端APP的相关题目。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[小米2023CTF安全赛道writeup]]></title>
+            <link>https://sumygg.com/2023/05/06/mi-ctf-2023-writeup/</link>
+            <guid>/2023/05/06/mi-ctf-2023-writeup/</guid>
+            <pubDate>Sat, 06 May 2023 12:00:00 GMT</pubDate>
+            <description><![CDATA[
+# 小米2023CTF安全赛道writeup
+
+> 又是一年小米CTF，这次稍微卷了卷，拿到了第三名。奖品是一个小米手表（感觉没有去年好，23333）。但是有超多的证书和奖杯（有三个！！！）
+
+## IoT]]></description>
+        </item>
+        <item>
+            <title><![CDATA[重放攻击与Rust与WebAssembly]]></title>
+            <link>https://sumygg.com/2023/04/29/replay-attack-and-rust-and-webassembly/</link>
+            <guid>/2023/04/29/replay-attack-and-rust-and-webassembly/</guid>
+            <pubDate>Sat, 29 Apr 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[
+# 重放攻击与Rust与WebAssembly
+
+> 本文主要介绍重放攻击的原理和防范措施。并尝试使用rust编译的wasm模块实现重放攻击中的请求签名算法。
+
+## 什么是重放攻击？]]></description>
+        </item>
+        <item>
+            <title><![CDATA[2022小米编程大赛题解]]></title>
+            <link>https://sumygg.com/2022/11/02/solutions-to-xiaomi-programming-competition-2022/</link>
+            <guid>/2022/11/02/solutions-to-xiaomi-programming-competition-2022/</guid>
+            <pubDate>Wed, 02 Nov 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[
+# 2022小米编程大赛题解
+
+> 小米编程大赛是每年1024的固定活动，依托于力扣的周赛和双周赛，进行内部排名。
+
+## 第一场-[第 90 场双周赛](https://leetcode.cn/contest/biweekly-contest-90/)]]></description>
+        </item>
+        <item>
+            <title><![CDATA[node下基于MySQL实现分布式锁]]></title>
+            <link>https://sumygg.com/2022/09/20/implement-distributed-lock-with-node-and-mysql/</link>
+            <guid>/2022/09/20/implement-distributed-lock-with-node-and-mysql/</guid>
+            <pubDate>Mon, 19 Sep 2022 16:00:00 GMT</pubDate>
+            <description><![CDATA[
+# node下基于MySQL实现分布式锁
+
+业务里有一个清理数据库日志的功能，于是搞了个定时任务去删记录。为了不让多个机器的定时任务同时去删记录，就自然而然的想到了加锁。迫于现实技术栈限制，只能用“基本不用”的MySQL方式实现一个分布式锁。有条件最好的还是使用Redis吧。node框架使用了midwayjs和typeorm。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[深度广度优先搜索]]></title>
+            <link>https://sumygg.com/2022/08/16/bfs-dfs-search-template/</link>
+            <guid>/2022/08/16/bfs-dfs-search-template/</guid>
+            <pubDate>Tue, 16 Aug 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[# 深度广度优先搜索
+
+> 所有的问题都能用搜索解决。——某人
+
+不要怂、就是干]]></description>
+        </item>
+        <item>
+            <title><![CDATA[动态polyfill方案调研]]></title>
+            <link>https://sumygg.com/2022/08/12/research-on-dynamic-polyfill-solutions/</link>
+            <guid>/2022/08/12/research-on-dynamic-polyfill-solutions/</guid>
+            <pubDate>Fri, 12 Aug 2022 22:00:00 GMT</pubDate>
+            <description><![CDATA[
+# 动态polyfill方案调研
+
+## 什么是polyfill
+
+简单来说，polyfill是为了**抹平不同浏览器的api之间的差异**。使我们在开发的过程中不需要过多关注浏览器版本之间的差异。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[小米电视 6095 端口 HTTP API 整理]]></title>
+            <link>https://sumygg.com/2022/08/05/xiaomi-tv-6095-port-http-api/</link>
+            <guid>/2022/08/05/xiaomi-tv-6095-port-http-api/</guid>
+            <pubDate>Fri, 05 Aug 2022 22:00:00 GMT</pubDate>
+            <description><![CDATA[
+# 小米电视 6095 端口 HTTP API 整理
+
+小米电视在 6095 端口有一个内置的服务，很神奇的导出了一些 API 接口。
+
+## 获取电视基础信息]]></description>
+        </item>
+        <item>
+            <title><![CDATA[小米CTF2022安全赛道writeup]]></title>
+            <link>https://sumygg.com/2022/06/24/mi-ctf-writeup/</link>
+            <guid>/2022/06/24/mi-ctf-writeup/</guid>
+            <pubDate>Fri, 24 Jun 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[
+# 小米CTF2022安全赛道writeup
+
+> 参加了下CTF比赛，最终获得了第五名的成绩。奖品是个电烤箱，很喜欢的一个奖品因为冬天烤🍠真的好棒。
+> 做CTF基本上就是边学边做，这篇文章主要记录下过了的CTF题目，以及一些解题思路。
+]]></description>
+        </item>
+        <item>
+            <title><![CDATA[响应式编程初探]]></title>
+            <link>https://sumygg.com/2022/02/20/startup-with-observable-programming/</link>
+            <guid>/2022/02/20/startup-with-observable-programming/</guid>
+            <pubDate>Sun, 20 Feb 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[
+# 响应式编程初探
+
+## 什么是响应式编程
+
+> In computing, reactive programming is an asynchronous programming paradigm concerned with data streams and]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Android Compose 对比 React hooks]]></title>
+            <link>https://sumygg.com/2021/12/23/start-up-android-componse-vs-react-hooks/</link>
+            <guid>/2021/12/23/start-up-android-componse-vs-react-hooks/</guid>
+            <pubDate>Thu, 23 Dec 2021 10:00:00 GMT</pubDate>
+            <description><![CDATA[
+# Android Compose 对比 React hooks
+
+## 前言
+
+自2008年Android 1.0出现之后，Android开发的基本模式类似于一种MVC的命令式开发模式。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[前端实现在线预览文件]]></title>
+            <link>https://sumygg.com/2021/10/16/preview-document-file-in-webpage/</link>
+            <guid>/2021/10/16/preview-document-file-in-webpage/</guid>
+            <pubDate>Sat, 16 Oct 2021 15:28:02 GMT</pubDate>
+            <description><![CDATA[
+# 前端实现在线预览文件
+
+最近的项目，对接阿里OSS做了一个在线物料管理功能。其中就需要在前端预览文件。调研实现了常用文件格式的展示。
+
+## 图片文件]]></description>
+        </item>
+        <item>
+            <title><![CDATA[从《Nintendo Switch Sports》导出表情贴纸]]></title>
+            <link>https://sumygg.com/2022/08/20/extract-emotestamp-from-nintendo-switch-sports/</link>
+            <guid>/2022/08/20/extract-emotestamp-from-nintendo-switch-sports/</guid>
+            <pubDate>Fri, 20 Aug 2021 22:00:00 GMT</pubDate>
+            <description><![CDATA[
+# 从《Nintendo Switch Sports》导出表情贴纸
+
+最近一直奋战的Sports的保龄球里，虽说一直3局滚粗游戏体验不好吧，但是为了每周的装扮也是可以忍忍的。:smile:
+
+游戏里的贴纸可以说非常的可爱，为了“永久的”获得这些有些贴纸，就考虑能不能从游戏数据里获取到原始的贴纸图片文件。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[太鼓达人歌曲《タベテモタベテモ》]]></title>
+            <link>https://sumygg.com/2021/06/20/taiko-song-lyrics-タベテモタベテモ/</link>
+            <guid>/2021/06/20/taiko-song-lyrics-タベテモタベテモ/</guid>
+            <pubDate>Sun, 20 Jun 2021 17:53:01 GMT</pubDate>
+            <description><![CDATA[
+# 太鼓达人歌曲《タベテモタベテモ》
+
+最近玩太鼓的时候，发现了一首比较好听的歌曲——《タベテモタベテモ》。无奈日语为零的我不知道去哪里才能找到歌词。在求助网抑云无果后，从某个打字网站上找到了对应的歌词。
+
+]]></description>
+        </item>
+        <item>
+            <title><![CDATA[SSH终端工具MobaXterm介绍]]></title>
+            <link>https://sumygg.com/2021/06/11/ssh-terminal-tools-mobaxterm/</link>
+            <guid>/2021/06/11/ssh-terminal-tools-mobaxterm/</guid>
+            <pubDate>Fri, 11 Jun 2021 22:00:00 GMT</pubDate>
+            <description><![CDATA[
+# SSH终端工具MobaXterm介绍
+
+说起终端工具大家一定不陌生，目前比较常见的终端工具有cmd、cmder、git-bash、powershell等。这些工具在执行命令上有各自的优势，
+有的还附带了cygwin模拟unix的执行环境。但是在SSH链接上表现都比较薄弱，只提供基础的ssh、scp指令，缺少会话管理的能力。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[一种通过svg-sprite-loader引入svg图标的方法]]></title>
+            <link>https://sumygg.com/2021/06/07/use-svg-sprite-loader-to-svg-icon/</link>
+            <guid>/2021/06/07/use-svg-sprite-loader-to-svg-icon/</guid>
+            <pubDate>Mon, 07 Jun 2021 22:00:00 GMT</pubDate>
+            <description><![CDATA[
+# 一种通过svg-sprite-loader引入svg图标的方法
+
+`svg-sprite-loader` 可以将 svg icon文件整合到一起。利用 svg 的 symbol 元素，将每个 icon 包括在 symbol 中，
+通过 use 元素使用该 symbol 。配合 SvgIcon 组件，可以方便的添加和引用 svg 图标文件。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[基于WSL2搭建Win10开发环境]]></title>
+            <link>https://sumygg.com/2021/05/31/web-development-on-win-10-with-wsl2/</link>
+            <guid>/2021/05/31/web-development-on-win-10-with-wsl2/</guid>
+            <pubDate>Mon, 31 May 2021 23:47:24 GMT</pubDate>
+            <description><![CDATA[
+# 基于WSL2搭建Win10开发环境
+
+距离微软发布 Windows Subsystem for Linux (WSL) 有好一段时间了，也一直没想到什么场景下能够用到这个子系统。最近给新电脑 Win10 系统搭建开发环境的时候，感觉好多开发软件不是特别顺手。猛然间想起了还有子系统，随即尝试了一下。作为开发环境没有什么问题的，下面把基本过程记录一下。
+
+]]></description>
+        </item>
+        <item>
+            <title><![CDATA[在Github上玩贪吃蛇游戏吧]]></title>
+            <link>https://sumygg.com/2021/05/15/play-snake-game-on-github-contribute-graph/</link>
+            <guid>/2021/05/15/play-snake-game-on-github-contribute-graph/</guid>
+            <pubDate>Sat, 15 May 2021 13:16:38 GMT</pubDate>
+            <description><![CDATA[
+# 在Github上玩贪吃蛇游戏吧
+
+说好不想再挖坑的，结果还是没有控制住自己，结果又开了一个新坑，明明有那么多的坑已经填不完了。。。这次玩点不一样的内容，写一个贪吃蛇游戏吧。但是也不能仅仅是一个贪吃蛇游戏，还想在其中增加些不一样的内容。Kotlin跨平台开发出来好久了，这次就体验一下Kotlin2JS的能力。另一方面，只做一个贪吃蛇游戏没有什么意思，最近经常逛Github，看到贡献墙眼前一亮，为什么不在这里进行游戏呢？将自己的代码逻辑嵌入网站，还是做成一个扩展比较方便。于是就打算按照扩展的模式开发。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[VueRouter4路由权重]]></title>
+            <link>https://sumygg.com/2021/05/11/vue-router-4-path-ranking/</link>
+            <guid>/2021/05/11/vue-router-4-path-ranking/</guid>
+            <pubDate>Tue, 11 May 2021 10:14:45 GMT</pubDate>
+            <description><![CDATA[
+# VueRouter4路由权重
+
+Vue3正式版发布也有一段时间了，各个相关组件也趋于稳定。前些天听了VueRouter4的一个分享会，了解到了新版的设计理念和一些主要的改动，其中一个改动就是舍弃了原来的路由顺序匹配，改为计算权重的方式。趁着这个上午，把其中的部分逻辑研究一下。
+
+]]></description>
+        </item>
+        <item>
+            <title><![CDATA[再次从零开始捣鼓一个Electron应用——菜单和再次发布]]></title>
+            <link>https://sumygg.com/2021/05/09/restart-from-the-very-beginning-for-electron-with-menu-and-release-2/</link>
+            <guid>/2021/05/09/restart-from-the-very-beginning-for-electron-with-menu-and-release-2/</guid>
+            <pubDate>Sun, 09 May 2021 18:35:17 GMT</pubDate>
+            <description><![CDATA[
+# 再次从零开始捣鼓一个Electron应用——菜单和再次发布
+
+时隔一段时间，其实每天还是在断断续续的“水”Electron的功能，本次在菜单和构建问题上又进了一步。i18n功能需要一个切换语言的位置，由于没有设置专门的设置窗口，就把切换语言放置在菜单栏中。Electron默认已经有一部分菜单了，这次就需要在菜单上加上语言列表。另一项任务是发布，每次手动发布也好麻烦（其实也就手动发布了一次而已），这次看看能不能利用Github Actions功能将构建和发布自动化。
+
+]]></description>
+        </item>
+        <item>
+            <title><![CDATA[美化你的Github个人信息页]]></title>
+            <link>https://sumygg.com/2021/04/25/beautify-your-github-profile-readme/</link>
+            <guid>/2021/04/25/beautify-your-github-profile-readme/</guid>
+            <pubDate>Sun, 25 Apr 2021 22:42:01 GMT</pubDate>
+            <description><![CDATA[
+# 美化你的Github个人信息页
+
+闲逛Github的时候，会发现有的Profile页面出现了一个README的头部，里面可以使用markdown自定义一些信息进行展示。查询了一下发现是Github新出现的一个秘密功能模块。不由分说，赶紧弄起来。
+
+]]></description>
+        </item>
+        <item>
+            <title><![CDATA[再次从零开始捣鼓一个Electron应用——监控、构建与发布]]></title>
+            <link>https://sumygg.com/2021/04/24/restart-from-the-very-beginning-for-electron-with-monitor-build-and-publish/</link>
+            <guid>/2021/04/24/restart-from-the-very-beginning-for-electron-with-monitor-build-and-publish/</guid>
+            <pubDate>Sat, 24 Apr 2021 16:11:17 GMT</pubDate>
+            <description><![CDATA[
+# 再次从零开始捣鼓一个Electron应用——监控、构建与发布
+
+在连续捣鼓了这个应用好几天后，感觉大部分功能实现的差不多了，就打算发布一版看一下。这次打算将成品包直接放到github上，github提供了release功能。本次发布过程还只是手动的，后续考虑如何自动的构建成品并进行发布操作。不知道Github Action支不支持这个功能。
+
+]]></description>
+        </item>
+        <item>
+            <title><![CDATA[再次从零开始捣鼓一个Electron应用——项目配置]]></title>
+            <link>https://sumygg.com/2021/04/23/restart-from-the-very-beginning-for-electron-with-configure-project/</link>
+            <guid>/2021/04/23/restart-from-the-very-beginning-for-electron-with-configure-project/</guid>
+            <pubDate>Fri, 23 Apr 2021 21:28:26 GMT</pubDate>
+            <description><![CDATA[
+# 再次从零开始捣鼓一个Electron应用——项目配置
+
+上一篇介绍如何从新搭建了一个项目，本篇重点说明一下在开发过程中遇到的一些问题，以及如何解决。鲁迅曾说过，世界上没有两个相同的程序。本系列也不会介绍代码如何编写，只是将开发过程中遇到的重点的问题记录一下，避免以后出现相同的问题。
+
+]]></description>
+        </item>
+        <item>
+            <title><![CDATA[再次从零开始捣鼓一个Electron应用——使用electron-builder]]></title>
+            <link>https://sumygg.com/2021/04/22/restart-from-the-very-beginning-for-electron-with-electron-builder/</link>
+            <guid>/2021/04/22/restart-from-the-very-beginning-for-electron-with-electron-builder/</guid>
+            <pubDate>Thu, 22 Apr 2021 23:05:51 GMT</pubDate>
+            <description><![CDATA[
+# 再次从零开始捣鼓一个Electron应用——使用electron-builder
+
+自从17年接触过electron后，不知过了多久就弃坑，实在想不到会重起这个系列。
+
+先说一下重起的原因，Github会扫描仓库中使用的npm包的版本，如果发现使用了含有漏洞的版本会给出提示，需要进行升级。于是就尝试升级了一下老项目的版本依赖，在升级到最新版本之后，很自然的项目跑不起来了。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[从视频网站下载视频的那件事]]></title>
+            <link>https://sumygg.com/2021/04/08/find-m3u8-file-to-download-video-from-video-website/</link>
+            <guid>/2021/04/08/find-m3u8-file-to-download-video-from-video-website/</guid>
+            <pubDate>Thu, 08 Apr 2021 15:30:41 GMT</pubDate>
+            <description><![CDATA[
+# 从视频网站下载视频的那件事
+
+最近有朋友想从视频网站下载视频，于是稍微研究了一下如何下载。想当年下载视频的时候都有工具能够自动解析，随着时间的发展，这类工具要不不再更新了，要不无法支持某些视频网站的下载。这里使用的工具是m3u8-downloader，主要探讨如何手动获取各个视频网站的m3u8文件。找到m3u8文件后，通过m3u8-downloader工具就可以实现视频片段的下载和自动合并工作。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[使用Jetpack Compose For Desktop创建生成式艺术和算法创作探索程序]]></title>
+            <link>https://sumygg.com/2021/04/05/generative-art-explorer-in-kotin-with-jetpack-compse-for-desktop/</link>
+            <guid>/2021/04/05/generative-art-explorer-in-kotin-with-jetpack-compse-for-desktop/</guid>
+            <pubDate>Sun, 04 Apr 2021 16:12:49 GMT</pubDate>
+            <description><![CDATA[
+# 使用Jetpack Compose For Desktop创建生成式艺术和算法创作探索程序
+
+日常刷微博的时候，发现了有人推荐一个生成式艺术的github仓库，看到里面的样例图片，展示出的艺术形式看起来很不错。不过这个代码是用go语言编写的，而且只支持命令行模式，没有图像化的界面。本着重复造轮子的思想，就想着能不能用kotlin重新来一遍，又考虑到最近关注的 **jetpack compose for desktop** ，就这样一个整合式的想法就诞生了。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[博客评论系统迁移到Valine]]></title>
+            <link>https://sumygg.com/2021/03/29/blog-switch-to-valine-comments-plugin/</link>
+            <guid>/2021/03/29/blog-switch-to-valine-comments-plugin/</guid>
+            <pubDate>Mon, 29 Mar 2021 07:58:01 GMT</pubDate>
+            <description><![CDATA[
+# 博客评论系统迁移到Valine
+
+原来博客的评论系统使用的disqus，个人还是比较喜欢disqus评论的，无奈被“限制”的太厉害，常年加载不出来。无奈只好寻求其它的解决方案。
+
+参考几个评论系统，有几款基于Github Issues的评论系统，有专门的评论系统（来必力等）。基于Github Issues的在存储上不成问题，但是考虑到评论导入的问题，就不太好操作了，切换到这类评论系统需要舍弃以前的评论信息。第三方的评论系统就要考虑随时被墙的问题，而且打开速度也有影响。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[使用树莓派制作一个电子日历]]></title>
+            <link>https://sumygg.com/2021/03/23/raspberry-pi-with-ink-screen-to-build-electronic-calendar/</link>
+            <guid>/2021/03/23/raspberry-pi-with-ink-screen-to-build-electronic-calendar/</guid>
+            <pubDate>Mon, 22 Mar 2021 16:13:30 GMT</pubDate>
+            <description><![CDATA[
+# 使用树莓派制作一个电子日历
+
+闲暇时候看到一篇文章，介绍可以用树莓派加一块墨水屏制作一个电子日历，然后心血来潮就打算自己也制作一个。前前后后磨蹭了一年的时间，终于克服了懒癌在去年十一假期的时候制作出来了。这段时间看到小米有品也出了一款电子日历，算下来成本和自己制作的差不多。但是怎么说，自己制作的日历可是带了一个树莓派呀，四舍五入就价值一个亿了呀。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[解析用户输入表达式的值，简易的JS沙箱]]></title>
+            <link>https://sumygg.com/2021/03/22/eval-js-expression-that-can-only-use-allowed-functions/</link>
+            <guid>/2021/03/22/eval-js-expression-that-can-only-use-allowed-functions/</guid>
+            <pubDate>Mon, 22 Mar 2021 15:42:01 GMT</pubDate>
+            <description><![CDATA[
+# 解析用户输入表达式的值，简易的JS沙箱
+
+有时候我们需要解析用户输入的表达式，用户输入的表达式千奇百怪，如何控制只能使用指定的函数，制作一个简易的沙箱环境？
+
+参考Vue的代码，实现以下效果：]]></description>
+        </item>
+        <item>
+            <title><![CDATA[使用Bootstrap的popovers时鼠标移动到tips也保持展示]]></title>
+            <link>https://sumygg.com/2021/03/17/keep-bootstrap-popovers-alive-while-hovered-tips/</link>
+            <guid>/2021/03/17/keep-bootstrap-popovers-alive-while-hovered-tips/</guid>
+            <pubDate>Wed, 17 Mar 2021 15:24:45 GMT</pubDate>
+            <description><![CDATA[
+# 使用Bootstrap的popovers时鼠标移动到tips也保持展示
+
+目的是需要制作一个点击可以打开OA进行聊天的链接，鼠标放置上去可以展示当前人的邮箱等联系方式。
+
+以前的平台使用的是Bootstrap的前端控件，所以选择popover控件作为实现的基础控件。但是使用时发现，popover控件提供的几种方式，hover模式下鼠标移开之后tips就会关闭，而click的体验不太好。想要的效果是，鼠标移动展示邮箱tips，鼠标移动到tips上可以进一步操作（选中复制邮箱等）。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Maven构建Spring时连同进行npm构建并合并部署]]></title>
+            <link>https://sumygg.com/2021/03/16/spring-maven-package-with-npm-build-dist/</link>
+            <guid>/2021/03/16/spring-maven-package-with-npm-build-dist/</guid>
+            <pubDate>Tue, 16 Mar 2021 12:46:06 GMT</pubDate>
+            <description><![CDATA[
+# Maven构建Spring时连同进行npm构建并合并部署
+
+前后端分离已成为现在的主流。一个项目后端使用Java+SpringBoot的模式，提供接口；前端使用Vue提供用户界面。前后端的差异也体现在了部署上，后端需要一套JDK环境，而前端可能只需要一个静态网页服务器。
+
+在这种前后端模式成熟的基础上，为什么还需要将前后端部署在一起（同一容器）呢？可能有以下几个原因：]]></description>
+        </item>
+        <item>
+            <title><![CDATA[“毕业” or “辍学”]]></title>
+            <link>https://sumygg.com/2021/03/15/leave-from-company-a-resign-or-quit/</link>
+            <guid>/2021/03/15/leave-from-company-a-resign-or-quit/</guid>
+            <pubDate>Mon, 15 Mar 2021 15:49:12 GMT</pubDate>
+            <description><![CDATA[
+# “毕业” or “辍学”
+
+今天北京的沙尘暴真是几年难得一遇，我也怀着平静的心情去公司（就叫做公司A吧）走完最后的离职流程。整个流程持续了两周的事件，最后从公司带走的是一台联想ThinkPad、一台显示器还有一连串可能会被渐渐忘却也不知从何说起的回忆。如果把离职比作“毕业”，我更想把我的这次经历比作“辍学”。我想从头开始，稍微回忆一下博客消失的这一段时间的经历。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[使用git中的rebase简化commit提交历史]]></title>
+            <link>https://sumygg.com/2018/10/28/simplify-commit-history-with-git-rebase/</link>
+            <guid>/2018/10/28/simplify-commit-history-with-git-rebase/</guid>
+            <pubDate>Sun, 28 Oct 2018 10:50:26 GMT</pubDate>
+            <description><![CDATA[
+# 使用git中的rebase简化commit提交历史
+
+Git作为“现代”开发中不可获取的一部分，平时的最常用的几个命令是 `init` `clone` `push` `pull` `origin`。但Git包含的功能却远远不止这些。说起命令，就想起之前面试官提到了`rebase`，然后就尝试了一下`rebase`这个命令，最后发现这完全是强迫症的福利。只要平时的开发流里再多几个简单操作，世界就能变得很美好，而且有了IDE的加持，用起来更加简单便捷了。然后，虽然这个前言感觉很唐突，天道好轮回，技术债也是要还的。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[魔法の筆 呪文で絵描くよ 君も描こう！]]></title>
+            <link>https://sumygg.com/2018/07/31/p5js-version-for-taiko-drum-master-song-void-setup/</link>
+            <guid>/2018/07/31/p5js-version-for-taiko-drum-master-song-void-setup/</guid>
+            <pubDate>Tue, 31 Jul 2018 05:48:45 GMT</pubDate>
+            <description><![CDATA[
+# 魔法の筆 呪文で絵描くよ 君も描こう！
+
+好久没更新博客了，今天趁着月末就再来水一篇吧。
+
+## 起因原来是太鼓达人]]></description>
+        </item>
+        <item>
+            <title><![CDATA[记一次简单的域名解析找回操作]]></title>
+            <link>https://sumygg.com/2018/06/26/domain-resolves-to-an-unknown-website/</link>
+            <guid>/2018/06/26/domain-resolves-to-an-unknown-website/</guid>
+            <pubDate>Tue, 26 Jun 2018 14:38:55 GMT</pubDate>
+            <description><![CDATA[
+# 记一次简单的域名解析找回操作
+
+前段时间搞了点东西，想放到自己的域名上。很自然的在域名解析里配置了将域名解析到自己服务器上，结果过了一段时间发现，域名被解析到一个**彩网站上面去了。以为自己搞错了解析，再三确认了配置没有错误。然后开始了解析错误查找之旅。
+
+首先确认了解析有没有过来，使用了[站长工具Ping检测](http://ping.chinaz.com)测试了域名的连通情况，发现国内的解析都指向了一个IP地址，国外的解析都是正常的。而直接访问这个IP地址，就是那个什么什么的网站。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[优化SQL查询时候的性能]]></title>
+            <link>https://sumygg.com/2018/05/31/optimize-sql-queries-to-improving-the-performance/</link>
+            <guid>/2018/05/31/optimize-sql-queries-to-improving-the-performance/</guid>
+            <pubDate>Thu, 31 May 2018 13:43:49 GMT</pubDate>
+            <description><![CDATA[
+# 优化SQL查询时候的性能
+
+最近是特殊时期，都在强调系统性能的优化。在师傅的指导下，对系统中一个比较费劲的功能进行了优化。师傅的理念是： **能用SQL解决的问题绝不用程序处理** 。在实际场景下，通过优化，将3分钟无法完成的业务优化到了1分钟以内。虽然没有优化到极致，但对SQL查询性能的了解前进了一大步，于是稍微记录一下。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[自定义域名在Github Pages中支持通过HTTPS访问]]></title>
+            <link>https://sumygg.com/2018/05/28/custom-domains-on-github-pages-support-for-https/</link>
+            <guid>/2018/05/28/custom-domains-on-github-pages-support-for-https/</guid>
+            <pubDate>Mon, 28 May 2018 13:43:23 GMT</pubDate>
+            <description><![CDATA[
+# 自定义域名在Github Pages中支持通过HTTPS访问
+
+最近[Github官方博客](https://blog.github.com/2018-05-01-github-pages-custom-domains-https/)上已经宣布自定义域名也支持通过HTTPS进行访问。之前也没想过要弄个HTTPS，借着这个机会就搞一搞HTTPS访问吧。不过都现在了，已经过了尝鲜期了。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[一个处理JavaScript日期的时候出现的问题]]></title>
+            <link>https://sumygg.com/2018/05/21/a-plus-one-day-problem-in-javascript/</link>
+            <guid>/2018/05/21/a-plus-one-day-problem-in-javascript/</guid>
+            <pubDate>Mon, 21 May 2018 12:29:53 GMT</pubDate>
+            <description><![CDATA[
+# 一个处理JavaScript日期的时候出现的问题
+
+好久没写博客了，有半年之久了吧。今天就之前遇到的一个bug聊一聊在用JavaScript处理日期的时候出现的一个问题。
+
+代码需要获取startDate和endDate之间的所有间隔的天数，传入的日期格式为 `YYYY-MM-DD` 。代码的逻辑很明朗，设置开始时间，给开始时间增加天数，与结束时间相比较，直到多于结束时间为止。当时的代码如下：]]></description>
+        </item>
+        <item>
+            <title><![CDATA[制作《求生之路2》喷漆]]></title>
+            <link>https://sumygg.com/2017/09/23/make-left4dead2-spray-paint-from-new-game-op/</link>
+            <guid>/2017/09/23/make-left4dead2-spray-paint-from-new-game-op/</guid>
+            <pubDate>Sat, 23 Sep 2017 07:37:59 GMT</pubDate>
+            <description><![CDATA[
+# 制作《求生之路2》喷漆
+
+最近比较迷《求生之路2》，不过现在的水平也只能打打普通难度。网上有许多个人的服务器，可以支持多于4人的游戏。游戏人多了就感觉比较有意思了。过程中看到好多人都会往墙上或地上画一些个性的图画（或者不可描述的图片），感觉比较有意思。查了查发现制作喷漆也很简单，于是打算动手制作一个。:yum:]]></description>
+        </item>
+        <item>
+            <title><![CDATA[深搜&广搜一二三]]></title>
+            <link>https://sumygg.com/2017/09/11/breadth-first-search-and-depth-first-search-one-two-three/</link>
+            <guid>/2017/09/11/breadth-first-search-and-depth-first-search-one-two-three/</guid>
+            <pubDate>Mon, 11 Sep 2017 08:12:22 GMT</pubDate>
+            <description><![CDATA[
+# 深搜&广搜一二三
+
+搜索是一种求解的方法，通常来说就是将所有情况探索一遍，找出其中符合要求的情况作为最后的解。按照生成解的顺序有两种基本的求解顺序：**深度优先搜索（Depth-first Search）** 和 __广度优先搜索（Breadth-first search）__。关于这两种搜索方式的基本原理不做过多介绍了，下面只说明个人对这两种搜索方式的一些理解。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[用Java实现C++::std中的upper_bound和lower_bound]]></title>
+            <link>https://sumygg.com/2017/09/08/upper-bound-and-lower-bound-in-java/</link>
+            <guid>/2017/09/08/upper-bound-and-lower-bound-in-java/</guid>
+            <pubDate>Fri, 08 Sep 2017 08:30:18 GMT</pubDate>
+            <description><![CDATA[
+# 用Java实现C++::std中的upper_bound和lower_bound
+
+Cpp的Std标准库中包含了很多算法，以前写Cpp的时候受益于Std库，确实方便了不少，在Java语言下还是要慢慢适应Java语言的方式。
+
+Java没有迭代器指针这个概念，所以很多内容与C++有所不同。Java中有二分的实现，叫做`java.util.Arrays.binarySearch()`。使用二分的前提是数组必须有序（从小到大）。如果没有排序，那么方法无法确定返回哪个值。对于有序的数组，如果数组中包含多个相同的目标值，方法也无法保证找到的是哪一个。若找到了目标值，方法会返回目标值所在的下标；如果没有找到目标值，则方法会返回一个可以插入该值的位置，以负数表示 *-(_插入点_ - 1)* 。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[背景《球球大作战》实现要点]]></title>
+            <link>https://sumygg.com/2017/08/03/ball-battle-on-my-blog-background/</link>
+            <guid>/2017/08/03/ball-battle-on-my-blog-background/</guid>
+            <pubDate>Thu, 03 Aug 2017 14:48:39 GMT</pubDate>
+            <description><![CDATA[
+# 背景《球球大作战》实现要点
+
+很早以前有个游戏叫 `agar` ，就是类似大球吃小球的游戏。最近国内在手游上也出现了类似的游戏，比较好的有《球球大作战》和《疯狂贪吃蛇》。对于这两款游戏，不是很感冒，不过还是想把其中的一些内容提取出来，做成一个博客背景动画。
+
+从想法到实现花费了大约一天半的时间，具体实现细节可以参考代码，这里只记录一下一些实现难点。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[从零开始捣鼓一个Electron应用——文件读取]]></title>
+            <link>https://sumygg.com/2017/06/20/start-from-the-very-beginning-for-electron-with-reading-file-state/</link>
+            <guid>/2017/06/20/start-from-the-very-beginning-for-electron-with-reading-file-state/</guid>
+            <pubDate>Tue, 20 Jun 2017 15:08:09 GMT</pubDate>
+            <description><![CDATA[
+# 从零开始捣鼓一个Electron应用——文件读取
+
+今天要实现的一个内容是，选择一个目录，读取目录中的文件，然后把扩展名为 `.md` 文件的文件名和文件大小列举出来，最后展示在表格中。
+
+## 本篇技术栈和主要技能]]></description>
+        </item>
+        <item>
+            <title><![CDATA[从零开始捣鼓一个Electron应用——界面组件]]></title>
+            <link>https://sumygg.com/2017/06/19/start-from-the-very-beginning-for-electron-with-element-ui-and-icon/</link>
+            <guid>/2017/06/19/start-from-the-very-beginning-for-electron-with-element-ui-and-icon/</guid>
+            <pubDate>Mon, 19 Jun 2017 13:04:10 GMT</pubDate>
+            <description><![CDATA[
+# 从零开始捣鼓一个Electron应用——界面组件
+
+上一篇捣鼓了一个Electron-vue的脚手架，把Vue的全家桶搭建了一下，也很给面子的跑了起来。接下来就是如何一步一步完成我心中的那个“她”了。
+
+首先先巴拉巴拉自己的技能：]]></description>
+        </item>
+        <item>
+            <title><![CDATA[使用electron-vue搭建脚手架]]></title>
+            <link>https://sumygg.com/2017/06/17/get-start-with-vue-and-electron/</link>
+            <guid>/2017/06/17/get-start-with-vue-and-electron/</guid>
+            <pubDate>Sat, 17 Jun 2017 15:51:25 GMT</pubDate>
+            <description><![CDATA[
+# 使用electron-vue搭建脚手架
+
+是的，最近无聊，打算开个新坑，想用Electron做点东西。涉及前端的东西总是有好多选择，也就有好多组合。
+
+使用Electron，可以使用原生的js写，也可以用babel加点新特性什么。听说可以用React，但是被我否决了，没有基础熟悉起来太麻烦。考虑最近用了Vue，决定尝试一些Vue2什么的。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[如何以并发方式在同一个流上执行多种操作]]></title>
+            <link>https://sumygg.com/2017/06/07/java8-stream-forker-consumer-framework/</link>
+            <guid>/2017/06/07/java8-stream-forker-consumer-framework/</guid>
+            <pubDate>Wed, 07 Jun 2017 07:00:58 GMT</pubDate>
+            <description><![CDATA[
+# 如何以并发方式在同一个流上执行多种操作
+
+最近看了《Java8实战》，了解了Java8 Stream的一些内容。在Java 8中，流的一个局限性在于，只能遍历一次，再次遍历的时候会出现异常：
+
+> java.lang.IllegalStateException: stream has already been operated upon or closed]]></description>
+        </item>
+        <item>
+            <title><![CDATA[为网页添加一个网格粒子动画的背景]]></title>
+            <link>https://sumygg.com/2017/05/29/make-a-animation-of-grid-particle-in-canvas/</link>
+            <guid>/2017/05/29/make-a-animation-of-grid-particle-in-canvas/</guid>
+            <pubDate>Mon, 29 May 2017 10:26:21 GMT</pubDate>
+            <description><![CDATA[
+# 为网页添加一个网格粒子动画的背景
+
+好些日子之前，发现某乎的背景特别漂亮，在某些机缘巧合之下，又在好多地方发现了类似这种“网格粒子”的背景。一种“抄袭之魂”油然而生，对着一篇文章，按照自己的想法实现了一下。本来打算顺势改进一下“引擎”，但是整个做下来发现这个“引擎”改进的方向有点偏，导致好多地方很难看懂了。下面将大体的思路说明一下，具体细节可以参考代码或者【参考文献】中的文章。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[TSCTF2017线下赛心得体会]]></title>
+            <link>https://sumygg.com/2017/05/20/tsctf-2017-offline-final-contest/</link>
+            <guid>/2017/05/20/tsctf-2017-offline-final-contest/</guid>
+            <pubDate>Sat, 20 May 2017 15:38:26 GMT</pubDate>
+            <description><![CDATA[
+# TSCTF2017线下赛心得体会
+
+5月14日举行了TSCTF线下决赛。凭着线上初赛第4的名次，感谢北邮“天枢”战队给了这次机会，有幸能参加这次线下决赛。第一次参加这次攻防性质的线下赛，不免有些不知所措，比赛的时候也是走一步看一步。
+
+首先说明一下这次线下赛的比赛规则。这次线下赛共有16支队伍参加，其中校内队有6支初赛队和2支大一新生队，校外队邀请了6支高校队伍参加。比赛共有5道题目，2道Web，2道Pwn和1道逆向。其中逆向题由赞助方“深思数盾”提供，逆向题在比赛前2天放出，比赛时提交flag可以多获得3000分初始分。另外4道题都是攻防形式给出，各队可以给自己的题目打补丁防御其它队伍的攻击，flag每个5分钟更换一次，每轮被攻击后减20分，每轮check程序检测服务异常减40分。大致规则就是这样。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[TSCTF2017线上初赛WriteUp]]></title>
+            <link>https://sumygg.com/2017/05/15/tsctf-2017-online-contest-write-up/</link>
+            <guid>/2017/05/15/tsctf-2017-online-contest-write-up/</guid>
+            <pubDate>Mon, 15 May 2017 03:10:58 GMT</pubDate>
+            <description><![CDATA[
+# TSCTF2017线上初赛WriteUp
+
+本着互动娱乐的精神，我们三个人组成了【新建文件夹】队参加了这次TSCTF2017的比赛。比赛题目采用浮动分数值，题目起始分1000，解出的人数越多，题目的分值越低。比赛时长36小时，截止到比赛结束总共放出了30题，我们队解出了其中17题。
+
+下面说一下我们解出题目的解题思路。题目不是按照难度排列的。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[数字电路与Minecraft中的红石电路]]></title>
+            <link>https://sumygg.com/2017/05/05/digital-circuits-and-redstone-circuits-in-minecraft/</link>
+            <guid>/2017/05/05/digital-circuits-and-redstone-circuits-in-minecraft/</guid>
+            <pubDate>Fri, 05 May 2017 06:56:19 GMT</pubDate>
+            <description><![CDATA[
+# 数字电路与Minecraft中的红石电路
+
+Minecraft中有很多吸引人的地方，其中一个就是**红石电路**系统。有牛人就用游戏的红石电路制作了8位计算器、数字显示器等等。
+
+前几天看到了LeetCode上面的一道题目，对，就是那道用数字电路解法的题目。看完之后心血来潮，想着用Minecraft的红石电路弄一遍，一定会非常 _COOL_ ~。:cool:]]></description>
+        </item>
+        <item>
+            <title><![CDATA[如何在Java中正确的终止一个线程]]></title>
+            <link>https://sumygg.com/2017/04/28/how-to-properly-stop-a-thread-in-java/</link>
+            <guid>/2017/04/28/how-to-properly-stop-a-thread-in-java/</guid>
+            <pubDate>Fri, 28 Apr 2017 12:55:14 GMT</pubDate>
+            <description><![CDATA[
+# 如何在Java中正确的终止一个线程
+
+## 含有死循环的线程是无法知道自己该什么时候结束的
+
+一个工作线程需要不断接受外部的消息，这样的线程内部通常有一个死循环 `while(true){}` 。因为死循环的存在，该线程自己无法知道何时才能停止循环，只能通过外部线程通知该线程的结束。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[LeetCode Q137 Single Number II的数电AC方法]]></title>
+            <link>https://sumygg.com/2017/04/27/single-number-ii-solved-using-circult-design-and-digital-logic/</link>
+            <guid>/2017/04/27/single-number-ii-solved-using-circult-design-and-digital-logic/</guid>
+            <pubDate>Thu, 27 Apr 2017 08:38:25 GMT</pubDate>
+            <description><![CDATA[
+# LeetCode Q137 Single Number II的数电AC方法
+
+最近突然在LeetCode上刷起了题目，[Q137题](https://leetcode.com/problems/single-number-ii/#/description)和好久之前做过的[数组中只出现过一次的元素](/2013/10/10/single-element-in-a-array/)类似。一个数组中有一些整数，这些数要不出现3次，要不只出现1次，并且出现1次的数字只有一个，找出那个出现一次的数字。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[博客添加渐变效果出现的fixed问题]]></title>
+            <link>https://sumygg.com/2017/04/20/un-fixing-fixed-elements-with-css-transforms/</link>
+            <guid>/2017/04/20/un-fixing-fixed-elements-with-css-transforms/</guid>
+            <pubDate>Thu, 20 Apr 2017 15:18:11 GMT</pubDate>
+            <description><![CDATA[
+# 博客添加渐变效果出现的fixed问题
+
+最近特别喜欢某些博客的渐变加载效果，于是就照着制作了一个，感觉还可以。
+
+# 渐变效果]]></description>
+        </item>
+        <item>
+            <title><![CDATA[使用Docker构建PHP+MySQL开发测试环境]]></title>
+            <link>https://sumygg.com/2017/03/21/use-docker-to-build-php-and-mysql-development-environment/</link>
+            <guid>/2017/03/21/use-docker-to-build-php-and-mysql-development-environment/</guid>
+            <pubDate>Tue, 21 Mar 2017 03:18:52 GMT</pubDate>
+            <description><![CDATA[
+# 使用Docker构建PHP+MySQL开发测试环境
+
+> 最近强行弄了一份工作，为一个基于ThinkPHP框架的网站添加一点需求功能。于是想着用Docker弄一个开发测试的环境。在配置过程中，遇到了很多的问题，靠着搜索才一步一步的解决了。
+
+## 基础镜像的选用]]></description>
+        </item>
+        <item>
+            <title><![CDATA[人人都懂的Docker简明教程]]></title>
+            <link>https://sumygg.com/2017/02/15/universal-docker-introductory-tutorial/</link>
+            <guid>/2017/02/15/universal-docker-introductory-tutorial/</guid>
+            <pubDate>Wed, 15 Feb 2017 08:06:26 GMT</pubDate>
+            <description><![CDATA[
+# 人人都懂的Docker简明教程
+
+很早之前就听过 **Docker** ，前几天写一个程序的时候想要用 **mongo** ，于是就想不如从 Docker 里弄一个吧，于是就这样跌跌撞撞的走上了 _使用_ Docker之路。
+
+本文不对Docker做深入的了解，只是根据实际使用中遇到的情况，所谓遇到什么问题解决什么问题。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[通过启动项启用关闭Hyper-V功能]]></title>
+            <link>https://sumygg.com/2017/02/12/switch-hyperv-on-and-off-with-a-bcdedit-boot-entry/</link>
+            <guid>/2017/02/12/switch-hyperv-on-and-off-with-a-bcdedit-boot-entry/</guid>
+            <pubDate>Sun, 12 Feb 2017 07:02:21 GMT</pubDate>
+            <description><![CDATA[
+# 通过启动项启用关闭Hyper-V功能
+
+俗话说，鱼和熊掌不能兼得。最近在考虑使用Docker for Windows的问题。Docker for Windows使用了Hyper-V的虚拟化技术进行支持，Hyper-V与VirtualBox不能同时使用（同时启动虚拟机会出现“绿屏”）。考虑到Virtualbox在其它方面可能还会用到。一篇文章上可以通过修改 **启动菜单** 启动和关闭Hyper-V的特性。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[修正双系统Windows和Ubuntu时间不同步]]></title>
+            <link>https://sumygg.com/2017/01/29/fix-time-differences-between-ubuntu-and-windows/</link>
+            <guid>/2017/01/29/fix-time-differences-between-ubuntu-and-windows/</guid>
+            <pubDate>Sun, 29 Jan 2017 09:43:42 GMT</pubDate>
+            <description><![CDATA[
+# 修正双系统Windows和Ubuntu时间不同步
+
+每次使用Ubuntu的时候，回到Windows之后时间总会慢8个小时。原因是Ubuntu认为CMOS时间是**格林威治标准时间**，而Windows认为CMOS时间是当地时间，如果当地在+8区，时间相应的就会差8个小时。
+
+之前看过一些解决方法。一种是在Ubuntu下修改配置文件，让系统使用本地时间。另一种是修改Windows的注册表，让系统使用标准时间。不知为什么这两种方法的都没有成功。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[用CSS制作一个带有动画的菜单开关标识]]></title>
+            <link>https://sumygg.com/2017/01/28/howto-css-menu-icon-with-open-and-close-tranistion/</link>
+            <guid>/2017/01/28/howto-css-menu-icon-with-open-and-close-tranistion/</guid>
+            <pubDate>Sat, 28 Jan 2017 06:13:35 GMT</pubDate>
+            <description><![CDATA[
+# 用CSS制作一个带有动画的菜单开关标识
+
+> 先祝大家鸡年大吉<del>吧</del>。看过NEXT模板主题的博客，很喜欢它目录放在侧边栏的样子，于是寻思着也给博客弄一个侧边栏目录。其中用到了如何用CSS和JavaScript实现一个带动画的菜单图标。
+
+## 静态菜单图标]]></description>
+        </item>
+        <item>
+            <title><![CDATA[2017年博客主题更换]]></title>
+            <link>https://sumygg.com/2017/01/21/note-for-2017-blog-theme-change/</link>
+            <guid>/2017/01/21/note-for-2017-blog-theme-change/</guid>
+            <pubDate>Sat, 21 Jan 2017 15:46:22 GMT</pubDate>
+            <description><![CDATA[
+# 2017年博客主题更换
+
+放弃了自己制作主题，转而使用修改他人的主题。在主题选择上总是比较纠结：一方面对自己前端水平的无奈，另一方面又想有个性。这次选择了 `maupassant` 作为样板主题，打算进行一些修改，尽最大努力保留上一个版本主题的内容。
+
+## 评论]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Ubuntu中命令行修改屏幕分辨率]]></title>
+            <link>https://sumygg.com/2016/12/21/modify-screen-resolution-on-ubuntu-desktop/</link>
+            <guid>/2016/12/21/modify-screen-resolution-on-ubuntu-desktop/</guid>
+            <pubDate>Wed, 21 Dec 2016 12:09:12 GMT</pubDate>
+            <description><![CDATA[
+# Ubuntu中命令行修改屏幕分辨率
+
+前几天安装了Ubuntu Kylin 16.10，然后按照[Ubuntu 14.04~15.10 Linux 3D桌面完全教程，显卡驱动安装方法，compiz特效介绍，常见问题解答](http://forum.ubuntu.org.cn/viewtopic.php?p=868051)配置了桌面特效，感觉还不错。但是重启的之后发现屏幕分辨率不太对了，而且最大只有 640x480 分辨率。只有笔记本屏幕的分辨率有问题，连接外接显示器的分辨率还很正常。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Maven 初尝试踩坑记录]]></title>
+            <link>https://sumygg.com/2016/11/22/maven-pratice-in-my-project/</link>
+            <guid>/2016/11/22/maven-pratice-in-my-project/</guid>
+            <pubDate>Tue, 22 Nov 2016 05:53:34 GMT</pubDate>
+            <description><![CDATA[
+# Maven 初尝试踩坑记录
+
+之前有个项目使用的 `Ant` 构建出来的，当时为了节省时间，就在里面填填补补，导致现在感觉项目比较凌乱。于是花了大约2周的时间将 `Ant` 重构成了 `Maven`，由于第一次使用，好多地方也不是很明白，没有达到100%还原。
+
+这里只简单记录一下耗时比较长的坑，一些简单的内容可以通过谷歌直接解决了。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Ubuntu 下合并分区数据]]></title>
+            <link>https://sumygg.com/2016/11/15/move-parition-data-to-another-parition/</link>
+            <guid>/2016/11/15/move-parition-data-to-another-parition/</guid>
+            <pubDate>Tue, 15 Nov 2016 15:35:47 GMT</pubDate>
+            <description><![CDATA[
+# Ubuntu 下合并分区数
+
+好久没写博客了，最近也不知道在忙些什么，而且期间还生了场大病，好在感觉节奏在慢慢回来，可能吧。
+
+之前系统 Ubuntu 分区根据不同的挂载点，分了不同的分区。随着系统的升级，现在越来越觉得 `/boot` 分区有点力不从心，稍微安装几个内核就满了，于是考虑将 `/boot` 分区合并到 `/` 的分区里。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[在atom的界面上添加署名标识]]></title>
+            <link>https://sumygg.com/2016/04/12/atom-a-easy-hacking-attempt-to-add-a-signature/</link>
+            <guid>/2016/04/12/atom-a-easy-hacking-attempt-to-add-a-signature/</guid>
+            <pubDate>Tue, 12 Apr 2016 12:15:10 GMT</pubDate>
+            <description><![CDATA[
+# 在atom的界面上添加署名标识
+
+用了一段时间的Atom编辑器了，感觉很不错。Atom通过CSS控制显示的样式，所以一些效果可以通过修改内置的CSS样式来实现。
+
+打开 `File->Stylesheet...` 就可以看到编辑器内置的样式，当然默认里面什么都没有填写。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[使用Canvas画一棵生长的树]]></title>
+            <link>https://sumygg.com/2016/04/11/canvas-draw-a-growing-tree/</link>
+            <guid>/2016/04/11/canvas-draw-a-growing-tree/</guid>
+            <pubDate>Mon, 11 Apr 2016 11:43:09 GMT</pubDate>
+            <description><![CDATA[
+# 使用Canvas画一棵生长的树
+
+四月，很快的到了。说到四月，我想到了一句话“四月是你的谎言”，也不知道出处在哪里。其实四月果然还是花开花落的季节。三月月末在思考四月的banner的时候，联想到了一个游戏 `Prune`，中文翻译是“修剪艺术”。很喜欢里面的树的生长方式，于是就有了 **四月，花开花落** 的banner。为了实现这个banner，也参考了一些代码。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Java调用外部程序获取的返回信息乱码]]></title>
+            <link>https://sumygg.com/2016/04/06/java-execute-program-return-messages-garbled/</link>
+            <guid>/2016/04/06/java-execute-program-return-messages-garbled/</guid>
+            <pubDate>Wed, 06 Apr 2016 11:05:56 GMT</pubDate>
+            <description><![CDATA[
+# Java调用外部程序获取的返回信息乱码
+
+之前用Java写的常驻进程服务，最近发现有个地方出现了乱码。出现乱码的位置是，程序调用了一个外部程序，通过管道读取外部程序的返回信息，然后加工这些返回信息。
+
+![1.jpg](./1.jpg)]]></description>
+        </item>
+        <item>
+            <title><![CDATA[MI3换屏幕小记]]></title>
+            <link>https://sumygg.com/2016/03/13/change-the-maintenance-for-mi3/</link>
+            <guid>/2016/03/13/change-the-maintenance-for-mi3/</guid>
+            <pubDate>Sun, 13 Mar 2016 07:28:02 GMT</pubDate>
+            <description><![CDATA[
+# MI3换屏幕小记
+
+毕业的时候不小心将米3的屏幕压碎了，就这样放在家里放了半年。现在突然心血来潮，给米3换个屏幕吧。后壳也摔得不行了，也需要换一换后壳。
+
+## 准备]]></description>
+        </item>
+        <item>
+            <title><![CDATA[三月读书书单]]></title>
+            <link>https://sumygg.com/2016/03/01/mar-reading-book-list/</link>
+            <guid>/2016/03/01/mar-reading-book-list/</guid>
+            <pubDate>Tue, 01 Mar 2016 07:39:46 GMT</pubDate>
+            <description><![CDATA[
+# 三月读书书单
+
+> 三月读书的书单。
+
+一转眼二月就过去了，假期一个月的时间只在前半月读了点，后半月完全不知道每天在忙什么。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[让Hexo支持emoji表情]]></title>
+            <link>https://sumygg.com/2016/02/29/hexo-support-emoji/</link>
+            <guid>/2016/02/29/hexo-support-emoji/</guid>
+            <pubDate>Mon, 29 Feb 2016 08:28:28 GMT</pubDate>
+            <description><![CDATA[
+# 让Hexo支持emoji表情
+
+写博客的时候发现有些内容不能很好的通过文字表达出来，这时候就需要表情的支持了。所以就研究了一下怎么在博客中加入emoji表情。
+
+网上有很多支持emoji的插件，但是都需要在浏览器端进行处理，考虑到使用的JS库已经够多了，所以尽量还是让Hexo提前渲染为好。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[使用Python+Mongodb+NodeJS实现一个票数记录网站]]></title>
+            <link>https://sumygg.com/2016/02/29/a-vote-logger-with-python-mongodb-and-nodejs/</link>
+            <guid>/2016/02/29/a-vote-logger-with-python-mongodb-and-nodejs/</guid>
+            <pubDate>Mon, 29 Feb 2016 02:15:37 GMT</pubDate>
+            <description><![CDATA[
+# 使用Python+Mongodb+NodeJS实现一个票数记录网站
+
+之前刷微博的时候看过一个网站[买下 Steam 所有游戏要花多少钱？](http://steamtuhao.com/)，发现它的实现使用的是 **Python后台** 加 **NodeJS展示** 。前几天 _天二_ 发来了一个投票网站，在研究了一番之后找到了刷票的方法。再加上想用NodeJS干点事情，于是在这些乱七八糟的事情的驱动下，这个网站的想法就这样诞生的。NodeJS和Mongodb都是现学现卖的，至少能达到预期的效果了。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[体验Electron之Hello World]]></title>
+            <link>https://sumygg.com/2016/02/19/electron-hello-world/</link>
+            <guid>/2016/02/19/electron-hello-world/</guid>
+            <pubDate>Fri, 19 Feb 2016 14:33:00 GMT</pubDate>
+            <description><![CDATA[
+# 体验Electron之Hello World
+
+从Electron简单起步之后，接下来应该就是写Hello World了。但是Hello World已经包含在Quick Start程序里了，怎么办呢？
+
+所以接下来先来看一看Quick Start中的Hello World是怎么写的吧。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[体验Electron之起步]]></title>
+            <link>https://sumygg.com/2016/02/18/electron-get-started/</link>
+            <guid>/2016/02/18/electron-get-started/</guid>
+            <pubDate>Thu, 18 Feb 2016 13:08:17 GMT</pubDate>
+            <description><![CDATA[
+# 体验Electron之起步
+
+很喜欢用[Atom](https://atom.io/)编辑器，于是很好奇Atom是怎样实现的，然后就发现了`Electron`项目。
+
+## Electron]]></description>
+        </item>
+        <item>
+            <title><![CDATA[17 行代码实现的简易 Javascript 字符串模板]]></title>
+            <link>https://sumygg.com/2016/02/16/seventeen-line-to-complete-a-javascript-string-render-template/</link>
+            <guid>/2016/02/16/seventeen-line-to-complete-a-javascript-string-render-template/</guid>
+            <pubDate>Tue, 16 Feb 2016 12:39:01 GMT</pubDate>
+            <description><![CDATA[
+# 17 行代码实现的简易 Javascript 字符串模板
+
+前几天在写博客模板的时候需要用 js 将 JSON 生成网页，当时很纠结怎样优雅的实现数据的填充，因为不太想用 `+` 连接数据和HTML代码。正当纠结的时候在微博上发现了这个JavaScript字符串模板，遂拿来用了用。至于其中的各方面原理，还需要等JS水平上来之后再慢慢分析吧。当前先照葫芦画瓢。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[【更新中】Java Socket通信实现笔记]]></title>
+            <link>https://sumygg.com/2016/02/10/java-danmuji/</link>
+            <guid>/2016/02/10/java-danmuji/</guid>
+            <pubDate>Wed, 10 Feb 2016 13:18:23 GMT</pubDate>
+            <description><![CDATA[
+# 【更新中】Java Socket通信实现笔记
+
+用Java好长时间了，但是网络编程和并发编程方面一直都没有好好实践一下，对其中的方方面面还需要好好体会一下。还是打算自己动手，在实践中遇到问题并加以解决。最近研究直播方面的内容，决定从连接直播服务器入手来学习Socket相关的一些知识。
+
+## Java Socket]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Steam控制台命令]]></title>
+            <link>https://sumygg.com/2016/02/09/steam-console-command/</link>
+            <guid>/2016/02/09/steam-console-command/</guid>
+            <pubDate>Tue, 09 Feb 2016 12:54:41 GMT</pubDate>
+            <description><![CDATA[
+# Steam控制台命令
+
+今天在Steam上玩游戏的时候，发现游戏被锁区了，于是想看一看游戏许可证所在的分区，然后就发现Steam可以使用控制台命令。
+
+## 开启控制台模式]]></description>
+        </item>
+        <item>
+            <title><![CDATA[二月读书书单]]></title>
+            <link>https://sumygg.com/2016/02/05/feb-reading-book-list/</link>
+            <guid>/2016/02/05/feb-reading-book-list/</guid>
+            <pubDate>Fri, 05 Feb 2016 12:46:11 GMT</pubDate>
+            <description><![CDATA[
+# 二月读书书单
+
+> 二月读书的书单。
+
+新的一年，开始读书吧。二月正好是寒假，带来了好多书不知道能看几本。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[假期准备游戏吧！]]></title>
+            <link>https://sumygg.com/2016/02/04/holiday-game-play-prepare/</link>
+            <guid>/2016/02/04/holiday-game-play-prepare/</guid>
+            <pubDate>Thu, 04 Feb 2016 12:57:47 GMT</pubDate>
+            <description><![CDATA[
+# 假期准备游戏吧！
+
+假期也不知道该干些啥。。。每天睡到很晚起来看看书浑浑噩噩的就到下午了，然后上上网就过去了。。。前几天在翻电视的时候无意中发现电视与电视盒连接居然用的是HDMI线，突然想到能否将电脑和电视连接起来。
+
+于是乎，一个游戏机模型就这样在我脑海中诞生了。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[CentOS下安装和配置饥荒联机版服务器]]></title>
+            <link>https://sumygg.com/2016/01/24/install-and-configure-dont-starve-together-server-on-centos/</link>
+            <guid>/2016/01/24/install-and-configure-dont-starve-together-server-on-centos/</guid>
+            <pubDate>Sun, 24 Jan 2016 08:57:14 GMT</pubDate>
+            <description><![CDATA[
+# CentOS下安装和配置饥荒联机版服务器
+
+最近没啥好游戏玩了，所以就被同学拉着学习打饥荒。。。一起联机的话感觉太慢，正好有台限制的阿里云VPS，就拿来搭个饥荒服务器吧。
+
+## 前期准备]]></description>
+        </item>
+        <item>
+            <title><![CDATA[2016博客模板改进]]></title>
+            <link>https://sumygg.com/2016/01/21/note-for-2016-theme-improvement/</link>
+            <guid>/2016/01/21/note-for-2016-theme-improvement/</guid>
+            <pubDate>Thu, 21 Jan 2016 13:54:42 GMT</pubDate>
+            <description><![CDATA[
+# 2016博客模板改进
+
+将近年底了，也需要将博客的主题修改一番了。之前一直驾驭不了首页的大横幅，主要是大横幅因为宽度问题总是显示不全。也为了调整这个导致主题的一些模块出现了问题，正好趁着这个时候统一修正一下。
+
+## 顶部加载条]]></description>
+        </item>
+        <item>
+            <title><![CDATA[注解进阶：解析注解]]></title>
+            <link>https://sumygg.com/2016/01/19/advanced-annotation-runtime-resolution/</link>
+            <guid>/2016/01/19/advanced-annotation-runtime-resolution/</guid>
+            <pubDate>Tue, 19 Jan 2016 11:47:34 GMT</pubDate>
+            <description><![CDATA[
+# 注解进阶：解析注解
+
+上篇介绍了注解的基本知识和自定义注解，这篇文章来介绍如何在运行时解析注解。通过反射可以获得一些注解的信息，根据这些信息就可以进行一些操作。
+
+# 注解定义]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Java注解及自定义注解入门]]></title>
+            <link>https://sumygg.com/2016/01/17/java-define-and-use-annotation/</link>
+            <guid>/2016/01/17/java-define-and-use-annotation/</guid>
+            <pubDate>Sun, 17 Jan 2016 14:52:12 GMT</pubDate>
+            <description><![CDATA[
+# Java注解及自定义注解入门
+
+在编写Java代码中，我们可以经常可以看到注解的身影，常用的注解如`@Override` `@Deprecated`都不会太陌生。但是注解内部是如何工作的，这部分内容需要进一步去探究。
+
+# 注解]]></description>
+        </item>
+        <item>
+            <title><![CDATA[【占坑】最大流算法]]></title>
+            <link>https://sumygg.com/2016/01/15/max-flow-algorithm/</link>
+            <guid>/2016/01/15/max-flow-algorithm/</guid>
+            <pubDate>Fri, 15 Jan 2016 15:49:16 GMT</pubDate>
+            <description><![CDATA[
+# 【占坑】最大流算法
+
+考试呀，没时间写了。。。
+]]></description>
+        </item>
+        <item>
+            <title><![CDATA[【占坑】xposed研究]]></title>
+            <link>https://sumygg.com/2016/01/14/use-xposed-to-monitoring-function-invoke/</link>
+            <guid>/2016/01/14/use-xposed-to-monitoring-function-invoke/</guid>
+            <pubDate>Thu, 14 Jan 2016 12:02:10 GMT</pubDate>
+            <description><![CDATA[
+# 【占坑】xposed研究
+
+没写东西呀没写东西。。。
+
+## 参考内容]]></description>
+        </item>
+        <item>
+            <title><![CDATA[由一个小例子引出的Java异常处理机制]]></title>
+            <link>https://sumygg.com/2016/01/08/java-exception/</link>
+            <guid>/2016/01/08/java-exception/</guid>
+            <pubDate>Fri, 08 Jan 2016 14:54:50 GMT</pubDate>
+            <description><![CDATA[
+# 由一个小例子引出的Java异常处理机制
+
+大家对java异常处理可能再熟悉不过了，java很大一部分就是在与异常打交道，`try...catch...finally`再熟悉不过了。但是之前遇到了一个例子发现，原来异常处理并不是如我们想象那样如线性那么简单。
+
+## 引例]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Unicode \u202e 介绍]]></title>
+            <link>https://sumygg.com/2016/01/06/unicode-u202e/</link>
+            <guid>/2016/01/06/unicode-u202e/</guid>
+            <pubDate>Wed, 06 Jan 2016 15:39:47 GMT</pubDate>
+            <description><![CDATA[
+# Unicode \u202e 介绍
+
+`\u202e`是个有趣的Unicode字符，它的特性是可以反转其他字符的显示顺序。
+字符串`你好`，给每个字符前面加上这个字符得到`\u202e你\u202e好`就变成了`好你`。
+利用这种特性可以反反垃圾过滤。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[【新年占坑】自己制作Cinemagraph效果]]></title>
+            <link>https://sumygg.com/2016/01/04/amazing-cinemagraph/</link>
+            <guid>/2016/01/04/amazing-cinemagraph/</guid>
+            <pubDate>Mon, 04 Jan 2016 15:23:21 GMT</pubDate>
+            <description><![CDATA[# 【新年占坑】自己制作Cinemagraph效果
+
+最近比较忙，也不知道忙啥，只好写一些占坑贴来充数了。。。挖的坑一定要填。。。
+
+Cinemagraph是一种图片效果，主要针对GIF图片，背景为全静态，只有小部分在动，看起来效果灰常不错。有自己做一个的冲动。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[emoji在Github也在Twitter]]></title>
+            <link>https://sumygg.com/2016/01/02/use-emoji-in-github-and-emoji-cheat-sheet/</link>
+            <guid>/2016/01/02/use-emoji-in-github-and-emoji-cheat-sheet/</guid>
+            <pubDate>Sat, 02 Jan 2016 12:00:32 GMT</pubDate>
+            <description><![CDATA[
+# emoji在Github也在Twitter
+
+Github 是全球最大的“同性”交友网站`(￣ε(#￣)☆╰╮(￣▽￣///)`，不对不对，是最大的代码分享网站。就gayhub来说`(￣ε(#￣)☆╰╮(￣▽￣///)`，就网页版的github来说，有很多丰富的功能（快捷键啦、命令行跳转啦）。这里介绍一下github的emoji功能。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[2016新年快乐]]></title>
+            <link>https://sumygg.com/2016/01/01/happy-new-year-2016/</link>
+            <guid>/2016/01/01/happy-new-year-2016/</guid>
+            <pubDate>Fri, 01 Jan 2016 12:13:56 GMT</pubDate>
+            <description><![CDATA[# 2016新年快乐
+
+> 2016新年快乐。
+
+不知不觉时间过得很快，2016年就这么来到了。首先要感谢2015一起走过的点点滴滴。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[单例模式及单例模式实践]]></title>
+            <link>https://sumygg.com/2015/12/27/effective-java-for-singleton/</link>
+            <guid>/2015/12/27/effective-java-for-singleton/</guid>
+            <pubDate>Sun, 27 Dec 2015 14:14:08 GMT</pubDate>
+            <description><![CDATA[
+# 单例模式及单例模式实践
+
+单例模式应用广泛，而且是我最喜欢的模式。简单介绍一下单例模式吧。
+
+单例模式保证只有一个实例，每次取到的都是同一个实例。基本方法是将构造函数设为私有，并导出公有的静态成员。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Markdown说明]]></title>
+            <link>https://sumygg.com/2015/12/26/markdown-language-tutor/</link>
+            <guid>/2015/12/26/markdown-language-tutor/</guid>
+            <pubDate>Sat, 26 Dec 2015 14:09:33 GMT</pubDate>
+            <description><![CDATA[
+# Markdown说明
+
+最近也没有好好研究些东西，只好写这些小文章凑凑字数，就当做是一种复习吧。
+初识`Markdown`还是在刚刚使用Github的时候，当时候的感觉就是：哇塞，好神奇的东西。如同得到了一个锤子一般，总想把各个东西敲个遍。就这样使用Markdown开始了在Github上的博客之旅。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[用安卓手机获得三星卡背及卡包]]></title>
+            <link>https://sumygg.com/2015/12/25/got-heartstone-samsung-card-back-and-card-pack-with-something-wrong/</link>
+            <guid>/2015/12/25/got-heartstone-samsung-card-back-and-card-pack-with-something-wrong/</guid>
+            <pubDate>Fri, 25 Dec 2015 12:20:07 GMT</pubDate>
+            <description><![CDATA[
+# 用安卓手机获得三星卡背及卡包
+
+圣诞快乐。之前在浏览卡背收藏的时候就看到过三星的卡背，一直很好奇这个是怎么获得的。网上一搜原来是官方与三星合作推出的活动，有三星S6手机登录游戏就可以获得。而且貌似可以伪装手机型号进行欺骗。于是找了一个教程开始了卡包之旅。
+卡包卡背我来了！
+]]></description>
+        </item>
+        <item>
+            <title><![CDATA[trove4j大数据环境下的Collections库]]></title>
+            <link>https://sumygg.com/2015/12/24/use-trove4j-collections/</link>
+            <guid>/2015/12/24/use-trove4j-collections/</guid>
+            <pubDate>Thu, 24 Dec 2015 14:08:04 GMT</pubDate>
+            <description><![CDATA[
+# trove4j大数据环境下的Collections库
+
+平安夜快乐。。。今天在写词分析的器的时候，发现了一个问题。由于要计算两个词之间的cos距离，需要保存向量，于是将数据结构设计成`Map<Stirng, Set<Integer>>`。数据结构问题解决了，但是数据文本有2G多，程序加载数据到一半就GC了。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[终物语]]></title>
+            <link>https://sumygg.com/2015/12/23/some-screenshots-of-owarimonogatari/</link>
+            <guid>/2015/12/23/some-screenshots-of-owarimonogatari/</guid>
+            <pubDate>Wed, 23 Dec 2015 14:00:40 GMT</pubDate>
+            <description><![CDATA[
+# 终物语
+
+![29078c04218eb20f0684beabc69a52a6.png](./29078c04218eb20f0684beabc69a52a6.png)
+
+![f44885e5c930de604e547693cafdaa52.png](./f44885e5c930de604e547693cafdaa52.png)]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Java泛型二三事]]></title>
+            <link>https://sumygg.com/2015/12/15/java-generic-type-one-two-and-three/</link>
+            <guid>/2015/12/15/java-generic-type-one-two-and-three/</guid>
+            <pubDate>Tue, 15 Dec 2015 15:01:14 GMT</pubDate>
+            <description><![CDATA[
+# Java泛型二三事
+
+泛型（Generic Type）是Java中重要的一部分。在使用Java标准库中的内容的时候，经常会遇到泛型。这里将知道的泛型部分内容总结一下。以后遇到新的内容还会继续补充。
+
+## 什么是泛型]]></description>
+        </item>
+        <item>
+            <title><![CDATA[SSH中配置public key认证]]></title>
+            <link>https://sumygg.com/2015/12/14/set-up-SSH-public-key-authentication/</link>
+            <guid>/2015/12/14/set-up-SSH-public-key-authentication/</guid>
+            <pubDate>Mon, 14 Dec 2015 14:42:25 GMT</pubDate>
+            <description><![CDATA[
+# SSH中配置public key认证
+
+一般使用SSH登录远端主机的时候，都会使用用户名和密码的方式。为了使远端主机安全，密码会设置的很复杂，这样登录的时候也会有一定的麻烦。
+在远端主机使用public key的方式登录，可以免除输入密码。因为今天剁手买了个主机，还没有自己设置过免密码登录，所以就来记录一下大致过程。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[尝试Android Emulator Preview模拟器]]></title>
+            <link>https://sumygg.com/2015/12/11/getting-start-for-android-emulator-preview/</link>
+            <guid>/2015/12/11/getting-start-for-android-emulator-preview/</guid>
+            <pubDate>Fri, 11 Dec 2015 12:38:32 GMT</pubDate>
+            <description><![CDATA[
+# 尝试Android Emulator Preview模拟器
+
+很早就听说`Android Studio`发布了2.0preview版本，今天又看到连最新的模拟器也可以使用了。
+对于之前老的Android官方模拟器一直有一些意见，最大的问题是启动慢和运行卡（机子太烂也不能这样摔锅）。虽然可以使用`HAXM`技术加速，但是效果还是不太明显。曾一度使用`Genymotion`模拟器，最后就直接上真机了。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[体验JQuery Terminal Emulator插件]]></title>
+            <link>https://sumygg.com/2015/12/10/install-jquery-terminal-emulator-plugin-in-my-blog/</link>
+            <guid>/2015/12/10/install-jquery-terminal-emulator-plugin-in-my-blog/</guid>
+            <pubDate>Thu, 10 Dec 2015 13:26:57 GMT</pubDate>
+            <description><![CDATA[
+# 体验JQuery Terminal Emulator插件
+
+自从看了[JetBrains](https://www.jetbrains.com/)主页上那个命令行模拟器，就一直想弄一个玩玩。今天谷歌了一下，果然有这样的插件。
+
+![JetBrains首页的命令行模拟器](./1.png)]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Nexus6P解锁bootloader然后刷recovery、root、xposed指导]]></title>
+            <link>https://sumygg.com/2015/12/07/guide-for-nexus-6p-unlock-root-flash-and-xposed/</link>
+            <guid>/2015/12/07/guide-for-nexus-6p-unlock-root-flash-and-xposed/</guid>
+            <pubDate>Mon, 07 Dec 2015 12:12:05 GMT</pubDate>
+            <description><![CDATA[
+# Nexus6P解锁bootloader然后刷recovery、root、xposed指导
+
+经过漫长的等待，港版nexus 6p终于到手了，然后赶紧试了试。。。由于手机没有Root，无法恢复软件数据，所以先来折腾一番。
+参考的Root教程是[机锋论坛的一个置顶帖](http://bbs.gfan.com/android-8117931-1-1.html)，用的方法是刷修改版的内核。Root效果还是比较理想的。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[[i9502]品尝，棒棒糖！]]></title>
+            <link>https://sumygg.com/2015/12/02/galaxy-s4-i9502-try-lollipop-5-0-1/</link>
+            <guid>/2015/12/02/galaxy-s4-i9502-try-lollipop-5-0-1/</guid>
+            <pubDate>Wed, 02 Dec 2015 12:03:41 GMT</pubDate>
+            <description><![CDATA[
+# [i9502]品尝，棒棒糖！
+
+在等待六儿子的无聊过程中。。。偶然翻到了手头手机的刷机包，发现可以刷“棒棒糖”，于是就来尝试一下。过程比较曲折，但是还是基本上解决了。
+
+## 前言]]></description>
+        </item>
+        <item>
+            <title><![CDATA[atom使用activate-power-mode]]></title>
+            <link>https://sumygg.com/2015/12/01/ACTIVATE-POWER-MODE-ON/</link>
+            <guid>/2015/12/01/ACTIVATE-POWER-MODE-ON/</guid>
+            <pubDate>Tue, 01 Dec 2015 13:53:02 GMT</pubDate>
+            <description><![CDATA[
+# atom使用activate-power-mode
+
+最近在好多地方都看到介绍这个插件`activate-power-mode`，光看图觉得一般般，但是用上之后真的很震撼呀。绝对的装B利器，啊哈哈哈。。。
+
+GITHUB：[https://github.com/JoelBesada/activate-power-mode](https://github.com/JoelBesada/activate-power-mode)]]></description>
+        </item>
+        <item>
+            <title><![CDATA[使用PHP:proc_open()执行命令并获取输出]]></title>
+            <link>https://sumygg.com/2015/11/28/executing-command-from-php-and-capturing-output/</link>
+            <guid>/2015/11/28/executing-command-from-php-and-capturing-output/</guid>
+            <pubDate>Sat, 28 Nov 2015 11:48:15 GMT</pubDate>
+            <description><![CDATA[
+# 使用PHP:proc_open()执行命令并获取输出
+
+## 函数原型
+
+(PHP 4 >= 4.3.0, PHP 5, PHP 7)]]></description>
+        </item>
+        <item>
+            <title><![CDATA[SAXParser解析XML时抛出ArrayIndexOutOfBoundsException异常]]></title>
+            <link>https://sumygg.com/2015/11/27/a-problem-SAXParser-throw-ArrayIndexOutOfBoundsException/</link>
+            <guid>/2015/11/27/a-problem-SAXParser-throw-ArrayIndexOutOfBoundsException/</guid>
+            <pubDate>Fri, 27 Nov 2015 13:05:47 GMT</pubDate>
+            <description><![CDATA[
+# SAXParser解析XML时抛出ArrayIndexOutOfBoundsException异常
+
+今天在使用`SAXParser`解析XML时会抛出一个`ArrayIndexOutOfBoundsException`异常。只测试了在CDATA标签中，如果字符多余1033个就会出现异常。
+
+## 问题]]></description>
+        </item>
+        <item>
+            <title><![CDATA[linux下统计目录中的文件个数]]></title>
+            <link>https://sumygg.com/2015/11/25/count-the-number-of-files-in-the-directory/</link>
+            <guid>/2015/11/25/count-the-number-of-files-in-the-directory/</guid>
+            <pubDate>Wed, 25 Nov 2015 15:46:00 GMT</pubDate>
+            <description><![CDATA[
+# linux下统计目录中的文件个数
+
+在linux下使用以下命令可以简单的统计目录下文件的个数。
+
+## 命令]]></description>
+        </item>
+        <item>
+            <title><![CDATA[使用http_parser解析URL]]></title>
+            <link>https://sumygg.com/2015/11/24/use-http-parser-to-parse-url/</link>
+            <guid>/2015/11/24/use-http-parser-to-parse-url/</guid>
+            <pubDate>Tue, 24 Nov 2015 15:18:46 GMT</pubDate>
+            <description><![CDATA[
+# 使用http_parser解析URL
+
+解析URL是个烦心事，尤其是还要使用C语言来解析。写Java写习惯了，好多C的东西都不太会用了。最近的一次作业中需要用到URL的解析，查找了一番就找到了这个开源库。
+
+[http-parser](https://github.com/nodejs/http-parser)由[nodejs](https://github.com/nodejs)项目组开源，具体简介可以去参考主页README。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[新手向的问题描述及提问实践SSCCE]]></title>
+            <link>https://sumygg.com/2015/11/12/problem-with-short-selfcontained-correct-example/</link>
+            <guid>/2015/11/12/problem-with-short-selfcontained-correct-example/</guid>
+            <pubDate>Thu, 12 Nov 2015 14:09:45 GMT</pubDate>
+            <description><![CDATA[
+# 新手向的问题描述及提问实践SSCCE
+
+> 这篇文章主要讲解新手向的问题提问及描述实践，从一篇英文翻译而来。
+
+## 什么是 SSCCE]]></description>
+        </item>
+        <item>
+            <title><![CDATA[一个你吃我我吃你的小游戏Agar]]></title>
+            <link>https://sumygg.com/2015/11/11/eat-cells-smaller-than-you-and-dont-get-eaten-by-the-bigger-ones/</link>
+            <guid>/2015/11/11/eat-cells-smaller-than-you-and-dont-get-eaten-by-the-bigger-ones/</guid>
+            <pubDate>Wed, 11 Nov 2015 13:50:48 GMT</pubDate>
+            <description><![CDATA[
+# 一个你吃我我吃你的小游戏Agar
+
+今天是一个特殊的日子，就来介绍游戏了呀。之前看谜之声玩过，感觉还是挺有意思的，不过自己玩的时候就感觉，哈哈。
+
+Agar传送门：[http://agar.io/](http://agar.io/)]]></description>
+        </item>
+        <item>
+            <title><![CDATA[SSH的转义字符]]></title>
+            <link>https://sumygg.com/2015/11/10/how-to-use-ssh-escape-character/</link>
+            <guid>/2015/11/10/how-to-use-ssh-escape-character/</guid>
+            <pubDate>Tue, 10 Nov 2015 15:13:18 GMT</pubDate>
+            <description><![CDATA[
+# SSH的转义字符
+
+SSH 有一个转义字符（Escape Character），今天在微博上看到如何结束无响应的SSH的时候才了解到了它。
+
+转义字符必须在 **换行之后的第一个字符输入** ，如果已经输入了其它内容，即使按了退格键也是没有效果的。这个时候需要按Enter之后再重新输入。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[在CentOS 7上安装Tomcat 8]]></title>
+            <link>https://sumygg.com/2015/11/09/install-apache-tomcat-8-on-centos-7/</link>
+            <guid>/2015/11/09/install-apache-tomcat-8-on-centos-7/</guid>
+            <pubDate>Mon, 09 Nov 2015 12:16:27 GMT</pubDate>
+            <description><![CDATA[
+# 在CentOS 7上安装Tomcat 8
+
+`Apache Tomcat`是一个基于Java应用的网络服务器和servlet容器。Tomcat是一个实现了Java Servlet和JavaServer Pages技术的开源软件，它由Apache Software Foundation发行。要在CentOS下安装Tomcat，需要进行以下几个步骤。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[修改炉石传说客户端显示字符串]]></title>
+            <link>https://sumygg.com/2015/11/07/modify-heartstone-string-resource-to-have-fun/</link>
+            <guid>/2015/11/07/modify-heartstone-string-resource-to-have-fun/</guid>
+            <pubDate>Fri, 06 Nov 2015 17:16:45 GMT</pubDate>
+            <description><![CDATA[
+# 修改炉石传说客户端显示字符串
+
+> 炉石传说显示的文字是可以修改的，通过修改文字有更好的自定义性（个性）。
+
+受[@笔良文昌](http://weibo.com/u/1586244430)的推荐，看到了王师傅的这个视频，可以修改一下炉石传说的客户端。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[博客发现贴片广告(╯‵□′)╯︵┻━┻]]></title>
+            <link>https://sumygg.com/2015/11/06/clicki-with-advertisement-very-sad/</link>
+            <guid>/2015/11/06/clicki-with-advertisement-very-sad/</guid>
+            <pubDate>Thu, 05 Nov 2015 16:57:00 GMT</pubDate>
+            <description><![CDATA[
+# 博客发现贴片广告(╯‵□′)╯︵┻━┻
+
+晚上更新博客的时候突然发现页面的右下角出现了广告。
+![广告出现](./1.png)
+]]></description>
+        </item>
+        <item>
+            <title><![CDATA[使用aapt出现No such file or directory错误]]></title>
+            <link>https://sumygg.com/2015/11/06/aapt-with-no-such-file-or-directory-error/</link>
+            <guid>/2015/11/06/aapt-with-no-such-file-or-directory-error/</guid>
+            <pubDate>Thu, 05 Nov 2015 16:17:24 GMT</pubDate>
+            <description><![CDATA[
+# 使用aapt出现No such file or directory错误
+
+在Linux环境下运行aapt的时候出现：
+
+```]]></description>
+        </item>
+        <item>
+            <title><![CDATA[使用aapt获取apk的基本信息]]></title>
+            <link>https://sumygg.com/2015/11/04/use-aapt-to-get-apk-information/</link>
+            <guid>/2015/11/04/use-aapt-to-get-apk-information/</guid>
+            <pubDate>Wed, 04 Nov 2015 12:08:18 GMT</pubDate>
+            <description><![CDATA[
+# 使用aapt获取apk的基本信息
+
+`aapt`全称是android assert packaging tool。在编写android程序的时候，IDE会使用这个工具将程序资源打包成apk文件。
+前几天有获取apk包图标的需求，几番求证发现可以使用这个工具得到icon资源在apk包中的路径，通过处理aapt的输出，进而可以获取到图标。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[使用git hooks进行hexo博客自动化部署]]></title>
+            <link>https://sumygg.com/2015/11/02/use-git-hooks-for-hexo-automatic-deployment/</link>
+            <guid>/2015/11/02/use-git-hooks-for-hexo-automatic-deployment/</guid>
+            <pubDate>Mon, 02 Nov 2015 01:59:22 GMT</pubDate>
+            <description><![CDATA[
+# 使用git hooks进行hexo博客自动化部署
+
+客的一个备份搭在了DigitalOcean的虚拟主机上，于是就出现了一个需求，每次更新博客的时候都需要使用ftp重新上传文件，很容易造成文件的丢失。所以就考虑能不能有一种自动化部署的方案。最近查找的时候发现可以使用git hooks来实现自动化部署。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Java调用外部命令]]></title>
+            <link>https://sumygg.com/2015/10/30/java-exec-command/</link>
+            <guid>/2015/10/30/java-exec-command/</guid>
+            <pubDate>Fri, 30 Oct 2015 06:46:45 GMT</pubDate>
+            <description><![CDATA[
+# Java调用外部命令
+
+Java调用外部命令的基本方法是：通过`Runtime.getRuntime()`返回一个当前环境的运行时，通过运行时来调用外部的命令。
+
+# 函数原型]]></description>
+        </item>
+        <item>
+            <title><![CDATA[CentOS最简单安装与配置vsftpd]]></title>
+            <link>https://sumygg.com/2015/10/26/centos-install-vsftpd-ftp-server-for-html-deployer/</link>
+            <guid>/2015/10/26/centos-install-vsftpd-ftp-server-for-html-deployer/</guid>
+            <pubDate>Mon, 26 Oct 2015 13:41:49 GMT</pubDate>
+            <description><![CDATA[
+# CentOS最简单安装与配置vsftpd
+
+> 使用服务器搭建了一个静态网站，需要上传更新网页，于是想到了使用ftp服务来完成这个过程。
+
+## 什么是vsftpd]]></description>
+        </item>
+        <item>
+            <title><![CDATA[在Digital Ocean上部署shadowsocks]]></title>
+            <link>https://sumygg.com/2015/10/23/build-shadowsocks-in-digitalocean/</link>
+            <guid>/2015/10/23/build-shadowsocks-in-digitalocean/</guid>
+            <pubDate>Fri, 23 Oct 2015 10:49:01 GMT</pubDate>
+            <description><![CDATA[
+# 在Digital Ocean上部署shadowsocks
+
+自从申请到Github的学生开发大礼包之后，就想怎么用其中的各种服务。之前使用goagent代理开始变得不太稳定了，于是考虑在Digital Ocean上搭建一个新的代理，最终选择了shadowsocks。谨以此缅怀goagent和shadowsocks。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Atom快捷键整理]]></title>
+            <link>https://sumygg.com/2015/10/19/atom-shortcut/</link>
+            <guid>/2015/10/19/atom-shortcut/</guid>
+            <pubDate>Mon, 19 Oct 2015 12:13:52 GMT</pubDate>
+            <description><![CDATA[
+# Atom快捷键整理
+
+> 接触Atom有一段时间了，于是想好好看一看Atom的快捷键。网上找了几个快捷键列表，但是其中的一些快捷键在Windows下不能使用，所以就自己整理了一份。
+
+## 移动]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Hexo MathJax插件]]></title>
+            <link>https://sumygg.com/2015/10/17/hexo-mathjax-plugin/</link>
+            <guid>/2015/10/17/hexo-mathjax-plugin/</guid>
+            <pubDate>Sat, 17 Oct 2015 12:25:12 GMT</pubDate>
+            <description><![CDATA[
+# Hexo MathJax插件
+
+> 使用MathJax让Hexo博客支持数学公式。
+
+本来不打算为网站添加数学公式功能的，不过今天偶然看到了，发现添加比较简单，就尝试了一下。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Android下smali常用注入代码]]></title>
+            <link>https://sumygg.com/2015/05/18/android-smali-inject/</link>
+            <guid>/2015/05/18/android-smali-inject/</guid>
+            <pubDate>Mon, 18 May 2015 01:44:17 GMT</pubDate>
+            <description><![CDATA[
+# Android下smali常用注入代码
+
+这几天做Android的CTF，发现使用smali注入的方式获取Flag的方法比较通用，所以写出来参考一下。
+
+## 简介]]></description>
+        </item>
+        <item>
+            <title><![CDATA[你好，画廊]]></title>
+            <link>https://sumygg.com/2015/04/22/hello-gallery/</link>
+            <guid>/2015/04/22/hello-gallery/</guid>
+            <pubDate>Wed, 22 Apr 2015 03:21:49 GMT</pubDate>
+            <description><![CDATA[
+# 你好，画廊
+
+![1](./3997c3720024b6bb8e88229c5373ccbc.png)
+![2](./e27c8251737e4b1a8e4849550e6f54a9.png)
+![3](./3.jpg)]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Hello World]]></title>
+            <link>https://sumygg.com/2015/04/21/real-hello-world/</link>
+            <guid>/2015/04/21/real-hello-world/</guid>
+            <pubDate>Tue, 21 Apr 2015 09:42:03 GMT</pubDate>
+            <description><![CDATA[
+# Hello World
+
+> A collection of Hello World applications from helloworld.org.
+
+## C]]></description>
+        </item>
+        <item>
+            <title><![CDATA[你好，世界]]></title>
+            <link>https://sumygg.com/2015/04/17/hello-world/</link>
+            <guid>/2015/04/17/hello-world/</guid>
+            <pubDate>Fri, 17 Apr 2015 09:49:21 GMT</pubDate>
+            <description><![CDATA[
+# 你好，世界
+
+博客已经建成。
+之前使用的是`Jekyll`，由于荒废了好长一段时间了，所以干脆重新建设一个。
+]]></description>
+        </item>
+        <item>
+            <title><![CDATA[《创新、严肃、好玩的android应用程序开发》课程笔记③]]></title>
+            <link>https://sumygg.com/2014/01/09/my-lesson-notes-on-coursera-androidapps101-001-3/</link>
+            <guid>/2014/01/09/my-lesson-notes-on-coursera-androidapps101-001-3/</guid>
+            <pubDate>Wed, 08 Jan 2014 16:00:00 GMT</pubDate>
+            <description><![CDATA[
+# 《创新、严肃、好玩的android应用程序开发》课程笔记③
+
+> 《创新、严肃、好玩的android应用程序开发》第三周的视频，由于课程方那边圣诞放假，于是课程的 Deadline  就推迟了三周，借这个时间也把手头的事情忙了一下。
+
+课程地址：[https://class.coursera.org/androidapps101-001/class](https://class.coursera.org/androidapps101-001/class)]]></description>
+        </item>
+        <item>
+            <title><![CDATA[《创新、严肃、好玩的android应用程序开发》课程笔记②]]></title>
+            <link>https://sumygg.com/2013/12/07/my-lesson-notes-on-coursera-androidapps101-001-2/</link>
+            <guid>/2013/12/07/my-lesson-notes-on-coursera-androidapps101-001-2/</guid>
+            <pubDate>Fri, 06 Dec 2013 16:00:00 GMT</pubDate>
+            <description><![CDATA[
+# 《创新、严肃、好玩的android应用程序开发》课程笔记②
+
+> 《创新、严肃、好玩的android应用程序开发》第二周的视频放出来了，这次主要将的是安卓程序的创建、运行还有资源布局方面的内容。
+
+课程地址：[https://class.coursera.org/androidapps101-001/class](https://class.coursera.org/androidapps101-001/class)]]></description>
+        </item>
+        <item>
+            <title><![CDATA[《创新、严肃、好玩的android应用程序开发》课程笔记①]]></title>
+            <link>https://sumygg.com/2013/12/04/my-lesson-notes-on-coursera-androidapps101-001-1/</link>
+            <guid>/2013/12/04/my-lesson-notes-on-coursera-androidapps101-001-1/</guid>
+            <pubDate>Tue, 03 Dec 2013 16:00:00 GMT</pubDate>
+            <description><![CDATA[
+# 《创新、严肃、好玩的android应用程序开发》课程笔记①
+
+> 在 coursra 上学习《创新、严肃、好玩的android应用程序开发》这门课程，就把课程中重要的东西记录下来。因为是课程笔记，所以只记录了我认为比较有用的东西，也写的比较简练。
+  
+ 课程地址：[https://class.coursera.org/androidapps101-001/class](https://class.coursera.org/androidapps101-001/class)]]></description>
+        </item>
+        <item>
+            <title><![CDATA[EasyBCD硬盘安装Ubuntu]]></title>
+            <link>https://sumygg.com/2013/11/27/install-ubuntu-with-harddisk/</link>
+            <guid>/2013/11/27/install-ubuntu-with-harddisk/</guid>
+            <pubDate>Tue, 26 Nov 2013 16:00:00 GMT</pubDate>
+            <description><![CDATA[
+# EasyBCD硬盘安装Ubuntu
+
+> 前一阵子不小心把Ubuntu搞坏了，进不了系统，于是就打算重装一下。
+
+用这种方法装 Ubuntu 的好处就是不用刻盘，也不用将 iso 的镜像刻到 U 盘引导中。还是比较方便的。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[只怪自己年少无知？——写给21岁的自己]]></title>
+            <link>https://sumygg.com/2013/11/17/happy-birthday/</link>
+            <guid>/2013/11/17/happy-birthday/</guid>
+            <pubDate>Sun, 17 Nov 2013 11:47:34 GMT</pubDate>
+            <description><![CDATA[
+# 只怪自己年少无知？——写给21岁的自己
+
+> 以前也没码过啥字，就借着这个机会随便写点什么吧。
+
+又是一个平淡的生日呀，本来就不太喜欢热闹的我决定叫三个人一块去吃饭。。。结果，土豪不理我，大神回家了，还是老卜去了。去鸡公煲那里看了一下，呃，好多人呀，就去南方包子那里简单吃了一顿。。。俊哥送的键盘也到货了，真没用过这么好的键盘O__O"…一下子就被镇住了。。。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[简单了解JAVA对象序列化（Serializable）]]></title>
+            <link>https://sumygg.com/2013/11/16/first-step-simple-java-serializable/</link>
+            <guid>/2013/11/16/first-step-simple-java-serializable/</guid>
+            <pubDate>Fri, 15 Nov 2013 16:00:00 GMT</pubDate>
+            <description><![CDATA[
+# 简单了解JAVA对象序列化（Serializable）
+
+> 今天在整理 BAE 相关内容的时候突然发现了一个新东西 serializable ，中文名是序列化。通过了解这个新姿势，我终于找到了一种将对象保存的方法。
+
+## 序列化是什么？]]></description>
+        </item>
+        <item>
+            <title><![CDATA[用Jekyll书写博客]]></title>
+            <link>https://sumygg.com/2013/11/09/writting-in-jekyll/</link>
+            <guid>/2013/11/09/writting-in-jekyll/</guid>
+            <pubDate>Fri, 08 Nov 2013 16:00:00 GMT</pubDate>
+            <description><![CDATA[
+# 用Jekyll书写博客
+
+> Jekyll 是一个简单的免费的 Blog 生成工具，类似 WordPress 。但是和 WordPress 又有很大的不同，它可以免费部署在 Github
+  上。相信喜欢 DIY 的你一定会喜欢上它的。
+]]></description>
+        </item>
+        <item>
+            <title><![CDATA[jekyll本地环境搭建]]></title>
+            <link>https://sumygg.com/2013/11/08/set-up-jekyll-local-service/</link>
+            <guid>/2013/11/08/set-up-jekyll-local-service/</guid>
+            <pubDate>Thu, 07 Nov 2013 16:00:00 GMT</pubDate>
+            <description><![CDATA[
+# jekyll本地环境搭建
+
+> 用jekyll作为写作博客已经有半年多了，一直没有将搭建过程写出来。这几天正好想要给博客添加表格功能，本地环境却一直出错，遂决定重新搭建一下本地的博客环境。
+
+以下以 Windows 为例，说明一下本地测试环境搭建的过程。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[开始驾照学习之旅]]></title>
+            <link>https://sumygg.com/2013/11/06/starting-getting-driving-license/</link>
+            <guid>/2013/11/06/starting-getting-driving-license/</guid>
+            <pubDate>Tue, 05 Nov 2013 16:00:00 GMT</pubDate>
+            <description><![CDATA[要开始学习驾照了，感觉好兴奋。有吗？嘿嘿。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[百度BAE初次尝试]]></title>
+            <link>https://sumygg.com/2013/11/04/baidu-BAE-first-try/</link>
+            <guid>/2013/11/04/baidu-BAE-first-try/</guid>
+            <pubDate>Sun, 03 Nov 2013 16:00:00 GMT</pubDate>
+            <description><![CDATA[
+# 百度BAE初次尝试
+
+> 百度BAE类似于谷歌的网站应用发布，也具有托管网站的功能。今日突发奇想，就想把自己用J2EE写的一个小网站放到上面去，结果遇到各种问题。暂时算是解决了一些吧，将遇到的问题记录下来。
+
+## 使用的软件]]></description>
+        </item>
+        <item>
+            <title><![CDATA[ACM计算几何题目推荐及做题统计]]></title>
+            <link>https://sumygg.com/2013/10/29/summer-for-geometry-after-icpcacm/</link>
+            <guid>/2013/10/29/summer-for-geometry-after-icpcacm/</guid>
+            <pubDate>Mon, 28 Oct 2013 16:00:00 GMT</pubDate>
+            <description><![CDATA[# ACM计算几何题目推荐及做题统计
+
+> 先前这个是放在首页的，现在结束了就把它挪到这里了，也算是对之前过程的一个留念吧。
+
+<style>]]></description>
+        </item>
+        <item>
+            <title><![CDATA[n! 与组合数的素因子分解]]></title>
+            <link>https://sumygg.com/2013/10/13/prime-factorization-for-n-factorial-and-combinatorial-number/</link>
+            <guid>/2013/10/13/prime-factorization-for-n-factorial-and-combinatorial-number/</guid>
+            <pubDate>Sat, 12 Oct 2013 16:00:00 GMT</pubDate>
+            <description><![CDATA[
+# n! 与组合数的素因子分解
+
+> 阶乘和组合数的素因子分解不同于一般的素因子分解，不同之处就在于枚举的不是每个数的所有素因子，而是每个素因子包含哪些数。
+
+## n!的素因子分解]]></description>
+        </item>
+        <item>
+            <title><![CDATA[数组中只出现过一次的元素]]></title>
+            <link>https://sumygg.com/2013/10/10/single-element-in-a-array/</link>
+            <guid>/2013/10/10/single-element-in-a-array/</guid>
+            <pubDate>Wed, 09 Oct 2013 16:00:00 GMT</pubDate>
+            <description><![CDATA[
+# 数组中只出现过一次的元素
+
+> 数组中其它元素都出现 k 次，只有一个元素出现一次，如何把它找出来。
+
+好久没来更新博客了，最近也只是在修改了几次博客的模板。感觉再不更新就要杂草丛生了。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[三角形面积的计算公式]]></title>
+            <link>https://sumygg.com/2013/08/07/triangle-area/</link>
+            <guid>/2013/08/07/triangle-area/</guid>
+            <pubDate>Wed, 07 Aug 2013 12:00:00 GMT</pubDate>
+            <description><![CDATA[
+# 三角形面积的计算公式
+
+> 给出一个三角形，这里有好几个公式来得到它的面积。
+
+三角形面积没有什么特别的计算方法，只是对几个公式的理解。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[给定半径圆覆盖点]]></title>
+            <link>https://sumygg.com/2013/08/06/Radius-Circle-Cover/</link>
+            <guid>/2013/08/06/Radius-Circle-Cover/</guid>
+            <pubDate>Mon, 05 Aug 2013 16:00:00 GMT</pubDate>
+            <description><![CDATA[
+# 给定半径圆覆盖点
+
+> 给定一个圆，使其能覆盖平面上最多的点。
+
+## 题目模型]]></description>
+        </item>
+        <item>
+            <title><![CDATA[8-2-SDAU练习赛（泰山挑夫1）点题报告]]></title>
+            <link>https://sumygg.com/2013/08/02/sdau-practice-contest/</link>
+            <guid>/2013/08/02/sdau-practice-contest/</guid>
+            <pubDate>Thu, 01 Aug 2013 16:00:00 GMT</pubDate>
+            <description><![CDATA[
+# 8-2-SDAU练习赛（泰山挑夫1）点题报告
+
+> 老师说要向泰山挑夫那样一步一步。
+
+今天的练习赛似乎又回到了上个暑假的时候，只是感觉少了点什么。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[判断一个点是否在凸包（多边形）内]]></title>
+            <link>https://sumygg.com/2013/08/01/Point-in-Polygon/</link>
+            <guid>/2013/08/01/Point-in-Polygon/</guid>
+            <pubDate>Wed, 31 Jul 2013 16:00:00 GMT</pubDate>
+            <description><![CDATA[
+# 判断一个点是否在凸包（多边形）内
+
+> 判断一个点是否在凸包内是比较常用的一个算法。
+
+判断一个点是否在凸包（多边形）内是比较常用的一个算法，总结了一下出现的方法，主要找到了下面的几种。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[计算多边形的面积]]></title>
+            <link>https://sumygg.com/2013/07/31/Polygon-Area/</link>
+            <guid>/2013/07/31/Polygon-Area/</guid>
+            <pubDate>Tue, 30 Jul 2013 16:00:00 GMT</pubDate>
+            <description><![CDATA[# 计算多边形的面积
+
+> 计算一个多边形的面积有很多种方法。
+
+对于一个多边形来说，凸多边形是特例中的特例，我们就以凸多边形为例来讨论这个问题。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[极角排序]]></title>
+            <link>https://sumygg.com/2013/07/30/Sorting-Points-by-Polar-Angle/</link>
+            <guid>/2013/07/30/Sorting-Points-by-Polar-Angle/</guid>
+            <pubDate>Mon, 29 Jul 2013 16:00:00 GMT</pubDate>
+            <description><![CDATA[
+# 极角排序
+
+> 通过一个简单的排序算法，从不同角度解决问题。
+
+*今天第一次接触到几何类的问题，看到了一个极角排序，感觉很有用处。*]]></description>
+        </item>
+        <item>
+            <title><![CDATA[自守数（Automorphic Number）]]></title>
+            <link>https://sumygg.com/2013/07/29/Automorphic-Number/</link>
+            <guid>/2013/07/29/Automorphic-Number/</guid>
+            <pubDate>Mon, 29 Jul 2013 11:47:34 GMT</pubDate>
+            <description><![CDATA[简单了解一下自守数的相关性质，似乎没多大的应用。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[模平方根的解法——托内利－尚克斯算法（Tonelli–Shanks algorithm）]]></title>
+            <link>https://sumygg.com/2013/07/28/tonellishanks-algorithm/</link>
+            <guid>/2013/07/28/tonellishanks-algorithm/</guid>
+            <pubDate>Sat, 27 Jul 2013 16:00:00 GMT</pubDate>
+            <description><![CDATA[
+# 模平方根的解法——托内利－尚克斯算法（Tonelli–Shanks algorithm）
+
+> 解决一类形如 x^2==n(mod p) 的问题。
+
+## 定义]]></description>
+        </item>
+        <item>
+            <title><![CDATA[对一道面试题目 f(f(n))==-n 的理解]]></title>
+            <link>https://sumygg.com/2013/06/29/ffn-equ-n/</link>
+            <guid>/2013/06/29/ffn-equ-n/</guid>
+            <pubDate>Fri, 28 Jun 2013 16:00:00 GMT</pubDate>
+            <description><![CDATA[
+# 对一道面试题目 f(f(n))==-n 的理解
+
+> 这是一道技术面试题目，其中隐含着很多思想。
+
+不知道大家有没有见过这道题目，一开始自己也没看明白是什么意思，后来根据他人的描述，也大体了解了一些内容了。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[斐波那契数列（Fibonacci）性质及拓展]]></title>
+            <link>https://sumygg.com/2013/06/02/fib/</link>
+            <guid>/2013/06/02/fib/</guid>
+            <pubDate>Sat, 01 Jun 2013 16:00:00 GMT</pubDate>
+            <description><![CDATA[
+# 斐波那契数列（Fibonacci）性质及拓展
+
+> 斐波那契数列，一个简单而神秘的序列。
+
+斐波那契数列（Fibonacci）相信大家一定很熟悉了，下面简单介绍一下斐波那契数列的一些内容。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[A^B mod C（指数循环节）的应用]]></title>
+            <link>https://sumygg.com/2013/05/22/a-pow-b-mod-c/</link>
+            <guid>/2013/05/22/a-pow-b-mod-c/</guid>
+            <pubDate>Tue, 21 May 2013 16:00:00 GMT</pubDate>
+            <description><![CDATA[
+# A^B mod C（指数循环节）的应用
+> 一个公式里面藏有好多的秘密。
+
+指数循环节，用于简化大数次幂的运算。简单来说就是一个公式：
+]]></description>
+        </item>
+        <item>
+            <title><![CDATA[sscanf与sprintf]]></title>
+            <link>https://sumygg.com/2013/05/18/sscanf-and-sprintf/</link>
+            <guid>/2013/05/18/sscanf-and-sprintf/</guid>
+            <pubDate>Fri, 17 May 2013 16:00:00 GMT</pubDate>
+            <description><![CDATA[# sscanf与sprintf
+
+> sscanf与sprintf将字符串与其它类型连接起来，在一定程度上方便了字符串的处理。
+
+这两个函数所需要的头文件都包含在`#include<cstdio>`（C++）或者`#include<stdio.h>`（C）。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[欧拉（euler）定理与欧拉函数]]></title>
+            <link>https://sumygg.com/2013/05/15/euler-and-phi/</link>
+            <guid>/2013/05/15/euler-and-phi/</guid>
+            <pubDate>Tue, 14 May 2013 16:00:00 GMT</pubDate>
+            <description><![CDATA[
+# 欧拉（euler）定理与欧拉函数
+
+> 欧拉函数还是次要的，重要的是隐藏在它背后那些不可告人的秘密。
+
+## 欧拉函数]]></description>
+        </item>
+        <item>
+            <title><![CDATA[约瑟夫（joseph）问题]]></title>
+            <link>https://sumygg.com/2013/05/13/joseph/</link>
+            <guid>/2013/05/13/joseph/</guid>
+            <pubDate>Sun, 12 May 2013 16:00:00 GMT</pubDate>
+            <description><![CDATA[
+# 约瑟夫（joseph）问题
+
+> 约瑟夫是一个经典的问题，提供了一种简单的递推思路。
+
+## 基础知识]]></description>
+        </item>
+        <item>
+            <title><![CDATA[高斯消元]]></title>
+            <link>https://sumygg.com/2013/05/12/gauss/</link>
+            <guid>/2013/05/12/gauss/</guid>
+            <pubDate>Sat, 11 May 2013 16:00:00 GMT</pubDate>
+            <description><![CDATA[
+# 高斯消元
+
+> 高斯消元提供了一种简单的方法解决方程组联立的问题。
+
+## 基础知识]]></description>
+        </item>
+        <item>
+            <title><![CDATA[二分矩阵快速幂及其应用]]></title>
+            <link>https://sumygg.com/2013/05/10/dichotomous-matrix-fast-power-and-its-application/</link>
+            <guid>/2013/05/10/dichotomous-matrix-fast-power-and-its-application/</guid>
+            <pubDate>Thu, 09 May 2013 16:00:00 GMT</pubDate>
+            <description><![CDATA[
+# 二分矩阵快速幂及其应用
+
+> 有些东西很慢，然后就变得很快了。二分矩阵快速幂是解决矩阵幂乘的一种方法，主要思想是采用分治方法。
+
+先来一个简单的数的幂运算。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[矩阵]]></title>
+            <link>https://sumygg.com/2013/05/10/matrix/</link>
+            <guid>/2013/05/10/matrix/</guid>
+            <pubDate>Thu, 09 May 2013 16:00:00 GMT</pubDate>
+            <description><![CDATA[
+# 矩阵
+
+> 矩阵是个神奇的东西，你可以用它来干这个，这个，还有这个。
+
+数学上，一个 m×n 的矩阵是一个由 m 行 n 列元素排列成的矩形阵列。矩阵里的元素可以是数字、符号或数学式。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[欧几里得+扩展的欧几里得算法+线性同余方程+中国剩余定理]]></title>
+            <link>https://sumygg.com/2013/05/07/euclid-and-extended-euclid-algorithm-and-linear-congruent-equation-and-chinese-remainder-theorem/</link>
+            <guid>/2013/05/07/euclid-and-extended-euclid-algorithm-and-linear-congruent-equation-and-chinese-remainder-theorem/</guid>
+            <pubDate>Mon, 06 May 2013 16:00:00 GMT</pubDate>
+            <description><![CDATA[
+# 欧几里得+扩展的欧几里得算法+线性同余方程+中国剩余定理
+
+> 欧几里得、扩展的欧几里得算法、线性同余方程、中国剩余定理，这几个都是好重要的算法呀。
+
+## 欧几里得算法]]></description>
+        </item>
+        <item>
+            <title><![CDATA[来两发整人命令]]></title>
+            <link>https://sumygg.com/2013/05/01/linux-joke-shell/</link>
+            <guid>/2013/05/01/linux-joke-shell/</guid>
+            <pubDate>Tue, 30 Apr 2013 16:00:00 GMT</pubDate>
+            <description><![CDATA[
+# 来两发整人命令
+
+> 今天不小心又发现了一个有意思的东东，我不会告诉你我是在微博上看到的。有胆量可以来试试呀。
+
+## No.1 `:() { :|:& }; :`]]></description>
+        </item>
+        <item>
+            <title><![CDATA[STL中next_permutation的应用]]></title>
+            <link>https://sumygg.com/2013/05/01/stl_next_permutation/</link>
+            <guid>/2013/05/01/stl_next_permutation/</guid>
+            <pubDate>Tue, 30 Apr 2013 16:00:00 GMT</pubDate>
+            <description><![CDATA[next_permutation是STL模板中用于求解排列数的一个算法。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Poisson分布（泊松分布）与极大似然估计]]></title>
+            <link>https://sumygg.com/2013/04/30/poisson-distribution-and-maximum-likelihood-estimate/</link>
+            <guid>/2013/04/30/poisson-distribution-and-maximum-likelihood-estimate/</guid>
+            <pubDate>Mon, 29 Apr 2013 16:00:00 GMT</pubDate>
+            <description><![CDATA[
+# Poisson分布（泊松分布）与极大似然估计
+
+> 概率统计学过去一年了，似乎都忘光了。。。果然还学要复习复习呀。
+
+## 泊松分布]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Java输入输出外挂]]></title>
+            <link>https://sumygg.com/2013/04/27/java-input-output/</link>
+            <guid>/2013/04/27/java-input-output/</guid>
+            <pubDate>Fri, 26 Apr 2013 16:00:00 GMT</pubDate>
+            <description><![CDATA[
+# Java输入输出外挂
+
+> 看似好多大牛都写这种，是不是这就是传说中的 Java 输入输出外挂！！！
+
+今天翻别人写的代码的时候无意中发现了这个，TA 写的 Java 版本的代码中，好多都用了这个。让我稍微看看这究竟是何方神圣。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Java类StringTokenizer的说明]]></title>
+            <link>https://sumygg.com/2013/04/27/java-stringtokenizer/</link>
+            <guid>/2013/04/27/java-stringtokenizer/</guid>
+            <pubDate>Fri, 26 Apr 2013 16:00:00 GMT</pubDate>
+            <description><![CDATA[
+# Java类StringTokenizer的说明
+
+> 看起来 StringTokenizer 类好神奇的样子，不管有没有用先了解了解再说。
+
+## 声明]]></description>
+        </item>
+        <item>
+            <title><![CDATA[由一个整人秘籍引发的新知识]]></title>
+            <link>https://sumygg.com/2013/04/25/cpp-joking-code/</link>
+            <guid>/2013/04/25/cpp-joking-code/</guid>
+            <pubDate>Wed, 24 Apr 2013 16:00:00 GMT</pubDate>
+            <description><![CDATA[
+# 由一个整人秘籍引发的新知识
+
+> __LINE__、__FILE__、#line、__func__的用法
+
+今天无意中在人人上看到一个整人的状态：]]></description>
+        </item>
+        <item>
+            <title><![CDATA[博客功能插件测试]]></title>
+            <link>https://sumygg.com/2013/04/23/blog-model-test/</link>
+            <guid>/2013/04/23/blog-model-test/</guid>
+            <pubDate>Mon, 22 Apr 2013 16:00:00 GMT</pubDate>
+            <description><![CDATA[# 博客功能插件测试
+
+> 用来测试一下博客的相关插件，主要是高亮插件和代码插件，表格样式还有公式的显示。
+
+## 代码高亮测试]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Hello World！]]></title>
+            <link>https://sumygg.com/2013/04/22/first-hello-world/</link>
+            <guid>/2013/04/22/first-hello-world/</guid>
+            <pubDate>Sun, 21 Apr 2013 16:00:00 GMT</pubDate>
+            <description><![CDATA[
+# Hello World！
+
+> 第一篇日志，一般都会写Hello World的吧。
+
+这是我的第一篇日志，博客配置起来好麻烦呀。]]></description>
+        </item>
+    </channel>
+</rss>

@@ -1,0 +1,15 @@
+/*! @mdx-js/react */
+
+/*! ./3.gif */
+
+/*! ./3.png */
+
+/*! ./rifumei.gif */
+
+/*! ./2.png */
+
+/*! react/jsx-runtime */
+
+/*! ./5.png */
+
+/*! ./4.png */
